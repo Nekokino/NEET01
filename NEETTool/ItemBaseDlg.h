@@ -29,5 +29,5 @@ public:
 	afx_msg void OnEnChangeIteminfo();
 	afx_msg void OnEnChangeOutputname();
 
-	int gitTest;
+	size_t GitTest;
 };
