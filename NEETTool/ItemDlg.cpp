@@ -14,6 +14,9 @@
 #include <NTAcc.h>
 #include <NTConsume.h>
 #include <NTKeyItem.h>
+#include <ResourceSystem.h>
+#include <NTWriteStream.h>
+#include <NTReadStream.h>
 
 #include "ItemView.h"
 #include "NTDlgShortCut.h"
@@ -45,6 +48,8 @@ BEGIN_MESSAGE_MAP(ItemDlg, CDialogEx)
 	ON_BN_CLICKED(IDCANCEL, &ItemDlg::OnBnClickedCancel)
 	ON_NOTIFY(TVN_SELCHANGED, IDC_ITEMTREE, &ItemDlg::OnTvnSelchangedItemtree)
 	ON_BN_CLICKED(IDC_CREATEITEM, &ItemDlg::OnBnClickedCreateitem)
+	ON_BN_CLICKED(IDC_ITEMSAVE, &ItemDlg::OnBnClickedItemsave)
+	ON_BN_CLICKED(IDC_ITEMLOAD, &ItemDlg::OnBnClickedItemload)
 END_MESSAGE_MAP()
 
 
@@ -162,4 +167,44 @@ void ItemDlg::OnBnClickedCreateitem()
 			}
 		}
 	}
+}
+
+void ItemDlg::OnBnClickedItemsave()
+{
+	CString SaveData = PathSystem::FindPath(L"Data");
+	SaveData += L"SpriteEditData.neet";
+
+	CString BackupData = PathSystem::FindPath(L"SpriteBackups");
+
+	wchar_t Time[256] = {};
+
+	_itow_s((int)time(nullptr), Time, 36);
+
+	BackupData += L"Backup_";
+	BackupData += Time;
+	BackupData += L".bak";
+
+	NTWriteStream SaveStream = NTWriteStream(SaveData);
+	NTWriteStream BackupStream = NTWriteStream(BackupData);
+
+	int size = (int)DataMap.size();
+	SaveStream.Write(&size, sizeof(int));
+	BackupStream.Write(&size, sizeof(int));
+
+	std::unordered_map<std::wstring, NTSpriteData*>::iterator StartIter = DataMap.begin();
+	std::unordered_map<std::wstring, NTSpriteData*>::iterator EndIter = DataMap.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		NTSpriteData* SaveData = StartIter->second;
+
+		SaveStream.Write(SaveData, sizeof(NTSpriteData));
+		BackupStream.Write(SaveData, sizeof(NTSpriteData));
+	}
+}
+
+
+void ItemDlg::OnBnClickedItemload()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

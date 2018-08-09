@@ -67,4 +67,6 @@ public:
 		ItemTree.SetItemData(NewItem, (DWORD_PTR)Item);
 		ItemTree.Expand(CurItem, TVE_EXPAND);
 	}
+	afx_msg void OnBnClickedItemsave();
+	afx_msg void OnBnClickedItemload();
 };
