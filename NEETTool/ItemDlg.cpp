@@ -172,9 +172,9 @@ void ItemDlg::OnBnClickedCreateitem()
 void ItemDlg::OnBnClickedItemsave()
 {
 	CString SaveData = PathSystem::FindPath(L"Data");
-	SaveData += L"SpriteEditData.neet";
+	SaveData += L"ItemData.neet";
 
-	CString BackupData = PathSystem::FindPath(L"SpriteBackups");
+	CString BackupData = PathSystem::FindPath(L"ItemBackups");
 
 	wchar_t Time[256] = {};
 
@@ -187,19 +187,48 @@ void ItemDlg::OnBnClickedItemsave()
 	NTWriteStream SaveStream = NTWriteStream(SaveData);
 	NTWriteStream BackupStream = NTWriteStream(BackupData);
 
-	int size = (int)DataMap.size();
+	int size = (int)ItemMap.size();
 	SaveStream.Write(&size, sizeof(int));
 	BackupStream.Write(&size, sizeof(int));
 
-	std::unordered_map<std::wstring, NTSpriteData*>::iterator StartIter = DataMap.begin();
-	std::unordered_map<std::wstring, NTSpriteData*>::iterator EndIter = DataMap.end();
+	std::unordered_map<std::wstring, Autoptr<NTItem>>::iterator StartIter = ItemMap.begin();
+	std::unordered_map<std::wstring, Autoptr<NTItem>>::iterator EndIter = ItemMap.end();
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		NTSpriteData* SaveData = StartIter->second;
+		const type_info* Type = StartIter->second->GetType();
 
-		SaveStream.Write(SaveData, sizeof(NTSpriteData));
-		BackupStream.Write(SaveData, sizeof(NTSpriteData));
+		const char* TypeName = Type->name();
+
+		if (strcmp(TypeName, "class NTWeapon") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeName, "class NTArmor") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeName, "class NTHelmet") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeName, "class NTAcc") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeName, "class NTConsume") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeName, "class NTKeyItem") == 0)
+		{
+			int a = 0;
+		}
 	}
 }
 
