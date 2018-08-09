@@ -34,6 +34,7 @@ ItemDlg::ItemDlg(CWnd* pParent /*=NULL*/)
 
 ItemDlg::~ItemDlg()
 {
+	Release();
 }
 
 void ItemDlg::DoDataExchange(CDataExchange* pDX)
@@ -109,21 +110,7 @@ BOOL ItemDlg::OnInitDialog()
 	View->ShowWindow(SW_SHOW);
 	View->MoveWindow(&ViewSize);
 
-	HTREEITEM Equip = ItemTree.InsertItem(L"Equip");
-	ItemTree.SetItemData(Equip, (DWORD_PTR)nullptr);
-
-	HTREEITEM Tmp = ItemTree.InsertItem(L"Weapon", Equip);
-	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
-	Tmp = ItemTree.InsertItem(L"Helmet", Equip);
-	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
-	Tmp = ItemTree.InsertItem(L"Armor", Equip);
-	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
-	Tmp = ItemTree.InsertItem(L"Accessory", Equip);
-	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
-	ItemTree.Expand(Equip, TVE_EXPAND);
-
-	ItemTree.InsertItem(L"Consumable");
-	ItemTree.InsertItem(L"KeyItem");
+	SetBaseTree();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -191,14 +178,18 @@ void ItemDlg::OnBnClickedItemsave()
 	SaveStream.Write(&size, sizeof(int));
 	BackupStream.Write(&size, sizeof(int));
 
-	std::unordered_map<std::wstring, Autoptr<NTItem>>::iterator StartIter = ItemMap.begin();
-	std::unordered_map<std::wstring, Autoptr<NTItem>>::iterator EndIter = ItemMap.end();
+	std::unordered_map<std::wstring, NTItem*>::iterator StartIter = ItemMap.begin();
+	std::unordered_map<std::wstring, NTItem*>::iterator EndIter = ItemMap.end();
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
 		const type_info* Type = StartIter->second->GetType();
 
 		const char* TypeName = Type->name();
+		char TypeNameBuf[20];
+		strcpy_s(TypeNameBuf, TypeName);
+		SaveStream.Write(TypeNameBuf, sizeof(TypeNameBuf));
+		BackupStream.Write(TypeNameBuf, sizeof(TypeNameBuf));
 
 		if (strcmp(TypeName, "class NTWeapon") == 0)
 		{
@@ -235,5 +226,85 @@ void ItemDlg::OnBnClickedItemsave()
 
 void ItemDlg::OnBnClickedItemload()
 {
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	Release();
+	ItemTree.DeleteAllItems();
+	CurItem = nullptr;
+	SetBaseTree();
+
+	CString SaveData = PathSystem::FindPath(L"Data");
+	SaveData += L"ItemData.neet";
+
+	NTReadStream ReadStream = NTReadStream(SaveData);
+
+	int Count = 0;
+	ReadStream.Read(&Count, sizeof(int), sizeof(int));
+
+	for (int i = 0; i < Count; ++i)
+	{
+		char TypeNameBuf[20];
+		ReadStream.Read(TypeNameBuf, sizeof(TypeNameBuf), sizeof(TypeNameBuf));
+
+		if (strcmp(TypeNameBuf, "class NTWeapon") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeNameBuf, "class NTArmor") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeNameBuf, "class NTHelmet") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeNameBuf, "class NTAcc") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeNameBuf, "class NTConsume") == 0)
+		{
+			int a = 0;
+		}
+
+		if (strcmp(TypeNameBuf, "class NTKeyItem") == 0)
+		{
+			int a = 0;
+		}
+	}
+
+}
+
+void ItemDlg::SetBaseTree()
+{
+	HTREEITEM Equip = ItemTree.InsertItem(L"Equip");
+	ItemTree.SetItemData(Equip, (DWORD_PTR)nullptr);
+
+	HTREEITEM Tmp = ItemTree.InsertItem(L"Weapon", Equip);
+	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
+	Tmp = ItemTree.InsertItem(L"Helmet", Equip);
+	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
+	Tmp = ItemTree.InsertItem(L"Armor", Equip);
+	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
+	Tmp = ItemTree.InsertItem(L"Accessory", Equip);
+	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
+	ItemTree.Expand(Equip, TVE_EXPAND);
+
+	ItemTree.InsertItem(L"Consumable");
+	ItemTree.InsertItem(L"KeyItem");
+}
+
+void ItemDlg::Release()
+{
+	std::unordered_map<std::wstring, NTItem*>::iterator StartIter = ItemMap.begin();
+	std::unordered_map<std::wstring, NTItem*>::iterator EndIter = ItemMap.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		delete StartIter->second;
+	}
+
+	ItemMap.clear();
 }

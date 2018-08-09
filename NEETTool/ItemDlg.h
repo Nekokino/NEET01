@@ -37,7 +37,7 @@ public:
 	afx_msg void OnBnClickedCreateitem();
 
 
-	std::unordered_map<std::wstring, Autoptr<NTItem>> ItemMap;
+	std::unordered_map<std::wstring, NTItem*> ItemMap;
 
 	template<typename T>
 	void CreateItem()
@@ -47,7 +47,7 @@ public:
 		wchar_t Time[256] = {};
 		_itow_s((int)time(nullptr), Time, 36);
 
-		std::unordered_map<std::wstring, Autoptr<NTItem>>::iterator FindIter = ItemMap.find(Time);
+		std::unordered_map<std::wstring, NTItem*>::iterator FindIter = ItemMap.find(Time);
 
 		if (FindIter != ItemMap.end())
 		{
@@ -61,7 +61,7 @@ public:
 		Item->Sellable = true;
 		Item->Price = 1;
 
-		ItemMap.insert(std::unordered_map<std::wstring, Autoptr<NTItem>>::value_type(Time, Item));
+		ItemMap.insert(std::unordered_map<std::wstring, NTItem*>::value_type(Time, Item));
 
 		HTREEITEM NewItem = ItemTree.InsertItem(Time, CurItem);
 		ItemTree.SetItemData(NewItem, (DWORD_PTR)Item);
@@ -69,4 +69,8 @@ public:
 	}
 	afx_msg void OnBnClickedItemsave();
 	afx_msg void OnBnClickedItemload();
+
+	void SetBaseTree();
+	void Release();
+
 };
