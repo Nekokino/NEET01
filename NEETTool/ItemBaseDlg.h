@@ -28,4 +28,6 @@ public:
 	afx_msg void OnBnClickedItemsellable();
 	afx_msg void OnEnChangeIteminfo();
 	afx_msg void OnEnChangeOutputname();
+
+	int gitTest;
 };
