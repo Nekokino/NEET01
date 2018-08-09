@@ -10,9 +10,7 @@ public:
 	std::wstring Info;
 	size_t Price;
 	bool Sellable;
-
-	int ASD;
-protected:
+public:
 	NTItem();
 	virtual ~NTItem() = 0;
 };

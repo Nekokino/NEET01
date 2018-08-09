@@ -37,7 +37,6 @@ void ItemDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_ITEMTREE, ItemTree);
-	DDX_Control(pDX, IDC_SELECTTYPE, TypeComBox);
 }
 
 
@@ -45,7 +44,7 @@ BEGIN_MESSAGE_MAP(ItemDlg, CDialogEx)
 	ON_BN_CLICKED(IDOK, &ItemDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDCANCEL, &ItemDlg::OnBnClickedCancel)
 	ON_NOTIFY(TVN_SELCHANGED, IDC_ITEMTREE, &ItemDlg::OnTvnSelchangedItemtree)
-	ON_CBN_SELCHANGE(IDC_SELECTTYPE, &ItemDlg::OnCbnSelchangeSelecttype)
+	ON_BN_CLICKED(IDC_CREATEITEM, &ItemDlg::OnBnClickedCreateitem)
 END_MESSAGE_MAP()
 
 
@@ -105,21 +104,12 @@ BOOL ItemDlg::OnInitDialog()
 	View->ShowWindow(SW_SHOW);
 	View->MoveWindow(&ViewSize);
 
-	TypeComBox.AddString(L"Weapon");
-	TypeComBox.AddString(L"Helmet");
-	TypeComBox.AddString(L"Armor");
-	TypeComBox.AddString(L"Accessory");
-	TypeComBox.AddString(L"Comsumable");
-	TypeComBox.AddString(L"KeyItem");
-
-	TypeComBox.SetCurSel(0);
-
 	HTREEITEM Equip = ItemTree.InsertItem(L"Equip");
 	ItemTree.SetItemData(Equip, (DWORD_PTR)nullptr);
 
-	HTREEITEM Weapon = ItemTree.InsertItem(L"Weapon", Equip);
-	ItemTree.SetItemData(Weapon, (DWORD_PTR)nullptr);
-	HTREEITEM Tmp = ItemTree.InsertItem(L"Helmet", Equip);
+	HTREEITEM Tmp = ItemTree.InsertItem(L"Weapon", Equip);
+	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
+	Tmp = ItemTree.InsertItem(L"Helmet", Equip);
 	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
 	Tmp = ItemTree.InsertItem(L"Armor", Equip);
 	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
@@ -128,14 +118,48 @@ BOOL ItemDlg::OnInitDialog()
 	ItemTree.Expand(Equip, TVE_EXPAND);
 
 	ItemTree.InsertItem(L"Consumable");
-	ItemTree.InsertItem(L"keyItem");
+	ItemTree.InsertItem(L"KeyItem");
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
 
-
-void ItemDlg::OnCbnSelchangeSelecttype()
+void ItemDlg::OnBnClickedCreateitem()
 {
-	CurBox = TypeComBox.GetCurSel();
+	if (CurItem != nullptr)
+	{
+		if (ItemTree.GetItemData(CurItem) == (DWORD_PTR)nullptr)
+		{
+			std::wstring Temp = ItemTree.GetItemText(CurItem);
+			if (lstrcmpW(Temp.c_str(), L"Weapon") == 0)
+			{
+				CreateItem<NTWeapon>();
+			}
+
+			if (lstrcmpW(Temp.c_str(), L"Helmet") == 0)
+			{
+				CreateItem<NTHelmet>();
+			}
+
+			if (lstrcmpW(Temp.c_str(), L"Armor") == 0)
+			{
+				CreateItem<NTArmor>();
+			}
+
+			if (lstrcmpW(Temp.c_str(), L"Accessory") == 0)
+			{
+				CreateItem<NTAcc>();
+			}
+
+			if (lstrcmpW(Temp.c_str(), L"Consumable") == 0)
+			{
+				CreateItem<NTConsume>();
+			}
+
+			if (lstrcmpW(Temp.c_str(), L"KeyItem") == 0)
+			{
+				CreateItem<NTKeyItem>();
+			}
+		}
+	}
 }
