@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Field">
+      <UniqueIdentifier>{2d2c36c3-443a-46f1-ac67-ccc7210faa1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TileMap">
+      <UniqueIdentifier>{6fcc5582-5062-4781-9f5d-8f237d231900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStruct">
+      <UniqueIdentifier>{ab9f7670-8a63-48ca-99ff-5968705684e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character">
+      <UniqueIdentifier>{de94917b-2a49-4ac4-b1c8-67eee0ea2058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameSystem">
+      <UniqueIdentifier>{85973ab3-ed3f-47de-9b3a-72bc92057496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{abd420e9-7716-4332-897c-634979ec9f22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CamLogic">
+      <UniqueIdentifier>{916f06d0-9233-4378-b086-c4e5230c30ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FieldLogic">
+      <UniqueIdentifier>{7b81d56c-d226-4157-b41f-4571319578bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextWindow">
+      <UniqueIdentifier>{c501a2bb-790d-4305-9394-2281ae141fd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{a166f6f7-cbe5-4005-ae39-52aa3a26b3cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{ad39bb80-6854-4881-a391-85dc5cfd58c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FadeRect">
+      <UniqueIdentifier>{1dd7a27c-7a0d-4eee-b7d9-59a879924fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Loading">
+      <UniqueIdentifier>{d954f733-cce6-44a0-8e95-48858bf15829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Debug">
+      <UniqueIdentifier>{93a75703-5e1c-4eab-8a19-765705b66a2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Window">
+      <UniqueIdentifier>{2890cf6c-bf47-446e-999c-929f8b0a3b75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PixelCheck">
+      <UniqueIdentifier>{82b5234e-627f-4b4a-b963-ccffc41d10fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item\Equip">
+      <UniqueIdentifier>{c1db3dec-4790-46f5-b772-550e4a0053ff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="NTTileMap.cpp">
+      <Filter>TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="NTField.cpp">
+      <Filter>Field</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteLoader.cpp">
+      <Filter>DataStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="NTNPC.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="NTPlayer.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem.cpp">
+      <Filter>GameSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="NTItem.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldCamera.cpp">
+      <Filter>CamLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="EnableRange.cpp">
+      <Filter>FieldLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="NTTextWindow.cpp">
+      <Filter>TextWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="NTEvent.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="NTEventSystem.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="NTFadeRect.cpp">
+      <Filter>FadeRect</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingSceneBuilder.cpp">
+      <Filter>Scene\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingSceneUpdater.cpp">
+      <Filter>Scene\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugSceneBuilder.cpp">
+      <Filter>Scene\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugSceneUpdater.cpp">
+      <Filter>Scene\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowSceneBuilder.cpp">
+      <Filter>Scene\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowSceneUpdater.cpp">
+      <Filter>Scene\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="TextLoader.cpp">
+      <Filter>DataStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="NTPixelChecker.cpp">
+      <Filter>PixelCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="NTPixelCollider.cpp">
+      <Filter>PixelCheck</Filter>
+    </ClCompile>
+    <ClCompile Include="NTPieceWindow.cpp">
+      <Filter>TextWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="NTKeyItem.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="NTConsume.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="NTEquip.cpp">
+      <Filter>Item\Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="NTWeapon.cpp">
+      <Filter>Item\Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="NTHelmet.cpp">
+      <Filter>Item\Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="NTArmor.cpp">
+      <Filter>Item\Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="NTAcc.cpp">
+      <Filter>Item\Equip</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NTTileMap.h">
+      <Filter>TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="NTField.h">
+      <Filter>Field</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSpriteData.h">
+      <Filter>DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteLoader.h">
+      <Filter>DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="NTNPC.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="NTPlayer.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem.h">
+      <Filter>GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="NTItem.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldCamera.h">
+      <Filter>CamLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="EnableRange.h">
+      <Filter>FieldLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="NTTextWindow.h">
+      <Filter>TextWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="NTEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="NTEventSystem.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="NTFadeRect.h">
+      <Filter>FadeRect</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingSceneBuilder.h">
+      <Filter>Scene\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingSceneUpdater.h">
+      <Filter>Scene\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugSceneBuilder.h">
+      <Filter>Scene\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugSceneUpdater.h">
+      <Filter>Scene\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowSceneBuilder.h">
+      <Filter>Scene\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowSceneUpdater.h">
+      <Filter>Scene\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="NTTextData.h">
+      <Filter>DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="TextLoader.h">
+      <Filter>DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="GameValue.h">
+      <Filter>GameSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="NTPixelChecker.h">
+      <Filter>PixelCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="NTPixelCollider.h">
+      <Filter>PixelCheck</Filter>
+    </ClInclude>
+    <ClInclude Include="NTPieceWindow.h">
+      <Filter>TextWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="NTKeyItem.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="NTConsume.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="NTEquip.h">
+      <Filter>Item\Equip</Filter>
+    </ClInclude>
+    <ClInclude Include="NTWeapon.h">
+      <Filter>Item\Equip</Filter>
+    </ClInclude>
+    <ClInclude Include="NTHelmet.h">
+      <Filter>Item\Equip</Filter>
+    </ClInclude>
+    <ClInclude Include="NTArmor.h">
+      <Filter>Item\Equip</Filter>
+    </ClInclude>
+    <ClInclude Include="NTAcc.h">
+      <Filter>Item\Equip</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="생각의 쓰레기통.txt" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,585 @@
+class Vec
+{
+public:
+	union
+	{
+		struct
+		{
+			float X;
+			float Y;
+			float Z;
+			float W;
+		};
+		
+		float m[4];
+	};
+
+public:
+	int IX()
+	{
+		return (int)X;
+	}
+
+	int IY()
+	{
+		return (int)Y;
+	}
+
+	int IZ()
+	{
+		return (int)Z;
+	}
+
+	Vec operator-(const Vec& _Value)
+	{
+		return Vec(X - _Value.X, Y - _Value.Y, Z - _Value.Z);
+	}
+
+	Vec& operator*=(const float _Value)
+	{
+		X *= _Value;
+		Y *= _Value;
+		Z *= _Value;
+		
+		return (*this);
+	}
+
+	Vec& operator/=(const float _Value)
+	{
+		X /= _Value;
+		Y /= _Value;
+		Z /= _Value;
+		W /= _Value;
+		return *this;
+	}
+
+	Vec NormalizationR() const
+	{
+		float Scale = sqrtf(X*X + Y*Y + Z*Z);
+		return Vec(X / Scale, Y / Scale, Z / Scale);
+	}
+
+	void Normalization()
+	{
+		float Scale = sqrtf(X*X + Y*Y + Z*Z);
+		X /= Scale;
+		Y /= Scale;
+		Z /= Scale;
+	}
+
+	float Dot(const Vec& _Other)
+	{
+		float Scale = X*_Other.X + Y*_Other.Y + Z*_Other.Z;
+
+		return Scale;
+	}
+
+	float Angle(const Vec& _Other)
+	{
+		Vec Left = NormalizationR();
+		Vec Right = _Other.NormalizationR();
+
+		return acosf(Left.Dot(Right));
+	}
+
+	Vec Cross(const Vec& _Other)
+	{
+		Vec Return;
+		Return.X = Y * _Other.Z - Z * _Other.Y;
+		Return.Y = X * _Other.Z - Z * _Other.X;
+		Return.Z = X * _Other.Y - Y * _Other.X;
+
+		return Return;
+	}
+
+public:
+	Vec() : X(0.0f), Y(0.0f), Z(0.0f)
+	{
+
+	}
+
+	Vec(float _X, float _Y, float _Z) : X(_X), Y(_Y), Z(_Z)
+	{
+
+	}
+};
+
+class Mat
+{
+public:
+	union
+	{
+		float mc[16];
+		float m[4][4];
+	};
+
+public:
+	void Identify()
+	{
+		memset(m, 0, sizeof(float) * 16);
+
+		m[0][0] = 1.0f;
+		m[1][1] = 1.0f;
+		m[2][2] = 1.0f;
+		m[3][3] = 1.0f;
+	}
+
+	void Trans(const Vec& _Trans)
+	{
+		Identify();
+		m[3][0] = _Trans.X;
+		m[3][1] = _Trans.Y;
+		m[3][2] = _Trans.Z;
+	}
+
+	void RotX(float _Rad)
+	{
+		Identify();
+		m[1][1] = cos(_Rad);
+		m[1][2] = sin(_Rad);
+		m[2][1] = -sin(_Rad);
+		m[2][2] = cos(_Rad);
+	}
+
+	void RotY(float _Rad)
+	{
+		Identify();
+		m[0][0] = cos(_Rad);
+		m[2][0] = sin(_Rad);
+		m[0][2] = -sin(_Rad);
+		m[2][2] = cos(_Rad);
+	}
+
+	void RotZ(float _Rad)
+	{
+		Identify();
+		m[0][0] = cos(_Rad);
+		m[0][1] = sin(_Rad);
+		m[1][0] = -sin(_Rad);
+		m[1][1] = cos(_Rad);
+	}
+
+	Mat operator*(const Mat& _Other)
+	{
+		Mat Return;
+		Return.Identify();
+
+		for (size_t y = 0; y < 4; y++)
+		{
+			for (size_t x = 0; x < 4; x++)
+			{
+				Return.m[y][x] =
+					m[y][0] * _Other.m[0][x] +
+					m[y][1] * _Other.m[1][x] +
+					m[y][2] * _Other.m[2][x] +
+					m[y][3] * _Other.m[3][x];
+			}
+		}
+
+		return Return;
+	}
+
+	Vec MulOne(const Vec& _Other)
+	{
+
+		Vec Return;
+		Return.X = m[0][0] * _Other.m[0]
+			+ m[1][0] * _Other.m[1]
+			+ m[2][0] * _Other.m[2]
+			+ m[3][0] * 1.0f;
+
+		Return.Y = m[0][1] * _Other.m[0]
+			+ m[1][1] * _Other.m[1]
+			+ m[2][1] * _Other.m[2]
+			+ m[3][1] * 1.0f;
+
+		Return.Z = m[0][2] * _Other.m[0]
+			+ m[1][2] * _Other.m[1]
+			+ m[2][2] * _Other.m[2]
+			+ m[3][2] * 1.0f;
+
+		Return.W = m[0][3] * _Other.m[0]
+			+ m[1][3] * _Other.m[1]
+			+ m[2][3] * _Other.m[2]
+			+ m[3][3] * 1.0f;
+
+		return Return;
+	}
+	
+	Vec MulZero(const Vec& _Other)
+	{
+
+		Vec Return;
+		Return.X = m[0][0] * _Other.m[0]
+			+ m[1][0] * _Other.m[1]
+			+ m[2][0] * _Other.m[2]
+			+ m[3][0] * 0.0f;
+
+		Return.Y = m[0][1] * _Other.m[0]
+			+ m[1][1] * _Other.m[1]
+			+ m[2][1] * _Other.m[2]
+			+ m[3][1] * 0.0f;
+
+		Return.Z = m[0][2] * _Other.m[0]
+			+ m[1][2] * _Other.m[1]
+			+ m[2][2] * _Other.m[2]
+			+ m[3][2] * 0.0f;
+
+		Return.W = _Other.W;
+
+		return Return;
+	}
+
+
+	void Scale(const Vec& _Scale)
+	{
+		m[0][0] = _Scale.X;
+		m[1][1] = _Scale.Y;
+		m[2][2] = _Scale.Z;
+	}
+};
+
+
+public:
+	Vec Mesh[24];
+	Vec TmpMesh[24];
+	POINT PARR[24];
+
+	Vec Pos;
+	Vec Scale;
+	Vec Rot;
+
+	Mat SMat;
+	Mat XRMat;
+	Mat YRMat;
+	Mat ZRMat;
+	Mat RMat;
+	Mat PMat;
+	Mat CamMat;
+	Mat ProjMat;
+	Mat VPMat;
+	Mat MMMMMM;
+
+	Vec CPos;
+	Vec CLookAt;
+	Vec CUp;
+	Vec CAxis[3];
+
+	HDC ImgDC;
+	HBITMAP BitMap;
+	HBITMAP OldBitMap;
+
+	float ZNear;
+	float ZFar;
+	float Fov;
+
+public:
+	void CreateMesh();
+	void Input();
+	void CalCam();
+	void CalProj();
+	void CalVP();
+
+
+
+
+
+
+
+
+
+
+#pragma once
+#include <NTScene.h>
+#include <Windows.h>
+
+class Vec
+{
+public:
+	union
+	{
+		struct
+		{
+			float X;
+			float Y;
+			float Z;
+			float W;
+		};
+		
+		float m[4];
+	};
+
+public:
+	int IX()
+	{
+		return (int)X;
+	}
+
+	int IY()
+	{
+		return (int)Y;
+	}
+
+	int IZ()
+	{
+		return (int)Z;
+	}
+
+	Vec operator-(const Vec& _Value)
+	{
+		return Vec(X - _Value.X, Y - _Value.Y, Z - _Value.Z);
+	}
+
+	Vec& operator*=(const float _Value)
+	{
+		X *= _Value;
+		Y *= _Value;
+		Z *= _Value;
+		
+		return (*this);
+	}
+
+	Vec& operator/=(const float _Value)
+	{
+		X /= _Value;
+		Y /= _Value;
+		Z /= _Value;
+		W /= _Value;
+		return *this;
+	}
+
+	Vec NormalizationR() const
+	{
+		float Scale = sqrtf(X*X + Y*Y + Z*Z);
+		return Vec(X / Scale, Y / Scale, Z / Scale);
+	}
+
+	void Normalization()
+	{
+		float Scale = sqrtf(X*X + Y*Y + Z*Z);
+		X /= Scale;
+		Y /= Scale;
+		Z /= Scale;
+	}
+
+	float Dot(const Vec& _Other)
+	{
+		float Scale = X*_Other.X + Y*_Other.Y + Z*_Other.Z;
+
+		return Scale;
+	}
+
+	float Angle(const Vec& _Other)
+	{
+		Vec Left = NormalizationR();
+		Vec Right = _Other.NormalizationR();
+
+		return acosf(Left.Dot(Right));
+	}
+
+	Vec Cross(const Vec& _Other)
+	{
+		Vec Return;
+		Return.X = Y * _Other.Z - Z * _Other.Y;
+		Return.Y = X * _Other.Z - Z * _Other.X;
+		Return.Z = X * _Other.Y - Y * _Other.X;
+
+		return Return;
+	}
+
+public:
+	Vec() : X(0.0f), Y(0.0f), Z(0.0f)
+	{
+
+	}
+
+	Vec(float _X, float _Y, float _Z) : X(_X), Y(_Y), Z(_Z)
+	{
+
+	}
+};
+
+class Mat
+{
+public:
+	union
+	{
+		float mc[16];
+		float m[4][4];
+	};
+
+public:
+	void Identify()
+	{
+		memset(m, 0, sizeof(float) * 16);
+
+		m[0][0] = 1.0f;
+		m[1][1] = 1.0f;
+		m[2][2] = 1.0f;
+		m[3][3] = 1.0f;
+	}
+
+	void Trans(const Vec& _Trans)
+	{
+		Identify();
+		m[3][0] = _Trans.X;
+		m[3][1] = _Trans.Y;
+		m[3][2] = _Trans.Z;
+	}
+
+	void RotX(float _Rad)
+	{
+		Identify();
+		m[1][1] = cos(_Rad);
+		m[1][2] = sin(_Rad);
+		m[2][1] = -sin(_Rad);
+		m[2][2] = cos(_Rad);
+	}
+
+	void RotY(float _Rad)
+	{
+		Identify();
+		m[0][0] = cos(_Rad);
+		m[2][0] = sin(_Rad);
+		m[0][2] = -sin(_Rad);
+		m[2][2] = cos(_Rad);
+	}
+
+	void RotZ(float _Rad)
+	{
+		Identify();
+		m[0][0] = cos(_Rad);
+		m[0][1] = sin(_Rad);
+		m[1][0] = -sin(_Rad);
+		m[1][1] = cos(_Rad);
+	}
+
+	Mat operator*(const Mat& _Other)
+	{
+		Mat Return;
+		Return.Identify();
+
+		for (size_t y = 0; y < 4; y++)
+		{
+			for (size_t x = 0; x < 4; x++)
+			{
+				Return.m[y][x] =
+					m[y][0] * _Other.m[0][x] +
+					m[y][1] * _Other.m[1][x] +
+					m[y][2] * _Other.m[2][x] +
+					m[y][3] * _Other.m[3][x];
+			}
+		}
+
+		return Return;
+	}
+
+	Vec MulOne(const Vec& _Other)
+	{
+
+		Vec Return;
+		Return.X = m[0][0] * _Other.m[0]
+			+ m[1][0] * _Other.m[1]
+			+ m[2][0] * _Other.m[2]
+			+ m[3][0] * 1.0f;
+
+		Return.Y = m[0][1] * _Other.m[0]
+			+ m[1][1] * _Other.m[1]
+			+ m[2][1] * _Other.m[2]
+			+ m[3][1] * 1.0f;
+
+		Return.Z = m[0][2] * _Other.m[0]
+			+ m[1][2] * _Other.m[1]
+			+ m[2][2] * _Other.m[2]
+			+ m[3][2] * 1.0f;
+
+		Return.W = m[0][3] * _Other.m[0]
+			+ m[1][3] * _Other.m[1]
+			+ m[2][3] * _Other.m[2]
+			+ m[3][3] * 1.0f;
+
+		return Return;
+	}
+	
+	Vec MulZero(const Vec& _Other)
+	{
+
+		Vec Return;
+		Return.X = m[0][0] * _Other.m[0]
+			+ m[1][0] * _Other.m[1]
+			+ m[2][0] * _Other.m[2]
+			+ m[3][0] * 0.0f;
+
+		Return.Y = m[0][1] * _Other.m[0]
+			+ m[1][1] * _Other.m[1]
+			+ m[2][1] * _Other.m[2]
+			+ m[3][1] * 0.0f;
+
+		Return.Z = m[0][2] * _Other.m[0]
+			+ m[1][2] * _Other.m[1]
+			+ m[2][2] * _Other.m[2]
+			+ m[3][2] * 0.0f;
+
+		Return.W = _Other.W;
+
+		return Return;
+	}
+
+
+	void Scale(const Vec& _Scale)
+	{
+		m[0][0] = _Scale.X;
+		m[1][1] = _Scale.Y;
+		m[2][2] = _Scale.Z;
+	}
+};
+
+class TestSceneUpdater : public NTScene::NTSceneUpdater
+{
+public:
+	Vec Mesh[24];
+	Vec TmpMesh[24];
+	POINT PARR[24];
+
+	Vec Pos;
+	Vec Scale;
+	Vec Rot;
+
+	Mat SMat;
+	Mat XRMat;
+	Mat YRMat;
+	Mat ZRMat;
+	Mat RMat;
+	Mat PMat;
+	Mat CamMat;
+	Mat ProjMat;
+	Mat VPMat;
+	Mat MMMMMM;
+
+	Vec CPos;
+	Vec CLookAt;
+	Vec CUp;
+	Vec CAxis[3];
+
+	HDC ImgDC;
+	HBITMAP BitMap;
+	HBITMAP OldBitMap;
+
+	float ZNear;
+	float ZFar;
+	float Fov;
+
+public:
+	void CreateMesh();
+	void Input();
+	void CalCam();
+	void CalProj();
+	void CalVP();
+public:
+	TestSceneUpdater();
+	~TestSceneUpdater();
+
+	virtual void SceneUpdate() override;
+	virtual void SceneStart() override;
+};
+

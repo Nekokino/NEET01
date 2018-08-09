@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{264efb51-9b40-418e-9ea8-7f15702fc0d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{1c25d823-4a7b-4bfa-b2b9-ac01c484e9e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parents">
+      <UniqueIdentifier>{f79bbf43-ed2d-456b-b1f9-00c37623ed65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{790821a0-f660-419d-b43d-bb5d42d2e7da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\SubSystem">
+      <UniqueIdentifier>{7a8c4616-5af1-4964-91e3-011acf73c08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\SubSystem\Scene">
+      <UniqueIdentifier>{12165f53-5461-49a1-9373-a159f40cfc26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\PreCom">
+      <UniqueIdentifier>{bf880876-2337-4907-a4d0-b1ce1a98ccc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Helper">
+      <UniqueIdentifier>{831ba570-51b4-408f-834b-7618c2799f84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parents\SimpleParent">
+      <UniqueIdentifier>{48c803af-1ff6-4c85-959b-eb8d0a4866a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{1104dace-53b6-4775-9f5c-d4d1ea96a216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component">
+      <UniqueIdentifier>{14d3fe1b-3f00-4755-86da-9ab795bc7698}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{db63d9a9-9e82-4f94-b73a-34adb9c32b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{f5681e09-34dd-4c46-80b7-98d11450f600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Res">
+      <UniqueIdentifier>{b53aa848-e09b-48f8-af00-521281ca884f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\EngineComponent">
+      <UniqueIdentifier>{da62f3d0-7990-4fad-82c7-857876967262}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\SubSystem\Device">
+      <UniqueIdentifier>{c59f5037-858a-45a2-8505-5264a23dced5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\DirectX">
+      <UniqueIdentifier>{fe302efe-2065-4048-9662-cadbe847f473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Res\Shader">
+      <UniqueIdentifier>{8b755d2b-1eb7-418c-87cc-d090bfdf67f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\EngineComponent\Renderer">
+      <UniqueIdentifier>{2775db8e-e631-4650-beac-c87f19ab9420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\EngineComponent\Base">
+      <UniqueIdentifier>{2dab5dbb-be62-40a8-8ccc-77938140c96b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Res\Mesh">
+      <UniqueIdentifier>{7cef01e4-2126-4dd3-91d3-ca592209bbce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Res\Texture">
+      <UniqueIdentifier>{2cf7bb58-05a0-4593-914b-644f1f6056f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Res\Blend">
+      <UniqueIdentifier>{3706013a-4631-4664-bf90-770ac1c32292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\EngineComponent\Renderer\Sub">
+      <UniqueIdentifier>{80221c81-0424-4409-b227-dff9ba5c8960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\EngineComponent\Collsion">
+      <UniqueIdentifier>{6db7556e-299f-4eb6-809a-c29a12d5a7a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\SubSystem\Scene\Collision">
+      <UniqueIdentifier>{9b7b9173-e113-452e-900c-2f49edbe5824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\SubSystem\Scene\Render">
+      <UniqueIdentifier>{f05f89b4-7f41-40c8-9fe8-29f389dc5aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\EngineComponent\Collsion\Sub">
+      <UniqueIdentifier>{0d283683-f180-471c-8f53-b1d6ea076914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window\SubSystem\Dbg">
+      <UniqueIdentifier>{364bf0ff-eaa6-4607-8fa4-c58c4fd7761e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Res\Font">
+      <UniqueIdentifier>{a38fe5de-80e0-496e-93cc-9061c4e87da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File">
+      <UniqueIdentifier>{e4121996-9e0b-4668-a735-eee987d432de}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="RefNAutoptr.cpp">
+      <Filter>Parents</Filter>
+    </ClCompile>
+    <ClCompile Include="PreCom.cpp">
+      <Filter>Header\PreCom</Filter>
+    </ClCompile>
+    <ClCompile Include="NTWindow.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="NTScene.cpp">
+      <Filter>Window\SubSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSwitcher.cpp">
+      <Filter>Parents</Filter>
+    </ClCompile>
+    <ClCompile Include="NTObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="NTComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="NTResource.cpp">
+      <Filter>Resource\Res</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSceneSystem.cpp">
+      <Filter>Window\SubSystem\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="NTDevice.cpp">
+      <Filter>Window\SubSystem\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectHeader.cpp">
+      <Filter>Header\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="NTWinShortCut.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceSystem.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="NTShader.cpp">
+      <Filter>Resource\Res\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="NTVertexShader.cpp">
+      <Filter>Resource\Res\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="NTPixelShader.cpp">
+      <Filter>Resource\Res\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="NTStCom.cpp">
+      <Filter>Object\Component\EngineComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="NTMaterial.cpp">
+      <Filter>Resource\Res\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="NTCamera.cpp">
+      <Filter>Object\Component\EngineComponent\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="NTTransform.cpp">
+      <Filter>Object\Component\EngineComponent\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="NTRenderer.cpp">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSpRenderer.cpp">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="NTLogic.cpp">
+      <Filter>Object\Component\EngineComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="NTMesh.cpp">
+      <Filter>Resource\Res\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="NTTexture.cpp">
+      <Filter>Resource\Res\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="NTImage.cpp">
+      <Filter>Resource\Res\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSampler.cpp">
+      <Filter>Resource\Res\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="NTBlend.cpp">
+      <Filter>Resource\Res\Blend</Filter>
+    </ClCompile>
+    <ClCompile Include="MathSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSubTransform.cpp">
+      <Filter>Object\Component\EngineComponent\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSpFrameAnimator.cpp">
+      <Filter>Object\Component\EngineComponent\Renderer\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="NTRenderSystem.cpp">
+      <Filter>Window\SubSystem\Scene\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="NT2DCollisionSystem.cpp">
+      <Filter>Window\SubSystem\Scene\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="NTCollisionComponent.cpp">
+      <Filter>Object\Component\EngineComponent\Collsion</Filter>
+    </ClCompile>
+    <ClCompile Include="NT2DCollision.cpp">
+      <Filter>Object\Component\EngineComponent\Collsion\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="NT2DCollisionBase.cpp">
+      <Filter>Object\Component\EngineComponent\Collsion\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugFunc.cpp">
+      <Filter>Window\SubSystem\Dbg</Filter>
+    </ClCompile>
+    <ClCompile Include="NTFont.cpp">
+      <Filter>Resource\Res\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="NTFileStream.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="NTReadStream.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="NTWriteStream.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="NTFontRenderer.cpp">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSecondUVRenderer.cpp">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="NTColorMeshRenderer.cpp">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WinCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="RefNAutoptr.h">
+      <Filter>Parents</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCom.h">
+      <Filter>Header\PreCom</Filter>
+    </ClInclude>
+    <ClInclude Include="NTWindow.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="NTScene.h">
+      <Filter>Window\SubSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="NTWinParent.h">
+      <Filter>Parents\SimpleParent</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSceneParent.h">
+      <Filter>Parents\SimpleParent</Filter>
+    </ClInclude>
+    <ClInclude Include="NTObjectParent.h">
+      <Filter>Parents\SimpleParent</Filter>
+    </ClInclude>
+    <ClInclude Include="NTTypeParent.h">
+      <Filter>Parents\SimpleParent</Filter>
+    </ClInclude>
+    <ClInclude Include="NTNameTag.h">
+      <Filter>Parents\SimpleParent</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSwitcher.h">
+      <Filter>Parents</Filter>
+    </ClInclude>
+    <ClInclude Include="StlAssist.h">
+      <Filter>Header\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="NTObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="NTComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomMacro.h">
+      <Filter>Header\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceSystem.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="NTResource.h">
+      <Filter>Resource\Res</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSceneSystem.h">
+      <Filter>Window\SubSystem\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="NTDevice.h">
+      <Filter>Window\SubSystem\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectHeader.h">
+      <Filter>Header\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectValueHeader.h">
+      <Filter>Header\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="NTWinShortCut.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="NTShader.h">
+      <Filter>Resource\Res\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="NTVertexShader.h">
+      <Filter>Resource\Res\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="NTPixelShader.h">
+      <Filter>Resource\Res\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="NTStCom.h">
+      <Filter>Object\Component\EngineComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="NTMaterial.h">
+      <Filter>Resource\Res\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="NTCamera.h">
+      <Filter>Object\Component\EngineComponent\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="NTTransform.h">
+      <Filter>Object\Component\EngineComponent\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="NTRenderer.h">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSpRenderer.h">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="NTLogic.h">
+      <Filter>Object\Component\EngineComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="NTMesh.h">
+      <Filter>Resource\Res\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="NTTexture.h">
+      <Filter>Resource\Res\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTex.h">
+      <Filter>Resource\Res\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="NTImage.h">
+      <Filter>Resource\Res\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSampler.h">
+      <Filter>Resource\Res\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="NTBlend.h">
+      <Filter>Resource\Res\Blend</Filter>
+    </ClInclude>
+    <ClInclude Include="MathSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSubTransform.h">
+      <Filter>Object\Component\EngineComponent\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSpFrameAnimator.h">
+      <Filter>Object\Component\EngineComponent\Renderer\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="NTRenderSystem.h">
+      <Filter>Window\SubSystem\Scene\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="NT2DCollisionSystem.h">
+      <Filter>Window\SubSystem\Scene\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="NTCollisionComponent.h">
+      <Filter>Object\Component\EngineComponent\Collsion</Filter>
+    </ClInclude>
+    <ClInclude Include="NT2DCollisionBase.h">
+      <Filter>Object\Component\EngineComponent\Collsion\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="NT2DCollision.h">
+      <Filter>Object\Component\EngineComponent\Collsion\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugFunc.h">
+      <Filter>Window\SubSystem\Dbg</Filter>
+    </ClInclude>
+    <ClInclude Include="FW1FontWrapper.h">
+      <Filter>Resource\Res\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="FW1CompileSettings.h">
+      <Filter>Resource\Res\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="NTFont.h">
+      <Filter>Resource\Res\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="NTFileStream.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="NTReadStream.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="NTWriteStream.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="NTFontRenderer.h">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSecondUVRenderer.h">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="NTColorMeshRenderer.h">
+      <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DirectXTex.inl">
+      <Filter>Resource\Res\Texture</Filter>
+    </None>
+  </ItemGroup>
+</Project>

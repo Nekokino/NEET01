@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="etc">
+      <UniqueIdentifier>{f05e3896-1987-44f9-9068-ca5ad8117708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlg">
+      <UniqueIdentifier>{35dfb501-336d-42f0-af2a-ce0edf3555fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{0faaed8b-83a7-49a3-9946-250fee5e5201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sub">
+      <UniqueIdentifier>{6b3f549f-3e98-477d-b651-58c56a670406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View">
+      <UniqueIdentifier>{ef6c2177-5e3f-4667-b44b-3f78ccb669ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ToolCore">
+      <UniqueIdentifier>{c1abeb38-c520-4c66-b2f2-7ee2b0e27e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{b95b8714-6a25-4e69-b58e-db1bb44400df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlg\Item">
+      <UniqueIdentifier>{4d17006e-ff3a-4b7e-8b33-fe1ae23c11e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlg\Item\Sub">
+      <UniqueIdentifier>{a0207895-8c00-484b-9176-9a85153817b6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="NEETTool.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSplitWnd.h">
+      <Filter>Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="RightView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuDlg.h">
+      <Filter>Dlg</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBuilder.h">
+      <Filter>ToolCore</Filter>
+    </ClInclude>
+    <ClInclude Include="MapDlg.h">
+      <Filter>Dlg</Filter>
+    </ClInclude>
+    <ClInclude Include="NTDlgShortCut.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="ResDlg.h">
+      <Filter>Dlg</Filter>
+    </ClInclude>
+    <ClInclude Include="TabDlg.h">
+      <Filter>Dlg</Filter>
+    </ClInclude>
+    <ClInclude Include="TextDlg.h">
+      <Filter>Dlg</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDlg.h">
+      <Filter>Dlg\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemEditDlg.h">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBaseDlg.h">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="NEETTool.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSplitWnd.cpp">
+      <Filter>Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="RightView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuDlg.cpp">
+      <Filter>Dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBuilder.cpp">
+      <Filter>ToolCore</Filter>
+    </ClCompile>
+    <ClCompile Include="MapDlg.cpp">
+      <Filter>Dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="NTDlgShortCut.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="ResDlg.cpp">
+      <Filter>Dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="TabDlg.cpp">
+      <Filter>Dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="TextDlg.cpp">
+      <Filter>Dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemDlg.cpp">
+      <Filter>Dlg\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemEditDlg.cpp">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBaseDlg.cpp">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\NEETTool.ico">
+      <Filter>etc</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NEETTool.rc">
+      <Filter>etc</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\NEETTool.rc2">
+      <Filter>etc</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>Base</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
