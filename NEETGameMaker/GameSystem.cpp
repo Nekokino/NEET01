@@ -10,6 +10,7 @@ wchar_t GameSystem::TextData[256][256] = {};
 bool GameSystem::NextText = false;
 int GameSystem::WindowStyle = 0;
 NTNPC* GameSystem::TextNPC = nullptr;
+float GameSystem::PlayTime = 0.0f;
 
 void GameSystem::SetNextText(NTNPC * _NPC, bool _Value)
 {
@@ -38,7 +39,7 @@ void GameSystem::BasePlayerSetting()
 	PS[CHRONO].MaxMP = 8;
 	PS[CHRONO].CurMP = PS[CHRONO].MaxMP;
 	PS[CHRONO].Member = true;
-	lstrcpyW(PS[CHRONO].Name, L"≈©∑Œ≥Î");
+	lstrcpyW(PS[CHRONO].Name, L"∂À¿Ô¿Ã");
 	PS[CHRONO].NextEXP = 20;
 	PS[CHRONO].Power = 5;
 	PS[CHRONO].Speed = 13;
@@ -47,6 +48,11 @@ void GameSystem::BasePlayerSetting()
 	PS[CHRONO].BattleOrder = 0;
 
 	BattleMember[0] = CHRONO;
+}
+
+void GameSystem::TimeUpdate()
+{
+	PlayTime += TimeSystem::DeltaTime();
 }
 
 GameSystem::GameSystem()

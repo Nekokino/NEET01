@@ -2,11 +2,13 @@
 
 #include <NTWindow.h>
 #include <NTWinShortCut.h>
+#include <NTSpRenderer.h>
 
 #include "GameSystem.h"
 #include "NTTextWindow.h"
 #include "NTPieceWindow.h"
 #include "NTPlayer.h"
+
 
 
 WindowSceneBuilder::WindowSceneBuilder()
@@ -53,13 +55,13 @@ void WindowSceneBuilder::SceneBuild()
 	Level01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 	std::wstring tmp = Level01->GetString();
 	tmp = L"Lv    ";
-	wchar_t LevelNum[3];
-	_itow_s(GameSystem::GetPlayerStatus(0).Level, LevelNum, 10);
+	wchar_t tmpbuf[4];
+	_itow_s(GameSystem::GetPlayerStatus(0).Level, tmpbuf, 10);
 	if (GameSystem::GetPlayerStatus(0).Level < 10)
 	{
 		tmp += L"  ";
 	}
-	tmp += LevelNum;
+	tmp += tmpbuf;
 	Level01->SetString(tmp.c_str());
 
 	Autoptr<NTFontRenderer> PlainHP01 = Window01->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
@@ -71,6 +73,39 @@ void WindowSceneBuilder::SceneBuild()
 	PlainHP01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 	PlainHP01->SetString(L"HP");
 
+	Autoptr<NTFontRenderer> HP01 = Window01->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	HP01->SetColor(255, 255, 255, 255);
+	HP01->SetSubPivot({ WinSize.x * 0.2375f, WinSize.y * 0.065f + 30.0f, 1.0f });
+	HP01->SetSubScale({ 1.0f, 1.0f, 1.0f });
+	HP01->SetSize(25.0f);
+	HP01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
+	HP01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+	tmp.clear();
+	_itow_s(GameSystem::GetPlayerStatus(0).CurHP, tmpbuf, 10);
+	tmp += tmpbuf;
+	tmp += L" / ";
+	_itow_s(GameSystem::GetPlayerStatus(0).MaxHP, tmpbuf, 10);
+	tmp += tmpbuf;
+	int tmpint = 11 - lstrlenW(tmp.c_str());
+	switch (tmpint)
+	{
+	case 3:
+		tmp.insert(0, L"  ");
+		break;
+	case 4:
+		tmp.insert(0, L"   ");
+		break;
+	case 5:
+		tmp.insert(0, L"     ");
+		break;
+	case 6:
+		tmp.insert(0, L"       ");
+		break;
+	default:
+		break;
+	}
+	HP01->SetString(tmp.c_str());
+
 	Autoptr<NTFontRenderer> PlainMP01 = Window01->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlainMP01->SetColor(255, 255, 255, 255);
 	PlainMP01->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.065f + 60.0f, 1.0f });
@@ -79,6 +114,50 @@ void WindowSceneBuilder::SceneBuild()
 	PlainMP01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
 	PlainMP01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 	PlainMP01->SetString(L"MP");
+
+	Autoptr<NTFontRenderer> MP01 = Window01->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	MP01->SetColor(255, 255, 255, 255);
+	MP01->SetSubPivot({ WinSize.x * 0.2375f, WinSize.y * 0.065f + 60.0f, 1.0f });
+	MP01->SetSubScale({ 1.0f, 1.0f, 1.0f });
+	MP01->SetSize(25.0f);
+	MP01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
+	MP01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+	tmp.clear();
+	_itow_s(GameSystem::GetPlayerStatus(0).CurMP, tmpbuf, 10);
+	tmp += tmpbuf;
+	tmp += L" / ";
+	_itow_s(GameSystem::GetPlayerStatus(0).MaxMP, tmpbuf, 10);
+	tmp += tmpbuf;
+	tmpint = 11 - lstrlenW(tmp.c_str());
+	switch (tmpint)
+	{
+	case 3:
+		tmp.insert(0, L"  ");
+		break;
+	case 4:
+		tmp.insert(0, L"   ");
+		break;
+	case 5:
+		tmp.insert(0, L"     ");
+		break;
+	case 6:
+		tmp.insert(0, L"       ");
+		break;
+	default:
+		break;
+	}
+	MP01->SetString(tmp.c_str());
+
+	Autoptr<NTSpRenderer> Atk01 = Window01->AddComponent<NTSpRenderer>(L"SmallIcon.png", UILayer);
+	Atk01->SetSubScale({ 32.0f, 32.0f, 1.0f });
+	Atk01->SetSubPivot({-WinSize.x * 0.135f, -WinSize.y * 0.065f});
+	Atk01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+
+	Autoptr<NTSpRenderer> Def01 = Window01->AddComponent<NTSpRenderer>(L"SmallIcon.png", UILayer);
+	Def01->SetSubScale({ 32.0f, 32.0f, 1.0f });
+	Def01->SetSubPivot({ 0.0f, -WinSize.y * 0.065f });
+	Def01->SetImageIndex(14);
+	Def01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 
 	Autoptr<NTObject> Window02 = GetScene()->CreateObject(L"Window02", UILayer);
 	CharacterMenu->AddChild(Window02);

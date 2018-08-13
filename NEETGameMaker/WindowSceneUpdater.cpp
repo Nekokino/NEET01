@@ -16,7 +16,7 @@ WindowSceneUpdater::~WindowSceneUpdater()
 
 void WindowSceneUpdater::SceneUpdate()
 {
-
+	GameSystem::TimeUpdate();
 }
 
 void WindowSceneUpdater::SceneStart()

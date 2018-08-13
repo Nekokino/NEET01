@@ -4,6 +4,8 @@
 class NTHelmet : public NTEquip
 {
 public:
+	size_t Def;
+public:
 	NTHelmet();
 	~NTHelmet();
 };

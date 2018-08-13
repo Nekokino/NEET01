@@ -20,3 +20,15 @@
 #define Stair2 NTVEC{25.0f, 25.0f, 25.0f, 255.0f}
 #define Stair3 NTVEC{35.0f, 35.0f, 35.0f, 255.0f}
 #define Stair4 NTVEC{45.0f, 45.0f, 45.0f, 255.0f}
+
+enum CHARACTER
+{
+	CHRONO,
+	LUCCA,
+	MARU,
+	KAERU,
+	ROBO,
+	EIRA,
+	MAOU,
+	CHARA_MAX
+};

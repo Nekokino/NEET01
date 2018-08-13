@@ -1,6 +1,10 @@
 #pragma once
 #include <Windows.h>
 #include "GameValue.h"
+#include "NTWeapon.h"
+#include "NTArmor.h"
+#include "NTHelmet.h"
+#include "NTAcc.h"
 
 class NTNPC;
 class PlayerStatus // 각각 캐릭터마다 가지고 있을 내용들.
@@ -52,6 +56,10 @@ public:
 	int Stamina; // 기본 방어력
 	int MagicDef; // 기본 마법방어력
 
+	NTWeapon Weapon;
+	NTHelmet Helmet;
+	NTArmor Armor;
+	NTAcc Acc;
 	// 아이템 4개
 
 	bool Member; // 현재 동료인가? (동료 이벤트를 봐서 동료로 사용 가능한가?)
@@ -69,20 +77,10 @@ private:
 		GM_ACTIVE,
 		GM_WAIT
 	};
-public:
-	enum CHARACTER
-	{
-		CHRONO,
-		LUCCA,
-		MARU,
-		KAERU,
-		ROBO,
-		EIRA,
-		MAOU,
-		CHARA_MAX
-	};
+
 
 private:
+	static float PlayTime;
 	static GAMEMODE GameMode;
 	static PlayerStatus PS[CHARA_MAX];
 	static CHARACTER BattleMember[3]; // 누가 전투멤버인가? (선두는 0번째에 있도록)
@@ -169,6 +167,7 @@ public:
 	}
 
 	static void BasePlayerSetting();
+	static void TimeUpdate();
 
 public:
 	GameSystem();
