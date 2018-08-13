@@ -22,6 +22,33 @@ void GameSystem::ActiveText()
 	TextNPC->ActiveTextEvent();
 }
 
+void GameSystem::BasePlayerSetting()
+{
+	PS[CHRONO].CurEXP = 0;
+	PS[CHRONO].Element = PlayerStatus::EM_LIGHT;
+	PS[CHRONO].Evade = 8;
+	PS[CHRONO].Hit = 8;
+	PS[CHRONO].IsBattle = true;
+	PS[CHRONO].IsFront = true;
+	PS[CHRONO].Level = 1;
+	PS[CHRONO].Magic = 5;
+	PS[CHRONO].MagicDef = 2;
+	PS[CHRONO].MaxHP = 70;
+	PS[CHRONO].CurHP = PS[CHRONO].MaxHP;
+	PS[CHRONO].MaxMP = 8;
+	PS[CHRONO].CurMP = PS[CHRONO].MaxMP;
+	PS[CHRONO].Member = true;
+	lstrcpyW(PS[CHRONO].Name, L"Å©·Î³ë");
+	PS[CHRONO].NextEXP = 20;
+	PS[CHRONO].Power = 5;
+	PS[CHRONO].Speed = 13;
+	PS[CHRONO].Stamina = 8;
+	PS[CHRONO].Usable = true;
+	PS[CHRONO].BattleOrder = 0;
+
+	BattleMember[0] = CHRONO;
+}
+
 GameSystem::GameSystem()
 {
 }

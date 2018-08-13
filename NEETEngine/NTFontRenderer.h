@@ -29,6 +29,11 @@ public:
 		String = _String;
 	}
 
+	const std::wstring& GetString()
+	{
+		return String;
+	}
+
 	void SetColor(unsigned __int8 R, unsigned __int8 G, unsigned __int8 B, unsigned __int8 A)
 	{
 		Color = 0;

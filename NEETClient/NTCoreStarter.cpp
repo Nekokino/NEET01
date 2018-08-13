@@ -18,6 +18,7 @@
 #include <DebugSceneUpdater.h>
 #include <WindowSceneBuilder.h>
 #include <WindowSceneUpdater.h>
+#include <GameSystem.h>
 
 NTCoreStarter::NTCoreStarter()
 {
@@ -30,7 +31,7 @@ NTCoreStarter::~NTCoreStarter()
 
 void NTCoreStarter::Build()
 {
-	NTWinShortCut::GetMainWindow().SetSize(1024 * 0.5f, 896 * 0.5f);
+	NTWinShortCut::GetMainWindow().SetSize(1024 * 0.75f, 896 * 0.75f);
 	NTWinShortCut::GetMainWindow().Show();
 	NTWinShortCut::GetMainWindow().InitDevice();
 
@@ -38,12 +39,14 @@ void NTCoreStarter::Build()
 	
 	SpriteLoader::Load();
 	TextLoader::Load();
+
+	GameSystem::BasePlayerSetting();
 	
 	NTWinShortCut::GetMainSceneSystem().CreateScene<LoadingSceneBuilder, LoadingSceneUpdater>(L"LoadingScene");
 	NTWinShortCut::GetMainSceneSystem().CreateScene<WindowSceneBuilder, WindowSceneUpdater>(L"WindowScene");
 	NTWinShortCut::GetMainSceneSystem().CreateScene<DebugSceneBuilder, DebugSceneUpdater>(L"DebugScene");
 	NTWinShortCut::GetMainSceneSystem().CreateScene<TestSceneBuilder, TestSceneUpdater>(L"TestScene");
-	NTWinShortCut::GetMainSceneSystem().CreateScene<TitleSceneBuilder, TitleSceneUpdater>(L"TitleScene");
+	NTWinShortCut::GetMainSceneSystem().CreateScene<TitleSceneBuilder, TitleSceneUpdater>(L"TitleScene");	
 	
 	NTWinShortCut::GetMainSceneSystem().ChangeScene(L"WindowScene");
 

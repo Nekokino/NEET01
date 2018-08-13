@@ -23,6 +23,15 @@ public:
 		EF_STOP, // 전투 끝날때까지 멈춤
 		EF_MAX
 	};
+
+	enum ELEMENT
+	{
+		EM_FIRE,
+		EM_WATER,
+		EM_LIGHT,
+		EM_SHADOW,
+		EM_MAX
+	};
 	wchar_t Name[32];
 
 	int MaxHP;
@@ -33,7 +42,7 @@ public:
 	int NextEXP;
 
 	int Level;
-	int Element;
+	ELEMENT Element;
 
 	int Power; // 물리공격 계수
 	int Speed; // 턴 돌아오는 속도. 소모템으로만 올라감. 레벨관계 무
@@ -149,6 +158,17 @@ public:
 	{
 		WindowStyle = _Style;
 	}
+
+	static PlayerStatus GetPlayerStatus(int _index)
+	{
+		if (_index >= CHARA_MAX)
+		{
+			return PS[CHARA_MAX];
+		}
+		return PS[_index];
+	}
+
+	static void BasePlayerSetting();
 
 public:
 	GameSystem();
