@@ -245,6 +245,9 @@
     <ClInclude Include="NTAcc.h">
       <Filter>Item\Equip</Filter>
     </ClInclude>
+    <ClInclude Include="NTItemData.h">
+      <Filter>DataStruct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="생각의 쓰레기통.txt" />

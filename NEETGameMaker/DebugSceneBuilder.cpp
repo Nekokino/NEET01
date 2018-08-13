@@ -42,7 +42,7 @@ void DebugSceneBuilder::SceneBuild()
 	CameraComponent->PushRenderLayer(0, 1, 2, 3, 4, 10);
 
 	Autoptr<NTObject> TestPlane = GetScene()->CreateObject(L"TPlane", 0);
-	Autoptr<NTPlayer> P_Kaeru = TestPlane->AddComponent<NTPlayer>(GameSystem::CHARACTER::KAERU);
+	Autoptr<NTPlayer> P_Kaeru = TestPlane->AddComponent<NTPlayer>(CHARACTER::KAERU);
 	
 
 	Autoptr<NTObject> Field = GetScene()->CreateObject(L"MainField", 0);

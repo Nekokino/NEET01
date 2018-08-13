@@ -21,20 +21,20 @@ NTPlayer::~NTPlayer()
 {
 }
 
-bool NTPlayer::Init(GameSystem::CHARACTER _Chara)
+bool NTPlayer::Init(CHARACTER _Chara)
 {
 	Character = _Chara;
 	Status = GameSystem::GetStatus(Character);
 	Status->IsFront = true;
 	switch (Character)
 	{
-	case GameSystem::CHRONO:
+	case CHRONO:
 		break;
-	case GameSystem::LUCCA:
+	case LUCCA:
 		break;
-	case GameSystem::MARU: 
+	case MARU: 
 		break;
-	case GameSystem::KAERU:
+	case KAERU:
 		Renderer = AddComponent<NTSpRenderer>(L"Kaeru.png");
 		Collider = AddComponent<NT2DCollision>(PlayerLayer);
 		Collider->SetMode(COLTYPE::CT_2D_RECT);
@@ -53,11 +53,11 @@ bool NTPlayer::Init(GameSystem::CHARACTER _Chara)
 #pragma endregion
 		Animator->ChangeAnimation(L"WalkDown");
 		break;
-	case GameSystem::ROBO:
+	case ROBO:
 		break;
-	case GameSystem::EIRA:
+	case EIRA:
 		break;
-	case GameSystem::MAOU:
+	case MAOU:
 		break;
 	default:
 		tassert(true);

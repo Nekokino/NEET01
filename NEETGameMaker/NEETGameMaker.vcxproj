@@ -180,6 +180,7 @@
     <ClInclude Include="NTField.h" />
     <ClInclude Include="NTHelmet.h" />
     <ClInclude Include="NTItem.h" />
+    <ClInclude Include="NTItemData.h" />
     <ClInclude Include="NTKeyItem.h" />
     <ClInclude Include="NTNPC.h" />
     <ClInclude Include="NTPieceWindow.h" />

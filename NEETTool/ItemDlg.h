@@ -36,6 +36,13 @@ public:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedCreateitem();
 
+	HTREEITEM TreeHelmet;
+	HTREEITEM TreeArmor;
+	HTREEITEM TreeWeapon;
+	HTREEITEM TreeAcc;
+	HTREEITEM TreeConsume;
+	HTREEITEM TreeKeyItem;
+
 
 	std::unordered_map<std::wstring, NTItem*> ItemMap;
 

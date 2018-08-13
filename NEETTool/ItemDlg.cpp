@@ -17,6 +17,7 @@
 #include <ResourceSystem.h>
 #include <NTWriteStream.h>
 #include <NTReadStream.h>
+#include <NTItemData.h>
 
 #include "ItemView.h"
 #include "NTDlgShortCut.h"
@@ -191,35 +192,100 @@ void ItemDlg::OnBnClickedItemsave()
 		SaveStream.Write(TypeNameBuf, sizeof(TypeNameBuf));
 		BackupStream.Write(TypeNameBuf, sizeof(TypeNameBuf));
 
+		NTItemData NewData = {};
+
 		if (strcmp(TypeName, "class NTWeapon") == 0)
 		{
-			int a = 0;
+			NTWeapon Weapon = *(NTWeapon*)(StartIter->second);
+			NewData.bSpecial = Weapon.bSpecial;
+			NewData.Crit = Weapon.Crit;
+			lstrcpyW(NewData.Info, Weapon.Info.c_str());
+			lstrcpyW(NewData.Name, Weapon.GetName());
+			lstrcpyW(NewData.Output, Weapon.Output.c_str());
+			NewData.Price = Weapon.Price;
+			NewData.Sellable = Weapon.Sellable;
+			NewData.Stat = Weapon.Atk;
+			NewData.Type = (int)Weapon.Type;
+			NewData.UseCharacter = Weapon.Only;
 		}
 
 		if (strcmp(TypeName, "class NTArmor") == 0)
 		{
-			int a = 0;
+			NTArmor Armor = *(NTArmor*)(StartIter->second);
+			NewData.bSpecial = Armor.bSpecial;
+			NewData.Crit = -1;
+			lstrcpyW(NewData.Info, Armor.Info.c_str());
+			lstrcpyW(NewData.Name, Armor.GetName());
+			lstrcpyW(NewData.Output, Armor.Output.c_str());
+			NewData.Price = Armor.Price;
+			NewData.Sellable = Armor.Sellable;
+			NewData.Stat = Armor.Def;
+			NewData.Type = (int)Armor.Type;
+			NewData.UseCharacter = Armor.Only;
 		}
 
 		if (strcmp(TypeName, "class NTHelmet") == 0)
 		{
-			int a = 0;
+			NTHelmet Helmet = *(NTHelmet*)(StartIter->second);
+			NewData.bSpecial = Helmet.bSpecial;
+			NewData.Crit = -1;
+			lstrcpyW(NewData.Info, Helmet.Info.c_str());
+			lstrcpyW(NewData.Name, Helmet.GetName());
+			lstrcpyW(NewData.Output, Helmet.Output.c_str());
+			NewData.Price = Helmet.Price;
+			NewData.Sellable = Helmet.Sellable;
+			NewData.Stat = Helmet.Def;
+			NewData.Type = -1;
+			NewData.UseCharacter = Helmet.Only;
 		}
 
 		if (strcmp(TypeName, "class NTAcc") == 0)
 		{
-			int a = 0;
+			NTAcc Acc = *(NTAcc*)(StartIter->second);
+			NewData.bSpecial = Acc.bSpecial;
+			NewData.Crit = -1;
+			lstrcpyW(NewData.Info, Acc.Info.c_str());
+			lstrcpyW(NewData.Name, Acc.GetName());
+			lstrcpyW(NewData.Output, Acc.Output.c_str());
+			NewData.Price = Acc.Price;
+			NewData.Sellable = Acc.Sellable;
+			NewData.Stat = -1;
+			NewData.Type = -1;
+			NewData.UseCharacter = Acc.Only;
 		}
 
 		if (strcmp(TypeName, "class NTConsume") == 0)
 		{
-			int a = 0;
+			NTConsume Consume = *(NTConsume*)(StartIter->second);
+			NewData.bSpecial = false;
+			NewData.Crit = -1;
+			lstrcpyW(NewData.Info, Consume.Info.c_str());
+			lstrcpyW(NewData.Name, Consume.GetName());
+			lstrcpyW(NewData.Output, Consume.Output.c_str());
+			NewData.Price = Consume.Price;
+			NewData.Sellable = Consume.Sellable;
+			NewData.Stat = -1;
+			NewData.Type = -1;
+			NewData.UseCharacter = -1;
 		}
 
 		if (strcmp(TypeName, "class NTKeyItem") == 0)
 		{
-			int a = 0;
+			NTKeyItem KeyItem = *(NTKeyItem*)(StartIter->second);
+			NewData.bSpecial = false;
+			NewData.Crit = -1;
+			lstrcpyW(NewData.Info, KeyItem.Info.c_str()); 
+			lstrcpyW(NewData.Name, KeyItem.GetName());
+			lstrcpyW(NewData.Output, KeyItem.Output.c_str());
+			NewData.Price = KeyItem.Price;
+			NewData.Sellable = KeyItem.Sellable;
+			NewData.Stat = -1;
+			NewData.Type = -1;
+			NewData.UseCharacter = -1;
 		}
+
+		SaveStream.Write(&NewData, sizeof(NTItemData));
+		BackupStream.Write(&NewData, sizeof(NTItemData));
 	}
 }
 
@@ -243,38 +309,121 @@ void ItemDlg::OnBnClickedItemload()
 	{
 		char TypeNameBuf[20];
 		ReadStream.Read(TypeNameBuf, sizeof(TypeNameBuf), sizeof(TypeNameBuf));
+		NTItemData* NewItem = new NTItemData();
+		ReadStream.Read(NewItem, sizeof(NTItemData), sizeof(NTItemData));
 
 		if (strcmp(TypeNameBuf, "class NTWeapon") == 0)
 		{
-			int a = 0;
+			NTWeapon* NewWeapon = new NTWeapon();
+			NewWeapon->Atk = NewItem->Stat;
+			NewWeapon->bSpecial = NewItem->bSpecial;
+			NewWeapon->Crit = NewItem->Crit;
+			NewWeapon->SetName(NewItem->Name);
+			NewWeapon->Info = NewItem->Info;
+			NewWeapon->Only = (CHARACTER)NewItem->UseCharacter;
+			NewWeapon->Output = NewItem->Output;
+			NewWeapon->Price = NewItem->Price;
+			NewWeapon->Sellable = NewItem->Sellable;
+			//NewWeapon->SpecialFunc 
+			NewWeapon->Type = (NTWeapon::WEAPONTYPE)NewItem->Type;
+			ItemMap.insert(std::unordered_map<std::wstring, NTItem*>::value_type(NewWeapon->GetName(), NewWeapon));
+
+			HTREEITEM NewItem = ItemTree.InsertItem(NewWeapon->GetName(), TreeWeapon);
+			ItemTree.SetItemData(NewItem, (DWORD_PTR)&(*NewWeapon));
+			ItemTree.Expand(TreeWeapon, TVE_EXPAND);
 		}
 
 		if (strcmp(TypeNameBuf, "class NTArmor") == 0)
 		{
-			int a = 0;
+			NTArmor* NewArmor = new NTArmor();
+			NewArmor->Def = NewItem->Stat;
+			NewArmor->bSpecial = NewItem->bSpecial;
+			NewArmor->SetName(NewItem->Name);
+			NewArmor->Info = NewItem->Info;
+			NewArmor->Only = (CHARACTER)NewItem->UseCharacter;
+			NewArmor->Output = NewItem->Output;
+			NewArmor->Price = NewItem->Price;
+			NewArmor->Sellable = NewItem->Sellable;
+			//NewWeapon->SpecialFunc 
+			NewArmor->Type = (NTArmor::ARMORTYPE)NewItem->Type;
+			ItemMap.insert(std::unordered_map<std::wstring, NTItem*>::value_type(NewArmor->GetName(), NewArmor));
+
+			HTREEITEM NewItem = ItemTree.InsertItem(NewArmor->GetName(), TreeArmor);
+			ItemTree.SetItemData(NewItem, (DWORD_PTR)&(*NewArmor));
+			ItemTree.Expand(TreeArmor, TVE_EXPAND);
 		}
 
 		if (strcmp(TypeNameBuf, "class NTHelmet") == 0)
 		{
-			int a = 0;
+			NTHelmet* NewHelmet = new NTHelmet();
+			NewHelmet->Def = NewItem->Stat;
+			NewHelmet->bSpecial = NewItem->bSpecial;
+			NewHelmet->SetName(NewItem->Name);
+			NewHelmet->Info = NewItem->Info;
+			NewHelmet->Only = (CHARACTER)NewItem->UseCharacter;
+			NewHelmet->Output = NewItem->Output;
+			NewHelmet->Price = NewItem->Price;
+			NewHelmet->Sellable = NewItem->Sellable;
+			//NewWeapon->SpecialFunc 
+			ItemMap.insert(std::unordered_map<std::wstring, NTItem*>::value_type(NewHelmet->GetName(), NewHelmet));
+
+			HTREEITEM NewItem = ItemTree.InsertItem(NewHelmet->GetName(), TreeHelmet);
+			ItemTree.SetItemData(NewItem, (DWORD_PTR)&(*NewHelmet));
+			ItemTree.Expand(TreeHelmet, TVE_EXPAND);
 		}
 
 		if (strcmp(TypeNameBuf, "class NTAcc") == 0)
 		{
-			int a = 0;
+			NTAcc* NewAcc = new NTAcc();
+			NewAcc->bSpecial = NewItem->bSpecial;
+			NewAcc->SetName(NewItem->Name);
+			NewAcc->Info = NewItem->Info;
+			NewAcc->Only = (CHARACTER)NewItem->UseCharacter;
+			NewAcc->Output = NewItem->Output;
+			NewAcc->Price = NewItem->Price;
+			NewAcc->Sellable = NewItem->Sellable;
+			//NewWeapon->SpecialFunc
+			ItemMap.insert(std::unordered_map<std::wstring, NTItem*>::value_type(NewAcc->GetName(), NewAcc));
+
+			HTREEITEM NewItem = ItemTree.InsertItem(NewAcc->GetName(), TreeAcc);
+			ItemTree.SetItemData(NewItem, (DWORD_PTR)&(*NewAcc));
+			ItemTree.Expand(TreeAcc, TVE_EXPAND);
 		}
 
 		if (strcmp(TypeNameBuf, "class NTConsume") == 0)
 		{
-			int a = 0;
+			NTConsume* NewConsume = new NTConsume();
+			NewConsume->SetName(NewItem->Name);
+			NewConsume->Info = NewItem->Info;
+			NewConsume->Output = NewItem->Output;
+			NewConsume->Price = NewItem->Price;
+			NewConsume->Sellable = NewItem->Sellable;
+			//NewWeapon->SpecialFunc 
+			ItemMap.insert(std::unordered_map<std::wstring, NTItem*>::value_type(NewConsume->GetName(), NewConsume));
+
+			HTREEITEM NewItem = ItemTree.InsertItem(NewConsume->GetName(), TreeConsume);
+			ItemTree.SetItemData(NewItem, (DWORD_PTR)&(*NewConsume));
+			ItemTree.Expand(TreeConsume, TVE_EXPAND);
 		}
 
 		if (strcmp(TypeNameBuf, "class NTKeyItem") == 0)
 		{
-			int a = 0;
-		}
-	}
+			NTKeyItem* NewKeyItem = new NTKeyItem();
+			NewKeyItem->SetName(NewItem->Name);
+			NewKeyItem->Info = NewItem->Info;
+			NewKeyItem->Output = NewItem->Output;
+			NewKeyItem->Price = NewItem->Price;
+			NewKeyItem->Sellable = NewItem->Sellable;
+			//NewWeapon->SpecialFunc 
+			ItemMap.insert(std::unordered_map<std::wstring, NTItem*>::value_type(NewKeyItem->GetName(), NewKeyItem));
 
+			HTREEITEM NewItem = ItemTree.InsertItem(NewKeyItem->GetName(), TreeKeyItem);
+			ItemTree.SetItemData(NewItem, (DWORD_PTR)&(*NewKeyItem));
+			ItemTree.Expand(TreeKeyItem, TVE_EXPAND);
+		}
+
+		delete NewItem;
+	}
 }
 
 void ItemDlg::SetBaseTree()
@@ -282,18 +431,20 @@ void ItemDlg::SetBaseTree()
 	HTREEITEM Equip = ItemTree.InsertItem(L"Equip");
 	ItemTree.SetItemData(Equip, (DWORD_PTR)nullptr);
 
-	HTREEITEM Tmp = ItemTree.InsertItem(L"Weapon", Equip);
-	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
-	Tmp = ItemTree.InsertItem(L"Helmet", Equip);
-	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
-	Tmp = ItemTree.InsertItem(L"Armor", Equip);
-	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
-	Tmp = ItemTree.InsertItem(L"Accessory", Equip);
-	ItemTree.SetItemData(Tmp, (DWORD_PTR)nullptr);
+	TreeWeapon = ItemTree.InsertItem(L"Weapon", Equip);
+	ItemTree.SetItemData(TreeWeapon, (DWORD_PTR)nullptr);
+	TreeHelmet = ItemTree.InsertItem(L"Helmet", Equip);
+	ItemTree.SetItemData(TreeHelmet, (DWORD_PTR)nullptr);
+	TreeArmor = ItemTree.InsertItem(L"Armor", Equip);
+	ItemTree.SetItemData(TreeArmor, (DWORD_PTR)nullptr);
+	TreeAcc = ItemTree.InsertItem(L"Accessory", Equip);
+	ItemTree.SetItemData(TreeAcc, (DWORD_PTR)nullptr);
 	ItemTree.Expand(Equip, TVE_EXPAND);
 
-	ItemTree.InsertItem(L"Consumable");
-	ItemTree.InsertItem(L"KeyItem");
+	TreeConsume = ItemTree.InsertItem(L"Consumable");
+	ItemTree.SetItemData(TreeConsume, (DWORD_PTR)nullptr);
+	TreeKeyItem = ItemTree.InsertItem(L"KeyItem");
+	ItemTree.SetItemData(TreeKeyItem, (DWORD_PTR)nullptr);
 }
 
 void ItemDlg::Release()

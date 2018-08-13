@@ -3,7 +3,7 @@
 
 GameSystem::GAMEMODE GameSystem::GameMode = (GameSystem::GAMEMODE)0;
 PlayerStatus GameSystem::PS[CHARA_MAX] = {};
-GameSystem::CHARACTER GameSystem::BattleMember[3] = {};
+CHARACTER GameSystem::BattleMember[3] = {};
 bool GameSystem::TextWindow = false;
 bool GameSystem::Inputable = true;
 wchar_t GameSystem::TextData[256][256] = {};

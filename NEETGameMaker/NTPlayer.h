@@ -26,12 +26,12 @@ private:
 	Autoptr<NTSpFrameAnimator> Animator;
 	Autoptr<NTPixelCollider> PixelCollider;
 	PlayerStatus* Status;
-	GameSystem::CHARACTER Character;
+	CHARACTER Character;
 	PLAYERDIRECTION Direction;
 
 	float FieldSpeed;
 public:
-	bool Init(GameSystem::CHARACTER _Chara);
+	bool Init(CHARACTER _Chara);
 	void PreUpdate() override;
 	void MainUpdate() override;
 	void DbgRender() override;
