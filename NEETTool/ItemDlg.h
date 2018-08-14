@@ -36,6 +36,7 @@ public:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedCreateitem();
 
+	HTREEITEM TreeEquip;
 	HTREEITEM TreeHelmet;
 	HTREEITEM TreeArmor;
 	HTREEITEM TreeWeapon;
@@ -79,5 +80,6 @@ public:
 
 	void SetBaseTree();
 	void Release();
-
+	HTREEITEM Find(HTREEITEM _ITEM, DWORD_PTR _Data);
+	void UpdateName(HTREEITEM _ITEM);
 };

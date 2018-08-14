@@ -81,6 +81,7 @@ void ItemView::Reset()
 	BaseDlg->Create(IDD_ITEMBASEDLG, this);
 	BaseDlg->ShowWindow(SW_SHOW); 
 	BaseDlg->SetWindowPos(this, Pos.x, Pos.y, Size.x, BaseDlg->SizeY, SWP_NOZORDER);
+	BaseDlg->SetItemData(CurItem);
 	Pos.y += BaseDlg->SizeY;
 	DlgList.push_back(BaseDlg);
 

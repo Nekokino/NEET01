@@ -1,5 +1,6 @@
 #pragma once
 #include "ItemEditDlg.h"
+#include <NTItem.h>
 
 // ItemBaseDlg 대화 상자입니다.
 
@@ -28,4 +29,23 @@ public:
 	afx_msg void OnBnClickedItemsellable();
 	afx_msg void OnEnChangeIteminfo();
 	afx_msg void OnEnChangeOutputname();
+
+	NTItem* CurItem;
+	CString ItemKey;
+	CString ItemOutput;
+	BOOL ItemSellable;
+	CString ItemInfo;
+	int ItemPrice;
+
+	void SetItemData(NTItem* _Item)
+	{
+		CurItem = _Item;
+		UpdateData(TRUE);
+		ItemKey = CurItem->GetName();
+		ItemOutput = CurItem->Output.c_str();
+		ItemPrice = CurItem->Price;
+		ItemSellable = CurItem->Sellable;
+		ItemInfo = CurItem->Info.c_str();
+		UpdateData(FALSE);
+	}
 };

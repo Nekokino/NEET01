@@ -6,6 +6,8 @@
 #include "ItemBaseDlg.h"
 #include "afxdialogex.h"
 
+#include "NTDlgShortCut.h"
+
 
 // ItemBaseDlg 대화 상자입니다.
 
@@ -13,6 +15,11 @@ IMPLEMENT_DYNAMIC(ItemBaseDlg, CDialogEx)
 
 ItemBaseDlg::ItemBaseDlg(CWnd* pParent /*=NULL*/)
 	: ItemEditDlg(IDD_ITEMBASEDLG, pParent)
+	, ItemKey(_T(""))
+	, ItemOutput(_T(""))
+	, ItemSellable(FALSE)
+	, ItemInfo(_T(""))
+	, ItemPrice(0)
 {
 	SizeY = 500;
 }
@@ -24,6 +31,11 @@ ItemBaseDlg::~ItemBaseDlg()
 void ItemBaseDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Text(pDX, IDC_ITEMNAME, ItemKey);
+	DDX_Text(pDX, IDC_OUTPUTNAME, ItemOutput);
+	DDX_Check(pDX, IDC_ITEMSELLABLE, ItemSellable);
+	DDX_Text(pDX, IDC_ITEMINFO, ItemInfo);
+	DDX_Text(pDX, IDC_ITEMPRICE, ItemPrice);
 }
 
 
@@ -55,49 +67,47 @@ void ItemBaseDlg::OnBnClickedCancel()
 
 void ItemBaseDlg::OnEnChangeItemname()
 {
-	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
-	// ItemEditDlg::OnInitDialog() 함수를 재지정 
-	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
-	// 이 알림 메시지를 보내지 않습니다.
-
-	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(TRUE);
+	CurItem->SetName(ItemKey);
+	NTDlgShortCut::pItemDlg->UpdateName(NTDlgShortCut::pItemDlg->Find(nullptr, (DWORD_PTR)CurItem));
+	UpdateData(FALSE);
 }
 
 
 void ItemBaseDlg::OnEnChangeItemprice()
 {
-	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
-	// ItemEditDlg::OnInitDialog() 함수를 재지정 
-	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
-	// 이 알림 메시지를 보내지 않습니다.
-
-	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(TRUE);
+	CurItem->Price = ItemPrice;
+	UpdateData(FALSE);
 }
 
 
 void ItemBaseDlg::OnBnClickedItemsellable()
 {
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(TRUE);
+	if (ItemSellable == TRUE)
+	{
+		CurItem->Sellable = true;
+	}
+	else
+	{
+		CurItem->Sellable = false;
+	}
+	UpdateData(FALSE);
 }
 
 
 void ItemBaseDlg::OnEnChangeIteminfo()
 {
-	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
-	// ItemEditDlg::OnInitDialog() 함수를 재지정 
-	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
-	// 이 알림 메시지를 보내지 않습니다.
-
-	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(TRUE);
+	CurItem->Info = ItemInfo;
+	UpdateData(FALSE);
 }
 
 
 void ItemBaseDlg::OnEnChangeOutputname()
 {
-	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
-	// ItemEditDlg::OnInitDialog() 함수를 재지정 
-	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
-	// 이 알림 메시지를 보내지 않습니다.
-
-	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(TRUE);
+	CurItem->Output = ItemOutput;
+	UpdateData(FALSE);
 }

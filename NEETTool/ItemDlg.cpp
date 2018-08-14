@@ -30,7 +30,7 @@ IMPLEMENT_DYNAMIC(ItemDlg, TabDlg)
 ItemDlg::ItemDlg(CWnd* pParent /*=NULL*/)
 	: TabDlg(IDD_ItemDlg, pParent), CurItem(nullptr)
 {
-
+	NTDlgShortCut::pItemDlg = this;
 }
 
 ItemDlg::~ItemDlg()
@@ -428,18 +428,18 @@ void ItemDlg::OnBnClickedItemload()
 
 void ItemDlg::SetBaseTree()
 {
-	HTREEITEM Equip = ItemTree.InsertItem(L"Equip");
-	ItemTree.SetItemData(Equip, (DWORD_PTR)nullptr);
+	TreeEquip = ItemTree.InsertItem(L"Equip");
+	ItemTree.SetItemData(TreeEquip, (DWORD_PTR)nullptr);
 
-	TreeWeapon = ItemTree.InsertItem(L"Weapon", Equip);
+	TreeWeapon = ItemTree.InsertItem(L"Weapon", TreeEquip);
 	ItemTree.SetItemData(TreeWeapon, (DWORD_PTR)nullptr);
-	TreeHelmet = ItemTree.InsertItem(L"Helmet", Equip);
+	TreeHelmet = ItemTree.InsertItem(L"Helmet", TreeEquip);
 	ItemTree.SetItemData(TreeHelmet, (DWORD_PTR)nullptr);
-	TreeArmor = ItemTree.InsertItem(L"Armor", Equip);
+	TreeArmor = ItemTree.InsertItem(L"Armor", TreeEquip);
 	ItemTree.SetItemData(TreeArmor, (DWORD_PTR)nullptr);
-	TreeAcc = ItemTree.InsertItem(L"Accessory", Equip);
+	TreeAcc = ItemTree.InsertItem(L"Accessory", TreeEquip);
 	ItemTree.SetItemData(TreeAcc, (DWORD_PTR)nullptr);
-	ItemTree.Expand(Equip, TVE_EXPAND);
+	ItemTree.Expand(TreeEquip, TVE_EXPAND);
 
 	TreeConsume = ItemTree.InsertItem(L"Consumable");
 	ItemTree.SetItemData(TreeConsume, (DWORD_PTR)nullptr);
@@ -458,4 +458,40 @@ void ItemDlg::Release()
 	}
 
 	ItemMap.clear();
+}
+
+HTREEITEM ItemDlg::Find(HTREEITEM _ITEM, DWORD_PTR _Data)
+{
+	if (_ITEM == nullptr)
+	{
+		_ITEM = ItemTree.GetRootItem();
+	}
+
+	if (ItemTree.GetItemData(_ITEM) == _Data)
+	{
+		return _ITEM;
+	}
+	else
+	{
+		HTREEITEM TmpITEM;
+		TmpITEM = ItemTree.GetChildItem(_ITEM);
+		if (TmpITEM != nullptr)
+		{
+			return Find(TmpITEM, _Data);
+		}
+
+		HTREEITEM TempITEM;
+		TempITEM = ItemTree.GetNextSiblingItem(_ITEM);
+		if (TempITEM != nullptr)
+		{
+			return Find(TempITEM, _Data);
+		}
+	}
+
+	return nullptr;
+}
+
+void ItemDlg::UpdateName(HTREEITEM _ITEM)
+{
+	ItemTree.SetItemText(_ITEM, ((NTItem*)ItemTree.GetItemData(_ITEM))->GetName());
 }

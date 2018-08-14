@@ -9,6 +9,7 @@
 #include "MainFrm.h"
 
 #include <WinCore.h>
+#include "NTDlgShortCut.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -143,6 +144,5 @@ BOOL CNEETToolApp::OnIdle(LONG lCount)
 	lCount = 0;
 
 	WinCore::Progress();
-
 	return CWinApp::OnIdle(lCount);
 }
