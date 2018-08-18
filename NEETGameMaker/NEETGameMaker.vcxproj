@@ -192,6 +192,8 @@
     <ClInclude Include="NTTextData.h" />
     <ClInclude Include="NTTileMap.h" />
     <ClInclude Include="NTWeapon.h" />
+    <ClInclude Include="PartyDetailWindow.h" />
+    <ClInclude Include="PartyGameInfoWindow.h" />
     <ClInclude Include="PartyMemWindow.h" />
     <ClInclude Include="PartyWindow.h" />
     <ClInclude Include="SpriteLoader.h" />
@@ -227,6 +229,8 @@
     <ClCompile Include="NTPlayer.cpp" />
     <ClCompile Include="NTTileMap.cpp" />
     <ClCompile Include="NTWeapon.cpp" />
+    <ClCompile Include="PartyDetailWindow.cpp" />
+    <ClCompile Include="PartyGameInfoWindow.cpp" />
     <ClCompile Include="PartyMemWindow.cpp" />
     <ClCompile Include="PartyWindow.cpp" />
     <ClCompile Include="SpriteLoader.cpp" />

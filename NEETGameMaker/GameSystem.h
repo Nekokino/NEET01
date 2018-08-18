@@ -177,6 +177,16 @@ public:
 		return PS[BattleMember[_index]];
 	}
 
+	static CHARACTER GetBattlememberCharacter(int _index)
+	{
+		if (_index >= 3)
+		{
+			return CHARA_MAX;
+		}
+
+		return BattleMember[_index];
+	}
+
 	static void BasePlayerSetting();
 	static void TimeUpdate();
 	static float GetPlayTime()

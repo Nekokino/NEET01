@@ -1,16 +1,14 @@
 #include "PartyMemWindow.h"
 
 #include "NTPieceWindow.h"
-#include "GameSystem.h"
+
 
 #include <NTSpRenderer.h>
 #include <NTFontRenderer.h>
 #include <NTWinShortCut.h>
 
 
-#define FirstPos { WinSize.x * -0.27f, WinSize.y * 0.3375f }
-#define SecondPos { WinSize.x * -0.27f, WinSize.y * 0.1125f }
-#define ThirdPos { WinSize.x * -0.27f, WinSize.y * -0.1125f }
+
 
 PartyMemWindow::PartyMemWindow()
 {
@@ -21,169 +19,197 @@ PartyMemWindow::~PartyMemWindow()
 {
 }
 
+std::wstring GlobalString;
 bool PartyMemWindow::Init(int _Index)
 {
-	if (_Index >= 3)
+	Index = _Index;
+	if (Index >= 3)
 	{
+		Index = -1;
 		return false;
 	}
+	CurPlayer = GameSystem::GetBattlememberStatus(Index);
+
+	
 
 	WinSize = NTVEC2{ NTWinShortCut::GetMainWindow().GetWidthf(), NTWinShortCut::GetMainWindow().GetHeightf() };
 
 	WindowRenderer = GetNTObject()->AddComponent<NTPieceWindow>(5, 3, 0.45f);
-	GetNTObject()->GetTransform()->SetLocalPosition(FirstPos);
-
-	Autoptr<NTFontRenderer> Name01 = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
-	Name01->SetColor(255, 255, 255, 255);
-	Name01->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.065f, 1.0f });
-	Name01->SetSubScale({ 1.0f, 1.0f, 1.0f });
-	Name01->SetSize(25.0f);
-	Name01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
-	Name01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
-	Name01->SetString(GameSystem::GetBattlememberStatus(0).Name);
-
-	Autoptr<NTFontRenderer> Level01 = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
-	Level01->SetColor(255, 255, 255, 255);
-	Level01->SetSubPivot({ WinSize.x * 0.275f, WinSize.y * 0.065f, 1.0f });
-	Level01->SetSubScale({ 1.0f, 1.0f, 1.0f });
-	Level01->SetSize(25.0f);
-	Level01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
-	Level01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
-	std::wstring tmp = Level01->GetString();
-	tmp = L"Lv    ";
-	wchar_t tmpbuf[32];
-	_itow_s(GameSystem::GetBattlememberStatus(0).Level, tmpbuf, 10);
-	if (GameSystem::GetBattlememberStatus(0).Level < 10)
+	switch (Index)
 	{
-		tmp += L"  ";
+	case 0:
+		GetNTObject()->GetTransform()->SetLocalPosition(FirstPos);
+		break;
+	case 1:
+		GetNTObject()->GetTransform()->SetLocalPosition(SecondPos);
+		break;
+	case 2:
+		GetNTObject()->GetTransform()->SetLocalPosition(ThirdPos);
+		break;
+	default:
+		break;
 	}
-	tmp += tmpbuf;
-	Level01->SetString(tmp.c_str());
+
+	if (CurPlayer.Level == 0)
+	{
+		return true;
+	}
+	
+
+	MemberName = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	MemberName->SetColor(255, 255, 255, 255);
+	MemberName->SetSubScale({ 1.0f, 1.0f, 1.0f });
+	MemberName->SetSize(25.0f);
+	MemberName->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
+	MemberName->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+	MemberName->SetString(CurPlayer.Name);
+
+	MemberLevel = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	MemberLevel->SetColor(255, 255, 255, 255);
+	MemberLevel->SetSubScale({ 1.0f, 1.0f, 1.0f });
+	MemberLevel->SetSize(25.0f);
+	MemberLevel->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
+	MemberLevel->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+	MakeLvString(GlobalString);
+	MemberLevel->SetString(GlobalString.c_str());
 
 	Autoptr<NTFontRenderer> PlainHP01 = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlainHP01->SetColor(255, 255, 255, 255);
-	PlainHP01->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.065f + 30.0f, 1.0f });
 	PlainHP01->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlainHP01->SetSize(25.0f);
 	PlainHP01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
 	PlainHP01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 	PlainHP01->SetString(L"HP");
 
-	Autoptr<NTFontRenderer> HP01 = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
-	HP01->SetColor(255, 255, 255, 255);
-	HP01->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.065f + 30.0f, 1.0f });
-	HP01->SetSubScale({ 1.0f, 1.0f, 1.0f });
-	HP01->SetSize(25.0f);
-	HP01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
-	HP01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
-	tmp.clear();
-	_itow_s(GameSystem::GetBattlememberStatus(0).CurHP, tmpbuf, 10);
-	tmp += tmpbuf;
-	tmp += L" / ";
-	_itow_s(GameSystem::GetBattlememberStatus(0).MaxHP, tmpbuf, 10);
-	tmp += tmpbuf;
-	int tmpint = 11 - lstrlenW(tmp.c_str());
-	switch (tmpint)
-	{
-	case 3:
-		tmp.insert(0, L"  ");
-		break;
-	case 4:
-		tmp.insert(0, L"   ");
-		break;
-	case 5:
-		tmp.insert(0, L"     ");
-		break;
-	case 6:
-		tmp.insert(0, L"       ");
-		break;
-	default:
-		break;
-	}
-	HP01->SetString(tmp.c_str());
+	MemberHP = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	MemberHP->SetColor(255, 255, 255, 255);
+	MemberHP->SetSubScale({ 1.0f, 1.0f, 1.0f });
+	MemberHP->SetSize(25.0f);
+	MemberHP->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
+	MemberHP->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+	MakeHMPString(GlobalString);
+	MemberHP->SetString(GlobalString.c_str());
 
 	Autoptr<NTFontRenderer> PlainMP01 = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlainMP01->SetColor(255, 255, 255, 255);
-	PlainMP01->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.065f + 60.0f, 1.0f });
 	PlainMP01->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlainMP01->SetSize(25.0f);
 	PlainMP01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
 	PlainMP01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 	PlainMP01->SetString(L"MP");
 
-	Autoptr<NTFontRenderer> MP01 = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
-	MP01->SetColor(255, 255, 255, 255);
-	MP01->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.065f + 60.0f, 1.0f });
-	MP01->SetSubScale({ 1.0f, 1.0f, 1.0f });
-	MP01->SetSize(25.0f);
-	MP01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
-	MP01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
-	tmp.clear();
-	_itow_s(GameSystem::GetBattlememberStatus(0).CurMP, tmpbuf, 10);
-	tmp += tmpbuf;
-	tmp += L" / ";
-	_itow_s(GameSystem::GetBattlememberStatus(0).MaxMP, tmpbuf, 10);
-	tmp += tmpbuf;
-	tmpint = 11 - lstrlenW(tmp.c_str());
-	switch (tmpint)
+	MemberMP = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	MemberMP->SetColor(255, 255, 255, 255);
+	MemberMP->SetSubScale({ 1.0f, 1.0f, 1.0f });
+	MemberMP->SetSize(25.0f);
+	MemberMP->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
+	MemberMP->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+	MakeHMPString(GlobalString, 1);
+	MemberMP->SetString(GlobalString.c_str());
+
+	PlaneAtk = GetNTObject()->AddComponent<NTSpRenderer>(L"SmallIcon.png", UILayer);
+	PlaneAtk->SetSubScale({ 32.0f, 32.0f, 1.0f });
+	PlaneAtk->SetSubPivot({ -WinSize.x * 0.115f, -WinSize.y * 0.065f });
+	PlaneAtk->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+
+	MemberAtk = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	MemberAtk->SetColor(255, 255, 255, 255);
+	MemberAtk->SetSubScale({ 1.0f, 1.0f, 1.0f });
+	MemberAtk->SetSize(25.0f);
+	MemberAtk->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
+	MemberAtk->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+	MakeAtkString(GlobalString);
+	MemberAtk->SetString(GlobalString.c_str());
+
+	PlaneDef = GetNTObject()->AddComponent<NTSpRenderer>(L"SmallIcon.png", UILayer);
+	PlaneDef->SetSubScale({ 32.0f, 32.0f, 1.0f });
+	PlaneDef->SetSubPivot({ WinSize.x * 0.025f, -WinSize.y * 0.065f });
+	PlaneDef->SetImageIndex(14);
+	PlaneDef->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+
+	MemberDef = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	MemberDef->SetColor(255, 255, 255, 255);
+	MemberDef->SetSubScale({ 1.0f, 1.0f, 1.0f });
+	MemberDef->SetSize(25.0f);
+	MemberDef->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
+	MemberDef->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+	MakeDefString(GlobalString);
+	MemberDef->SetString(GlobalString.c_str());
+
+	if (Index == -1)
 	{
-	case 3:
-		tmp.insert(0, L"  ");
+		PlaneAtk->SetColor({ 0.0f, 0.0f, 0.0f, 0.0f });
+		PlaneDef->SetColor({ 0.0f, 0.0f, 0.0f, 0.0f });
+	}
+
+	switch (Index)
+	{
+	case 0:
+		MemberName->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.065f, 1.0f });
+		MemberLevel->SetSubPivot({ WinSize.x * 0.275f, WinSize.y * 0.065f, 1.0f });
+		PlainHP01->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.065f + 30.0f, 1.0f });
+		PlainMP01->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.065f + 60.0f, 1.0f });
+		MemberHP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.065f + 30.0f, 1.0f });
+		MemberMP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.065f + 60.0f, 1.0f });
+		MemberAtk->SetSubPivot({ WinSize.x * 0.175f, WinSize.y * 0.21f });
+		MemberDef->SetSubPivot({ WinSize.x * 0.325f, WinSize.y * 0.21f });
 		break;
-	case 4:
-		tmp.insert(0, L"   ");
+	case 1:
+		MemberName->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.29f, 1.0f });
+		MemberLevel->SetSubPivot({ WinSize.x * 0.275f, WinSize.y * 0.29f, 1.0f });
+		PlainHP01->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.29f + 30.0f, 1.0f });
+		PlainMP01->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.29f + 60.0f, 1.0f });
+		MemberHP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.29f + 30.0f, 1.0f });
+		MemberMP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.29f + 60.0f, 1.0f });
+		MemberAtk->SetSubPivot({ WinSize.x * 0.175f, WinSize.y * 0.435f });
+		MemberDef->SetSubPivot({ WinSize.x * 0.325f, WinSize.y * 0.435f });
 		break;
-	case 5:
-		tmp.insert(0, L"     ");
-		break;
-	case 6:
-		tmp.insert(0, L"      ");
+	case 2:
+		MemberName->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.515f, 1.0f });
+		MemberLevel->SetSubPivot({ WinSize.x * 0.275f, WinSize.y * 0.515f, 1.0f });
+		PlainHP01->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.515f + 30.0f, 1.0f });
+		PlainMP01->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.515f + 60.0f, 1.0f });
+		MemberHP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.515f + 30.0f, 1.0f });
+		MemberMP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.515f + 60.0f, 1.0f });
+		MemberAtk->SetSubPivot({ WinSize.x * 0.175f, WinSize.y * 0.66f });
+		MemberDef->SetSubPivot({ WinSize.x * 0.325f, WinSize.y * 0.66f });
 		break;
 	default:
 		break;
 	}
-	MP01->SetString(tmp.c_str());
 
-	Autoptr<NTSpRenderer> PlaneAtk01 = GetNTObject()->AddComponent<NTSpRenderer>(L"SmallIcon.png", UILayer);
-	PlaneAtk01->SetSubScale({ 32.0f, 32.0f, 1.0f });
-	PlaneAtk01->SetSubPivot({ -WinSize.x * 0.115f, -WinSize.y * 0.065f });
-	PlaneAtk01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
-
-	Autoptr<NTFontRenderer> Atk01 = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
-	Atk01->SetColor(255, 255, 255, 255);
-	Atk01->SetSubPivot({ WinSize.x * 0.175f, WinSize.y * 0.21f });
-	Atk01->SetSubScale({ 1.0f, 1.0f, 1.0f });
-	Atk01->SetSize(25.0f);
-	Atk01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
-	Atk01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
-	tmp.clear();
-	int Damage = GameSystem::GetBattlememberStatus(0).Power + GameSystem::GetBattlememberStatus(0).Weapon.Atk;
-	_itow_s(Damage, tmpbuf, 10);
-	tmp += tmpbuf;
-	Atk01->SetString(tmp.c_str());
-
-	Autoptr<NTSpRenderer> PlaneDef01 = GetNTObject()->AddComponent<NTSpRenderer>(L"SmallIcon.png", UILayer);
-	PlaneDef01->SetSubScale({ 32.0f, 32.0f, 1.0f });
-	PlaneDef01->SetSubPivot({ WinSize.x * 0.025f, -WinSize.y * 0.065f });
-	PlaneDef01->SetImageIndex(14);
-	PlaneDef01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
-
-	Autoptr<NTFontRenderer> Def01 = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
-	Def01->SetColor(255, 255, 255, 255);
-	Def01->SetSubPivot({ WinSize.x * 0.325f, WinSize.y * 0.21f });
-	Def01->SetSubScale({ 1.0f, 1.0f, 1.0f });
-	Def01->SetSize(25.0f);
-	Def01->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
-	Def01->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
-	tmp.clear();
-	int Defence = GameSystem::GetBattlememberStatus(0).Stamina + GameSystem::GetBattlememberStatus(0).Armor.Def + GameSystem::GetBattlememberStatus(0).Helmet.Def;
-	_itow_s(Defence, tmpbuf, 10);
-	tmp += tmpbuf;
-	Def01->SetString(tmp.c_str());
+	return true;
 }
 
 void PartyMemWindow::MainUpdate()
 {
+	CurPlayer = GameSystem::GetBattlememberStatus(Index);
+	if (CurPlayer.Level ==0)
+	{
+		return;
+	}
+	MemberName->SetString(CurPlayer.Name);
+	MakeLvString(GlobalString);
+	MemberLevel->SetString(GlobalString.c_str());
+	MakeHMPString(GlobalString);
+	MemberHP->SetString(GlobalString.c_str());
+	MakeHMPString(GlobalString, 1);
+	MemberMP->SetString(GlobalString.c_str());
+	MakeAtkString(GlobalString);
+	MemberAtk->SetString(GlobalString.c_str());
+	MakeDefString(GlobalString);
+	MemberDef->SetString(GlobalString.c_str());
+
+	if (Index == -1)
+	{
+		PlaneAtk->SetColor({ 0.0f });
+		PlaneDef->SetColor({ 0.0f });
+	}
+	else
+	{
+		PlaneAtk->SetColor({ 1.0f });
+		PlaneDef->SetColor({ 1.0f });
+	}
 }
 
 void PartyMemWindow::DbgUpdate()

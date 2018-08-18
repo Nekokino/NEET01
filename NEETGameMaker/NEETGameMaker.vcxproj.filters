@@ -162,6 +162,12 @@
     <ClCompile Include="PartyMemWindow.cpp">
       <Filter>WindowClass\PartyWindow\SubWindow</Filter>
     </ClCompile>
+    <ClCompile Include="PartyGameInfoWindow.cpp">
+      <Filter>WindowClass\PartyWindow\SubWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="PartyDetailWindow.cpp">
+      <Filter>WindowClass\PartyWindow\SubWindow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NTTileMap.h">
@@ -273,6 +279,12 @@
       <Filter>WindowClass\PartyWindow</Filter>
     </ClInclude>
     <ClInclude Include="PartyMemWindow.h">
+      <Filter>WindowClass\PartyWindow\SubWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="PartyGameInfoWindow.h">
+      <Filter>WindowClass\PartyWindow\SubWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="PartyDetailWindow.h">
       <Filter>WindowClass\PartyWindow\SubWindow</Filter>
     </ClInclude>
   </ItemGroup>
