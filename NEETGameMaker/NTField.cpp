@@ -6,7 +6,7 @@
 #include "NTEvent.h"
 #include "GameSystem.h"
 
-std::unordered_map<std::wstring, FieldData> NTField::FieldMap;
+std::unordered_map<std::wstring, FieldData> NTField::FieldMap = std::unordered_map<std::wstring, FieldData>();
 
 NTField::NTField() : FieldImage(nullptr), ColImage(nullptr), MapSize(0.0f)
 {
@@ -54,12 +54,14 @@ FieldData NTField::FindFieldData(const wchar_t * _Key)
 	return FindIter->second;
 }
 
+std::wstring TempKey;
 void NTField::DefaultDataSet()
 {
 	FieldData* NewData = new FieldData();
 	NTVEC Vector;
-	std::wstring TempKey;
 
+	TempKey.clear();
+	TempKey = L"";
 #pragma region Leene_Center Init
 	lstrcpyW(NewData->FieldImgName, L"Leene_Center.png");
 

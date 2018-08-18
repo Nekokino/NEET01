@@ -21,6 +21,11 @@
 #define Stair3 NTVEC{35.0f, 35.0f, 35.0f, 255.0f}
 #define Stair4 NTVEC{45.0f, 45.0f, 45.0f, 255.0f}
 
+#define PartyWindowFirstPos { WinSize.x * -0.27f, WinSize.y * 0.3375f }
+#define PartyWindowSecondPos { WinSize.x * -0.27f, WinSize.y * 0.1125f }
+#define PartyWindowThirdPos { WinSize.x * -0.27f, WinSize.y * -0.1125f }
+#define PartyWindowFourthPos { WinSize.x * -0.27f, WinSize.y * -0.3375f }
+
 enum CHARACTER
 {
 	CHRONO,

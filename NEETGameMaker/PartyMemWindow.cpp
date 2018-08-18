@@ -10,8 +10,11 @@
 
 
 
-PartyMemWindow::PartyMemWindow()
+PartyMemWindow::PartyMemWindow() : bFontRender(true), Index(0), WinSize(0.0f), WindowRenderer(nullptr),
+	MemberName(nullptr), MemberLevel(nullptr), MemberHP(nullptr), MemberMP(nullptr), MemberAtk(nullptr),
+	MemberDef(nullptr), PlaneAtk(nullptr), PlaneDef(nullptr)
 {
+
 }
 
 
@@ -38,13 +41,13 @@ bool PartyMemWindow::Init(int _Index)
 	switch (Index)
 	{
 	case 0:
-		GetNTObject()->GetTransform()->SetLocalPosition(FirstPos);
+		GetNTObject()->GetTransform()->SetLocalPosition(PartyWindowFirstPos);
 		break;
 	case 1:
-		GetNTObject()->GetTransform()->SetLocalPosition(SecondPos);
+		GetNTObject()->GetTransform()->SetLocalPosition(PartyWindowSecondPos);
 		break;
 	case 2:
-		GetNTObject()->GetTransform()->SetLocalPosition(ThirdPos);
+		GetNTObject()->GetTransform()->SetLocalPosition(PartyWindowThirdPos);
 		break;
 	default:
 		break;
@@ -209,6 +212,18 @@ void PartyMemWindow::MainUpdate()
 	{
 		PlaneAtk->SetColor({ 1.0f });
 		PlaneDef->SetColor({ 1.0f });
+	}
+
+	if (bFontRender == false)
+	{
+		MemberName->SetColor(0);
+		MemberLevel->SetColor(0);
+		MemberHP->SetColor(0);
+		MemberMP->SetColor(0);
+		MemberAtk->SetColor(0);
+		MemberDef->SetColor(0);
+		PlaneAtk->SetColor(0.0f);
+		PlaneDef->SetColor(0.0f);
 	}
 }
 

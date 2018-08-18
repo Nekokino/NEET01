@@ -8,8 +8,9 @@
 
 
 
-PartyGameInfoWindow::PartyGameInfoWindow()
+PartyGameInfoWindow::PartyGameInfoWindow() : WinSize(0.0f), PlayTime(nullptr), Gold(nullptr)
 {
+	
 }
 
 

@@ -56,7 +56,7 @@ public:
 		CurTextCount = _Count;
 	}
 
-	int GetTextCount()
+	size_t GetTextCount()
 	{
 		return CurTextCount;
 	}

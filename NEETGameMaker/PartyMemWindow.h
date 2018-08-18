@@ -3,10 +3,6 @@
 
 #include "GameSystem.h"
 
-#define FirstPos { WinSize.x * -0.27f, WinSize.y * 0.3375f }
-#define SecondPos { WinSize.x * -0.27f, WinSize.y * 0.1125f }
-#define ThirdPos { WinSize.x * -0.27f, WinSize.y * -0.1125f }
-
 class NTPieceWindow;
 class NTFontRenderer;
 class NTSpRenderer;
@@ -14,6 +10,7 @@ class PartyMemWindow : public NTLogic
 {
 private:
 	int Index;
+	bool bFontRender;
 	PlayerStatus CurPlayer;
 	NTVEC2 WinSize;
 	Autoptr<NTPieceWindow> WindowRenderer;
@@ -93,6 +90,11 @@ private:
 		_gStr.clear();
 		swprintf_s(Tmp, L"%d", CurPlayer.Stamina + CurPlayer.Armor.Def + CurPlayer.Helmet.Def);
 		_gStr += Tmp;
+	}
+
+	void SetFontRender(bool _Value)
+	{
+		bFontRender = _Value;
 	}
 public:
 	bool Init(int _Index);

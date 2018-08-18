@@ -7,7 +7,11 @@
 #include "NTPieceWindow.h"
 
 
-PartyDetailWindow::PartyDetailWindow()
+PartyDetailWindow::PartyDetailWindow() : Index(0), WinSize(0.0f), CurCharacter(CHARA_MAX),
+	CharacterFace(nullptr), CharacterElement(nullptr), CharacterLevel(nullptr), CharacterName(nullptr),
+	EquipAcc(nullptr), EquipHelmet(nullptr), Power(nullptr), Hit(nullptr),
+	Speed(nullptr), Magic(nullptr), Evade(nullptr), Stamina(nullptr), MagicDef(nullptr), CurExp(nullptr),
+	NextExp(nullptr), WeaponIcon(nullptr)
 {
 }
 
