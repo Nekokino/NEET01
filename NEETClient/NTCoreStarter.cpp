@@ -7,6 +7,7 @@
 #include <NTImage.h>
 #include <SpriteLoader.h>
 #include <TextLoader.h>
+#include <ItemLoader.h>
 
 #include "TestSceneUpdater.h"
 #include "TestSceneBuilder.h"
@@ -31,7 +32,7 @@ NTCoreStarter::~NTCoreStarter()
 
 void NTCoreStarter::Build()
 {
-	NTWinShortCut::GetMainWindow().SetSize(1024 * 0.75f, 896 * 0.75f);
+	NTWinShortCut::GetMainWindow().SetSize(1024, 896);
 	NTWinShortCut::GetMainWindow().Show();
 	NTWinShortCut::GetMainWindow().InitDevice();
 
@@ -39,6 +40,7 @@ void NTCoreStarter::Build()
 	
 	SpriteLoader::Load();
 	TextLoader::Load();
+	ItemLoader::Load();
 
 	GameSystem::BasePlayerSetting();
 	

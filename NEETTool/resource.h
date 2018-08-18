@@ -12,6 +12,10 @@
 #define IDD_TEXTDLG                     317
 #define IDD_ITEMEDITDLG                 318
 #define IDD_ITEMBASEDLG                 319
+#define IDD_ITEMEQUIPDLG                320
+#define IDD_ITEMWEAPONDLG               321
+#define IDD_ITEMARMORDLG                322
+#define IDD_ITEMHELMETDLG               323
 #define IDC_MENUTAB                     1004
 #define ID_Test                         1006
 #define IDC_test                        1008
@@ -48,14 +52,35 @@
 #define IDC_BUTTON3                     1041
 #define IDC_ITEMLOAD                    1041
 #define IDC_ITEMSAVE                    1042
+#define IDC_USECHRONO                   1044
+#define IDC_USELUCCA                    1045
+#define IDC_USEMARU                     1046
+#define IDC_USEKAERU                    1047
+#define IDC_USEROBO                     1048
+#define IDC_CHECK6                      1049
+#define IDC_USEEIRA                     1049
+#define IDC_CHECK7                      1050
+#define IDC_USEMAOU                     1050
+#define IDC_ITEMSPECIAL                 1051
+#define IDC_ARMORDEF                    1052
+#define IDC_HELMETDEF                   1053
+#define IDC_WARM                        1056
+#define IDC_WEAPONATK                   1057
+#define IDC_WBOW                        1061
+#define IDC_WBROADSWORD                 1062
+#define IDC_WFIST                       1063
+#define IDC_WGUN                        1064
+#define IDC_WSCYTHE                     1065
+#define IDC_WSWORD                      1066
+#define IDC_WEAPONCRIT                  1067
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        321
+#define _APS_NEXT_RESOURCE_VALUE        325
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1043
-#define _APS_NEXT_SYMED_VALUE           320
+#define _APS_NEXT_CONTROL_VALUE         1058
+#define _APS_NEXT_SYMED_VALUE           324
 #endif
 #endif

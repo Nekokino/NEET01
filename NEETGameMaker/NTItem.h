@@ -8,6 +8,10 @@ class NTItem : public NTNameTag, public RefCounter, public NTTypeParent
 {
 public:
 	static std::unordered_map<std::wstring, Autoptr<NTItem>> ItemData;
+	static std::unordered_map<std::wstring, Autoptr<NTItem>>::iterator FindIter;
+
+public:
+	static Autoptr<NTItem> FindItem(const wchar_t* _Name);
 public:
 	std::wstring Output;
 	std::wstring Info;

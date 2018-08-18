@@ -90,6 +90,7 @@ private:
 	static bool NextText;
 	static int WindowStyle;
 	static NTNPC* TextNPC;
+	static int Gold;
 
 public:
 	static PlayerStatus* GetStatus(CHARACTER _Chara)
@@ -166,8 +167,27 @@ public:
 		return PS[_index];
 	}
 
+	static PlayerStatus GetBattlememberStatus(int _index)
+	{
+		if (_index >= 3)
+		{
+			return PS[CHARA_MAX];
+		}
+
+		return PS[BattleMember[_index]];
+	}
+
 	static void BasePlayerSetting();
 	static void TimeUpdate();
+	static float GetPlayTime()
+	{
+		return PlayTime;
+	}
+
+	static int GetGold()
+	{
+		return Gold;
+	}
 
 public:
 	GameSystem();

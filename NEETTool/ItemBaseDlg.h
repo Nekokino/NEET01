@@ -40,12 +40,19 @@ public:
 	void SetItemData(NTItem* _Item)
 	{
 		CurItem = _Item;
+		const type_info* Type = _Item->GetType();
+		const char* TypeName = Type->name();
 		UpdateData(TRUE);
 		ItemKey = CurItem->GetName();
 		ItemOutput = CurItem->Output.c_str();
+		ItemInfo = CurItem->Info.c_str();
+		if (strcmp(TypeName, "class NTKeyItem") == 0)
+		{
+			CurItem->Price = 1;
+			CurItem->Sellable = false;
+		}
 		ItemPrice = CurItem->Price;
 		ItemSellable = CurItem->Sellable;
-		ItemInfo = CurItem->Info.c_str();
 		UpdateData(FALSE);
 	}
 };

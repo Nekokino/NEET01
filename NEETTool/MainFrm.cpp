@@ -54,7 +54,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	MainWnd.CreateStatic(this, 1, 2, WS_CHILD | WS_VISIBLE);
 
-	MainWnd.CreateView(0, 0, RUNTIME_CLASS(LeftView), SIZE{ /*1024, 896*/100, 100 }, nullptr);
+	MainWnd.CreateView(0, 0, RUNTIME_CLASS(LeftView), SIZE{ 1024, 896 }, nullptr);
 	MainWnd.CreateView(0, 1, RUNTIME_CLASS(RightView), SIZE{ 500, 896 }, nullptr);
 
 	CWnd* Wnd = MainWnd.GetPane(0, 0);

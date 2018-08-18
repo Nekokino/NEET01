@@ -91,6 +91,18 @@
     <ClInclude Include="ItemBaseDlg.h">
       <Filter>Dlg\Item\Sub</Filter>
     </ClInclude>
+    <ClInclude Include="ItemEquipDlg.h">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemArmorDlg.h">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemHelmetDlg.h">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemWeaponDlg.h">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -142,6 +154,18 @@
       <Filter>Dlg\Item\Sub</Filter>
     </ClCompile>
     <ClCompile Include="ItemBaseDlg.cpp">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemEquipDlg.cpp">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemArmorDlg.cpp">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemHelmetDlg.cpp">
+      <Filter>Dlg\Item\Sub</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemWeaponDlg.cpp">
       <Filter>Dlg\Item\Sub</Filter>
     </ClCompile>
   </ItemGroup>

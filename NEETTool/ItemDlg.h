@@ -62,8 +62,9 @@ public:
 			delete Item;
 			return;
 		}
-
-		Item->SetName(L"키값입니다. 게임에는 띄우지 않을 확률이 높습니다.");
+		std::wstring Tmp = L"키값입니다. 게임에는 띄우지 않을 확률이 높습니다.";
+		Tmp += Time;
+		Item->SetName(Tmp.c_str());
 		Item->Output = L"게임에서 출력될 이름입니다.";
 		Item->Info = L"아이템 설명란에 출력될 문자열입니다.";
 		Item->Sellable = true;
@@ -82,4 +83,5 @@ public:
 	void Release();
 	HTREEITEM Find(HTREEITEM _ITEM, DWORD_PTR _Data);
 	void UpdateName(HTREEITEM _ITEM);
+	afx_msg void OnTvnKeydownItemtree(NMHDR *pNMHDR, LRESULT *pResult);
 };

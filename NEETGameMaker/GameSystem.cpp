@@ -11,6 +11,7 @@ bool GameSystem::NextText = false;
 int GameSystem::WindowStyle = 0;
 NTNPC* GameSystem::TextNPC = nullptr;
 float GameSystem::PlayTime = 0.0f;
+int GameSystem::Gold = 0;
 
 void GameSystem::SetNextText(NTNPC * _NPC, bool _Value)
 {
@@ -46,6 +47,11 @@ void GameSystem::BasePlayerSetting()
 	PS[CHRONO].Stamina = 8;
 	PS[CHRONO].Usable = true;
 	PS[CHRONO].BattleOrder = 0;
+
+	PS[CHRONO].Weapon = *(Autoptr<NTWeapon>)(NTItem::FindItem(L"WoodSword"));
+	PS[CHRONO].Armor = *(Autoptr<NTArmor>)(NTItem::FindItem(L"Tunic"));
+	PS[CHRONO].Helmet = *(Autoptr<NTHelmet>)(NTItem::FindItem(L"LeatherHat"));
+	PS[CHRONO].Acc = *(Autoptr<NTAcc>)(NTItem::FindItem(L"Bandana"));
 
 	BattleMember[0] = CHRONO;
 }

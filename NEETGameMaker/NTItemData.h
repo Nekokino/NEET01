@@ -9,10 +9,10 @@ public:
 	wchar_t Info[256];
 	int Price;
 	bool Sellable;
-	int UseCharacter;
 	bool bSpecial;
 	int Type;
 	int Stat;
 	int Crit;
+	bool Only[CHARA_MAX];
 };
 

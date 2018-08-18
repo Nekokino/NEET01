@@ -21,7 +21,7 @@ ItemBaseDlg::ItemBaseDlg(CWnd* pParent /*=NULL*/)
 	, ItemInfo(_T(""))
 	, ItemPrice(0)
 {
-	SizeY = 500;
+	SizeY = 450;
 }
 
 ItemBaseDlg::~ItemBaseDlg()

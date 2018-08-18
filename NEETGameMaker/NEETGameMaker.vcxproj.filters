@@ -52,6 +52,15 @@
     <Filter Include="Item\Equip">
       <UniqueIdentifier>{c1db3dec-4790-46f5-b772-550e4a0053ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="WindowClass">
+      <UniqueIdentifier>{740c1326-6b1f-42df-ab63-d8bdebe9e67e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowClass\PartyWindow">
+      <UniqueIdentifier>{b5828038-c4c6-4373-b965-0fc4e5bab585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowClass\PartyWindow\SubWindow">
+      <UniqueIdentifier>{db3ca4bd-31a3-4289-a9d8-8eef570c587b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NTTileMap.cpp">
@@ -143,6 +152,15 @@
     </ClCompile>
     <ClCompile Include="NTAcc.cpp">
       <Filter>Item\Equip</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemLoader.cpp">
+      <Filter>DataStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="PartyWindow.cpp">
+      <Filter>WindowClass\PartyWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="PartyMemWindow.cpp">
+      <Filter>WindowClass\PartyWindow\SubWindow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +265,15 @@
     </ClInclude>
     <ClInclude Include="NTItemData.h">
       <Filter>DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemLoader.h">
+      <Filter>DataStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="PartyWindow.h">
+      <Filter>WindowClass\PartyWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="PartyMemWindow.h">
+      <Filter>WindowClass\PartyWindow\SubWindow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

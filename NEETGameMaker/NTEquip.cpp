@@ -4,7 +4,7 @@
 
 NTEquip::NTEquip()
 {
-	Only = CHARACTER::CHARA_MAX;
+	
 }
 
 

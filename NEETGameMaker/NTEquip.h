@@ -5,7 +5,7 @@
 class NTEquip : public NTItem
 {
 public:
-	CHARACTER Only;
+	bool Only[CHARA_MAX];
 	bool bSpecial;
 	void(*SpecialFunc)(void*);
 protected:

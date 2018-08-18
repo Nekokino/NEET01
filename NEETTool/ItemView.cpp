@@ -7,6 +7,10 @@
 
 #include "NTDlgShortCut.h"
 #include "ItemBaseDlg.h"
+#include "ItemEquipDlg.h"
+#include "ItemWeaponDlg.h"
+#include "ItemArmorDlg.h"
+#include "ItemHelmetDlg.h"
 
 
 // ItemView
@@ -84,6 +88,52 @@ void ItemView::Reset()
 	BaseDlg->SetItemData(CurItem);
 	Pos.y += BaseDlg->SizeY;
 	DlgList.push_back(BaseDlg);
+
+	const type_info* Type = CurItem->GetType();
+	const char* TypeName = Type->name();
+	if (strcmp(TypeName, "class NTWeapon") == 0 || strcmp(TypeName, "class NTArmor") == 0 || strcmp(TypeName, "class NTHelmet") == 0 || strcmp(TypeName, "class NTAcc") == 0)
+	{
+		ItemEquipDlg* EquipDlg = new ItemEquipDlg();
+		EquipDlg->Create(IDD_ITEMEQUIPDLG, this);
+		EquipDlg->ShowWindow(SW_SHOW);
+		EquipDlg->SetWindowPos(this, Pos.x, Pos.y, Size.x, EquipDlg->SizeY, SWP_NOZORDER);
+		EquipDlg->SetItemData((NTEquip*)CurItem);
+		Pos.y += EquipDlg->SizeY;
+		DlgList.push_back(EquipDlg);
+	}
+
+	if (strcmp(TypeName, "class NTWeapon") == 0)
+	{
+		ItemWeaponDlg* WeaponDlg = new ItemWeaponDlg();
+		WeaponDlg->Create(IDD_ITEMWEAPONDLG, this);
+		WeaponDlg->ShowWindow(SW_SHOW);
+		WeaponDlg->SetWindowPos(this, Pos.x, Pos.y, Size.x, WeaponDlg->SizeY, SWP_NOZORDER);
+		WeaponDlg->SetItemData((NTWeapon*)CurItem);
+		Pos.y += WeaponDlg->SizeY;
+		DlgList.push_back(WeaponDlg);
+	}
+
+	if (strcmp(TypeName, "class NTArmor") == 0)
+	{
+		ItemArmorDlg* ArmorDlg = new ItemArmorDlg();
+		ArmorDlg->Create(IDD_ITEMARMORDLG, this);
+		ArmorDlg->ShowWindow(SW_SHOW);
+		ArmorDlg->SetWindowPos(this, Pos.x, Pos.y, Size.x, ArmorDlg->SizeY, SWP_NOZORDER);
+		ArmorDlg->SetItemData((NTArmor*)CurItem);
+		Pos.y += ArmorDlg->SizeY;
+		DlgList.push_back(ArmorDlg);
+	}
+
+	if (strcmp(TypeName, "class NTHelmet") == 0)
+	{
+		ItemHelmetDlg* HelmetDlg = new ItemHelmetDlg();
+		HelmetDlg->Create(IDD_ITEMHELMETDLG, this);
+		HelmetDlg->ShowWindow(SW_SHOW);
+		HelmetDlg->SetWindowPos(this, Pos.x, Pos.y, Size.x, HelmetDlg->SizeY, SWP_NOZORDER);
+		HelmetDlg->SetItemData((NTHelmet*)CurItem);
+		Pos.y += HelmetDlg->SizeY;
+		DlgList.push_back(HelmetDlg);
+	}
 
 	SIZE SizeTotal;
 

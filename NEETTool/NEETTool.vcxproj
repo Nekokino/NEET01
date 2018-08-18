@@ -195,10 +195,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ItemArmorDlg.h" />
     <ClInclude Include="ItemBaseDlg.h" />
     <ClInclude Include="ItemDlg.h" />
     <ClInclude Include="ItemEditDlg.h" />
+    <ClInclude Include="ItemEquipDlg.h" />
+    <ClInclude Include="ItemHelmetDlg.h" />
     <ClInclude Include="ItemView.h" />
+    <ClInclude Include="ItemWeaponDlg.h" />
     <ClInclude Include="LeftView.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MapDlg.h" />
@@ -216,10 +220,14 @@
     <ClInclude Include="ToolBuilder.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ItemArmorDlg.cpp" />
     <ClCompile Include="ItemBaseDlg.cpp" />
     <ClCompile Include="ItemDlg.cpp" />
     <ClCompile Include="ItemEditDlg.cpp" />
+    <ClCompile Include="ItemEquipDlg.cpp" />
+    <ClCompile Include="ItemHelmetDlg.cpp" />
     <ClCompile Include="ItemView.cpp" />
+    <ClCompile Include="ItemWeaponDlg.cpp" />
     <ClCompile Include="LeftView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MapDlg.cpp" />

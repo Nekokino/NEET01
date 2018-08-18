@@ -168,6 +168,7 @@
     <ClInclude Include="FieldCamera.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameValue.h" />
+    <ClInclude Include="ItemLoader.h" />
     <ClInclude Include="LoadingSceneBuilder.h" />
     <ClInclude Include="LoadingSceneUpdater.h" />
     <ClInclude Include="NTAcc.h" />
@@ -191,6 +192,8 @@
     <ClInclude Include="NTTextData.h" />
     <ClInclude Include="NTTileMap.h" />
     <ClInclude Include="NTWeapon.h" />
+    <ClInclude Include="PartyMemWindow.h" />
+    <ClInclude Include="PartyWindow.h" />
     <ClInclude Include="SpriteLoader.h" />
     <ClInclude Include="NTTextWindow.h" />
     <ClInclude Include="TextLoader.h" />
@@ -203,6 +206,7 @@
     <ClCompile Include="EnableRange.cpp" />
     <ClCompile Include="FieldCamera.cpp" />
     <ClCompile Include="GameSystem.cpp" />
+    <ClCompile Include="ItemLoader.cpp" />
     <ClCompile Include="LoadingSceneBuilder.cpp" />
     <ClCompile Include="LoadingSceneUpdater.cpp" />
     <ClCompile Include="NTAcc.cpp" />
@@ -223,6 +227,8 @@
     <ClCompile Include="NTPlayer.cpp" />
     <ClCompile Include="NTTileMap.cpp" />
     <ClCompile Include="NTWeapon.cpp" />
+    <ClCompile Include="PartyMemWindow.cpp" />
+    <ClCompile Include="PartyWindow.cpp" />
     <ClCompile Include="SpriteLoader.cpp" />
     <ClCompile Include="NTTextWindow.cpp" />
     <ClCompile Include="TextLoader.cpp" />

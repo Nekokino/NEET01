@@ -52,6 +52,7 @@ BEGIN_MESSAGE_MAP(ItemDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_CREATEITEM, &ItemDlg::OnBnClickedCreateitem)
 	ON_BN_CLICKED(IDC_ITEMSAVE, &ItemDlg::OnBnClickedItemsave)
 	ON_BN_CLICKED(IDC_ITEMLOAD, &ItemDlg::OnBnClickedItemload)
+	ON_NOTIFY(TVN_KEYDOWN, IDC_ITEMTREE, &ItemDlg::OnTvnKeydownItemtree)
 END_MESSAGE_MAP()
 
 
@@ -78,8 +79,12 @@ void ItemDlg::OnTvnSelchangedItemtree(NMHDR *pNMHDR, LRESULT *pResult)
 
 	CurItem = pNMTreeView->itemNew.hItem;
 
-	NTItem* Item = (NTItem*)ItemTree.GetItemData(CurItem);
-
+	NTItem* Item = nullptr;
+	if (CurItem != nullptr)
+	{
+		Item = (NTItem*)ItemTree.GetItemData(CurItem);
+	}
+	
 	if (nullptr != Item)
 	{
 		NTDlgShortCut::pItemView->ClearDlg();
@@ -107,7 +112,7 @@ BOOL ItemDlg::OnInitDialog()
 
 	ItemView* View = (ItemView*)((CFrameWnd*)this)->CreateView(&Context);
 
-	RECT ViewSize = { 300, 18, 950, 750 };
+	RECT ViewSize = { 300, 18, 950, 800 };
 	View->ShowWindow(SW_SHOW);
 	View->MoveWindow(&ViewSize);
 
@@ -205,8 +210,8 @@ void ItemDlg::OnBnClickedItemsave()
 			NewData.Price = Weapon.Price;
 			NewData.Sellable = Weapon.Sellable;
 			NewData.Stat = Weapon.Atk;
-			NewData.Type = (int)Weapon.Type;
-			NewData.UseCharacter = Weapon.Only;
+			NewData.Type = (int)Weapon.WeaponType;
+			memcpy_s(NewData.Only, sizeof(NewData.Only), Weapon.Only, sizeof(NewData.Only));
 		}
 
 		if (strcmp(TypeName, "class NTArmor") == 0)
@@ -220,8 +225,7 @@ void ItemDlg::OnBnClickedItemsave()
 			NewData.Price = Armor.Price;
 			NewData.Sellable = Armor.Sellable;
 			NewData.Stat = Armor.Def;
-			NewData.Type = (int)Armor.Type;
-			NewData.UseCharacter = Armor.Only;
+			memcpy_s(NewData.Only, sizeof(NewData.Only), Armor.Only, sizeof(NewData.Only));
 		}
 
 		if (strcmp(TypeName, "class NTHelmet") == 0)
@@ -236,7 +240,7 @@ void ItemDlg::OnBnClickedItemsave()
 			NewData.Sellable = Helmet.Sellable;
 			NewData.Stat = Helmet.Def;
 			NewData.Type = -1;
-			NewData.UseCharacter = Helmet.Only;
+			memcpy_s(NewData.Only, sizeof(NewData.Only), Helmet.Only, sizeof(NewData.Only));
 		}
 
 		if (strcmp(TypeName, "class NTAcc") == 0)
@@ -251,7 +255,7 @@ void ItemDlg::OnBnClickedItemsave()
 			NewData.Sellable = Acc.Sellable;
 			NewData.Stat = -1;
 			NewData.Type = -1;
-			NewData.UseCharacter = Acc.Only;
+			memcpy_s(NewData.Only, sizeof(NewData.Only), Acc.Only, sizeof(NewData.Only));
 		}
 
 		if (strcmp(TypeName, "class NTConsume") == 0)
@@ -266,7 +270,7 @@ void ItemDlg::OnBnClickedItemsave()
 			NewData.Sellable = Consume.Sellable;
 			NewData.Stat = -1;
 			NewData.Type = -1;
-			NewData.UseCharacter = -1;
+			memset(NewData.Only, false, sizeof(NewData.Only));
 		}
 
 		if (strcmp(TypeName, "class NTKeyItem") == 0)
@@ -281,7 +285,7 @@ void ItemDlg::OnBnClickedItemsave()
 			NewData.Sellable = KeyItem.Sellable;
 			NewData.Stat = -1;
 			NewData.Type = -1;
-			NewData.UseCharacter = -1;
+			memset(NewData.Only, false, sizeof(NewData.Only));
 		}
 
 		SaveStream.Write(&NewData, sizeof(NTItemData));
@@ -293,6 +297,7 @@ void ItemDlg::OnBnClickedItemsave()
 void ItemDlg::OnBnClickedItemload()
 {
 	Release();
+	NTDlgShortCut::pItemView->ClearDlg();
 	ItemTree.DeleteAllItems();
 	CurItem = nullptr;
 	SetBaseTree();
@@ -320,12 +325,12 @@ void ItemDlg::OnBnClickedItemload()
 			NewWeapon->Crit = NewItem->Crit;
 			NewWeapon->SetName(NewItem->Name);
 			NewWeapon->Info = NewItem->Info;
-			NewWeapon->Only = (CHARACTER)NewItem->UseCharacter;
+			memcpy_s(NewWeapon->Only, sizeof(NewWeapon->Only), NewItem->Only, sizeof(NewItem->Only));
 			NewWeapon->Output = NewItem->Output;
 			NewWeapon->Price = NewItem->Price;
 			NewWeapon->Sellable = NewItem->Sellable;
 			//NewWeapon->SpecialFunc 
-			NewWeapon->Type = (NTWeapon::WEAPONTYPE)NewItem->Type;
+			NewWeapon->WeaponType = (NTWeapon::WEAPONTYPE)NewItem->Type;
 			ItemMap.insert(std::unordered_map<std::wstring, NTItem*>::value_type(NewWeapon->GetName(), NewWeapon));
 
 			HTREEITEM NewItem = ItemTree.InsertItem(NewWeapon->GetName(), TreeWeapon);
@@ -340,12 +345,11 @@ void ItemDlg::OnBnClickedItemload()
 			NewArmor->bSpecial = NewItem->bSpecial;
 			NewArmor->SetName(NewItem->Name);
 			NewArmor->Info = NewItem->Info;
-			NewArmor->Only = (CHARACTER)NewItem->UseCharacter;
+			memcpy_s(NewArmor->Only, sizeof(NewArmor->Only), NewItem->Only, sizeof(NewItem->Only));
 			NewArmor->Output = NewItem->Output;
 			NewArmor->Price = NewItem->Price;
 			NewArmor->Sellable = NewItem->Sellable;
 			//NewWeapon->SpecialFunc 
-			NewArmor->Type = (NTArmor::ARMORTYPE)NewItem->Type;
 			ItemMap.insert(std::unordered_map<std::wstring, NTItem*>::value_type(NewArmor->GetName(), NewArmor));
 
 			HTREEITEM NewItem = ItemTree.InsertItem(NewArmor->GetName(), TreeArmor);
@@ -360,7 +364,7 @@ void ItemDlg::OnBnClickedItemload()
 			NewHelmet->bSpecial = NewItem->bSpecial;
 			NewHelmet->SetName(NewItem->Name);
 			NewHelmet->Info = NewItem->Info;
-			NewHelmet->Only = (CHARACTER)NewItem->UseCharacter;
+			memcpy_s(NewHelmet->Only, sizeof(NewHelmet->Only), NewItem->Only, sizeof(NewItem->Only));
 			NewHelmet->Output = NewItem->Output;
 			NewHelmet->Price = NewItem->Price;
 			NewHelmet->Sellable = NewItem->Sellable;
@@ -378,7 +382,7 @@ void ItemDlg::OnBnClickedItemload()
 			NewAcc->bSpecial = NewItem->bSpecial;
 			NewAcc->SetName(NewItem->Name);
 			NewAcc->Info = NewItem->Info;
-			NewAcc->Only = (CHARACTER)NewItem->UseCharacter;
+			memcpy_s(NewAcc->Only, sizeof(NewAcc->Only), NewItem->Only, sizeof(NewItem->Only));
 			NewAcc->Output = NewItem->Output;
 			NewAcc->Price = NewItem->Price;
 			NewAcc->Sellable = NewItem->Sellable;
@@ -477,14 +481,22 @@ HTREEITEM ItemDlg::Find(HTREEITEM _ITEM, DWORD_PTR _Data)
 		TmpITEM = ItemTree.GetChildItem(_ITEM);
 		if (TmpITEM != nullptr)
 		{
-			return Find(TmpITEM, _Data);
+			HTREEITEM ReturnItem = Find(TmpITEM, _Data);
+			if (ReturnItem != nullptr)
+			{
+				return ReturnItem;
+			}
 		}
 
 		HTREEITEM TempITEM;
 		TempITEM = ItemTree.GetNextSiblingItem(_ITEM);
 		if (TempITEM != nullptr)
 		{
-			return Find(TempITEM, _Data);
+			HTREEITEM ReturnItem = Find(TempITEM, _Data);
+			if (ReturnItem != nullptr)
+			{
+				return ReturnItem;
+			}
 		}
 	}
 
@@ -493,5 +505,38 @@ HTREEITEM ItemDlg::Find(HTREEITEM _ITEM, DWORD_PTR _Data)
 
 void ItemDlg::UpdateName(HTREEITEM _ITEM)
 {
+	if (_ITEM == nullptr)
+	{
+		return;
+	}
 	ItemTree.SetItemText(_ITEM, ((NTItem*)ItemTree.GetItemData(_ITEM))->GetName());
+}
+
+
+void ItemDlg::OnTvnKeydownItemtree(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMTVKEYDOWN pTVKeyDown = reinterpret_cast<LPNMTVKEYDOWN>(pNMHDR);
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	*pResult = 0;
+
+	if (VK_DELETE == pTVKeyDown->wVKey && nullptr != CurItem && ItemTree.GetItemData(CurItem) != (DWORD_PTR)nullptr)
+	{
+		NTItem* Tmp = (NTItem*)ItemTree.GetItemData(CurItem);
+
+		if (Tmp != nullptr)
+		{
+			NTDlgShortCut::pItemView->ClearDlg();
+			std::unordered_map<std::wstring, NTItem*>::iterator Find = ItemMap.find(Tmp->GetName());
+			if (Find == ItemMap.end())
+			{
+				return;
+			}
+			delete Find->second;
+			Find->second = nullptr;
+			ItemMap.erase(Find);
+		}
+
+		ItemTree.DeleteItem(CurItem);
+		ItemTree.SelectItem(nullptr);
+	}
 }
