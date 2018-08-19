@@ -159,23 +159,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="NTCoreStarter.h" />
-    <ClInclude Include="OverWorldSceneBuilder.h" />
-    <ClInclude Include="OverWorldSceneUpdater.h" />
     <ClInclude Include="TestLogic.h" />
-    <ClInclude Include="TestPlaneLogic.h" />
-    <ClInclude Include="TestSceneBuilder.h" />
-    <ClInclude Include="TestSceneUpdater.h" />
     <ClInclude Include="TitleSceneBuilder.h" />
     <ClInclude Include="TitleSceneUpdater.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NTCoreStarter.cpp" />
-    <ClCompile Include="OverWorldSceneBuilder.cpp" />
-    <ClCompile Include="OverWorldSceneUpdater.cpp" />
     <ClCompile Include="TestLogic.cpp" />
-    <ClCompile Include="TestPlaneLogic.cpp" />
-    <ClCompile Include="TestSceneBuilder.cpp" />
-    <ClCompile Include="TestSceneUpdater.cpp" />
     <ClCompile Include="TitleSceneBuilder.cpp" />
     <ClCompile Include="TitleSceneUpdater.cpp" />
   </ItemGroup>

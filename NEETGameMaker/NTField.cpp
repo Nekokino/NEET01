@@ -10,7 +10,7 @@ std::unordered_map<std::wstring, FieldData> NTField::FieldMap = std::unordered_m
 
 NTField::NTField() : FieldImage(nullptr), ColImage(nullptr), MapSize(0.0f)
 {
-	
+
 }
 
 

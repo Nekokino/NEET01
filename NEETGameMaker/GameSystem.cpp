@@ -115,8 +115,6 @@ void GameSystem::BasePlayerSetting()
 	BattleMember[1] = MARU;
 	BattleMember[2] = LUCCA;
 
-	memset(&PS[CHARA_MAX], 0, sizeof(PlayerStatus));
-
 	PlayTime = 0;
 }
 

@@ -2,7 +2,7 @@
 
 
 
-NTHelmet::NTHelmet()
+NTHelmet::NTHelmet() : Def(0)
 {
 	SetType();
 }

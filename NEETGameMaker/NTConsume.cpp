@@ -2,7 +2,7 @@
 
 
 
-NTConsume::NTConsume()
+NTConsume::NTConsume() : Effect(nullptr)
 {
 	SetType();
 }

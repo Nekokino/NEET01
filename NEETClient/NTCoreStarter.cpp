@@ -9,8 +9,6 @@
 #include <TextLoader.h>
 #include <ItemLoader.h>
 
-#include "TestSceneUpdater.h"
-#include "TestSceneBuilder.h"
 #include "TitleSceneBuilder.h"
 #include "TitleSceneUpdater.h"
 #include <LoadingSceneBuilder.h>
@@ -47,7 +45,6 @@ void NTCoreStarter::Build()
 	NTWinShortCut::GetMainSceneSystem().CreateScene<LoadingSceneBuilder, LoadingSceneUpdater>(L"LoadingScene");
 	NTWinShortCut::GetMainSceneSystem().CreateScene<WindowSceneBuilder, WindowSceneUpdater>(L"WindowScene");
 	NTWinShortCut::GetMainSceneSystem().CreateScene<DebugSceneBuilder, DebugSceneUpdater>(L"DebugScene");
-	NTWinShortCut::GetMainSceneSystem().CreateScene<TestSceneBuilder, TestSceneUpdater>(L"TestScene");
 	NTWinShortCut::GetMainSceneSystem().CreateScene<TitleSceneBuilder, TitleSceneUpdater>(L"TitleScene");	
 	
 	NTWinShortCut::GetMainSceneSystem().ChangeScene(L"WindowScene");

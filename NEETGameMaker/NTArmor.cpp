@@ -2,7 +2,7 @@
 
 
 
-NTArmor::NTArmor()
+NTArmor::NTArmor() : Def(0)
 {
 	SetType();
 }

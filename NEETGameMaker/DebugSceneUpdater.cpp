@@ -9,8 +9,9 @@
 #include "GameSystem.h"
 #include "NTPixelChecker.h"
 
-DebugSceneUpdater::DebugSceneUpdater()
+DebugSceneUpdater::DebugSceneUpdater() : Player(nullptr), FontRender(nullptr), FadeRect(nullptr), PixelChecker(nullptr), MousePos({ 0, 0 })
 {
+	//memset(TextString, 0, sizeof(TextString));
 }
 
 

@@ -2,9 +2,9 @@
 
 
 
-NTEquip::NTEquip()
+NTEquip::NTEquip() : bSpecial(false), SpecialFunc(nullptr)
 {
-	
+	memset(Only, false, sizeof(Only));
 }
 
 

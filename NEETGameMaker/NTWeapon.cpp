@@ -2,7 +2,7 @@
 
 
 
-NTWeapon::NTWeapon()
+NTWeapon::NTWeapon() : WeaponType(WT_MAX), Atk(0), Crit(0)
 {
 	SetType();
 }

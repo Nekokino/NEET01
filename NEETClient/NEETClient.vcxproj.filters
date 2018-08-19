@@ -1,90 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="TestSceneUpdater.h">
-      <Filter>TestScene</Filter>
-    </ClInclude>
-    <ClInclude Include="TestSceneBuilder.h">
-      <Filter>TestScene</Filter>
-    </ClInclude>
-    <ClInclude Include="TestPlaneLogic.h">
-      <Filter>TestScene\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleSceneBuilder.h">
-      <Filter>TitleScene</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleSceneUpdater.h">
-      <Filter>TitleScene</Filter>
-    </ClInclude>
     <ClInclude Include="NTCoreStarter.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="TitleSceneBuilder.h">
+      <Filter>title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleSceneUpdater.h">
+      <Filter>title</Filter>
+    </ClInclude>
     <ClInclude Include="TestLogic.h">
-      <Filter>TitleScene\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="OverWorldSceneBuilder.h">
-      <Filter>OverWorldScene</Filter>
-    </ClInclude>
-    <ClInclude Include="OverWorldSceneUpdater.h">
-      <Filter>OverWorldScene</Filter>
+      <Filter>title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TestSceneUpdater.cpp">
-      <Filter>TestScene</Filter>
-    </ClCompile>
-    <ClCompile Include="TestSceneBuilder.cpp">
-      <Filter>TestScene</Filter>
-    </ClCompile>
-    <ClCompile Include="TestPlaneLogic.cpp">
-      <Filter>TestScene\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleSceneBuilder.cpp">
-      <Filter>TitleScene</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleSceneUpdater.cpp">
-      <Filter>TitleScene</Filter>
-    </ClCompile>
     <ClCompile Include="NTCoreStarter.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="TitleSceneBuilder.cpp">
+      <Filter>title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleSceneUpdater.cpp">
+      <Filter>title</Filter>
+    </ClCompile>
     <ClCompile Include="TestLogic.cpp">
-      <Filter>TitleScene\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="OverWorldSceneBuilder.cpp">
-      <Filter>OverWorldScene</Filter>
-    </ClCompile>
-    <ClCompile Include="OverWorldSceneUpdater.cpp">
-      <Filter>OverWorldScene</Filter>
+      <Filter>title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CustomMatBackup.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="TestScene">
-      <UniqueIdentifier>{2d156d02-422f-424e-9456-17cd4f04461e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TestScene\Object">
-      <UniqueIdentifier>{b3149945-33d8-4751-a1fd-9e67b2828e89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TitleScene">
-      <UniqueIdentifier>{025902bb-64d0-491e-9e99-e00e9cc824fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{393677f2-4c5b-4228-bed5-873b44bd2799}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TitleScene\Object">
-      <UniqueIdentifier>{fe82824b-0f23-43bf-9634-4035269e84f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OverWorldScene">
-      <UniqueIdentifier>{348fd4af-6aef-46eb-bd09-38ad5dcefd46}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OverWorldScene\Object">
-      <UniqueIdentifier>{683f41a1-5117-4a9d-85e9-ec07f4066fd5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FieldScene">
       <UniqueIdentifier>{7d1a69a6-6579-423a-a65e-e40457cdf4db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="title">
+      <UniqueIdentifier>{a5a049d5-572f-4867-be18-0704221e6a9c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

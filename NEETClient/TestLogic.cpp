@@ -246,8 +246,9 @@ void TestLogic::MainUpdate()
 	Transform->SetLocalRotation({ 0.0f, 0.0f, PenRad });
 }
 
-TestLogic::TestLogic()
+TestLogic::TestLogic() : Pendulum(nullptr), BigC(nullptr), Trigger(nullptr), ClockHand(nullptr), Logo(nullptr)
 {
+	memset(hrono, 0, sizeof(hrono));
 }
 
 
