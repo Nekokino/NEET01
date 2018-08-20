@@ -12,18 +12,18 @@ NTInventory::~NTInventory()
 
 void NTInventory::UpdateInventory()
 {
-	StartIter = Inventory.begin();
-	EndIter = Inventory.end();
+	std::list<Autoptr<InventoryData>>::iterator SIter = Inventory.begin();
+	std::list<Autoptr<InventoryData>>::iterator EIter = Inventory.end();
 
-	for (; StartIter != EndIter;)
+	for (; SIter != EIter;)
 	{
-		if ((*StartIter)->Count == 0)
+		if ((*SIter)->Count == 0)
 		{
-			StartIter = Inventory.erase(StartIter);
+			SIter = Inventory.erase(SIter);
 		}
 		else
 		{
-			++StartIter;
+			++SIter;
 		}
 	}
 }
@@ -44,6 +44,8 @@ void NTInventory::InsertItem(NTItem * _Item, int _Count)
 	}
 
 	InventoryData* NewData = new InventoryData();
+	NewData->Item = NTItem::FindItem(_Item->GetName());
+	NewData->Count = _Count;
 
 	Inventory.push_back(NewData);
 	UpdateInventory();
@@ -82,6 +84,24 @@ void NTInventory::DumpItem(NTItem * _Item)
 		}
 	}
 	UpdateInventory();
+}
+
+std::list<Autoptr<InventoryData>> NTInventory::GetTypeList(const char * _ClassName)
+{
+	std::list<Autoptr<InventoryData>> ReturnList;
+	StartIter = Inventory.begin();
+	EndIter = Inventory.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (strcmp((*StartIter)->Item->GetType()->name(), _ClassName) == 0)
+		{
+			ReturnList.push_back((*StartIter));
+		}
+		
+	}
+
+	return ReturnList;
 }
 
 

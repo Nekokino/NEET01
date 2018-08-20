@@ -24,6 +24,8 @@ public:
 	void InsertItem(NTItem* _Item, int _Count = 1);
 	NTItem* TakeoutItem(NTItem* _Item, int _Count = 1);
 	void DumpItem(NTItem* _Item);
+
+	std::list<Autoptr<InventoryData>> GetTypeList(const char* _ClassName);
 public:
 	NTInventory();
 	~NTInventory();

@@ -1,4 +1,5 @@
 #pragma once
+#include <list>
 #include <NTNameTag.h>
 #include <RefNAutoptr.h>
 #include <NTTypeParent.h>
@@ -12,6 +13,7 @@ public:
 
 public:
 	static Autoptr<NTItem> FindItem(const wchar_t* _Name);
+	static std::list<Autoptr<NTItem>> FindTypeList(const char* _ClassName);
 public:
 	std::wstring Output;
 	std::wstring Info;

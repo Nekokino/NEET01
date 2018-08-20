@@ -1,9 +1,14 @@
 #pragma once
 #include <NTLogic.h>
+#include <vector>
+#include <list>
+
 #include "GameSystem.h"
+#include "NTInventory.h"
 
 class NTPieceWindow;
 class NTFontRenderer;
+class NTItem;
 class PartyEquipWindow : public NTLogic
 {
 private:
@@ -16,12 +21,17 @@ private:
 	Autoptr<NTPieceWindow> InventoryWindowRenderer;
 
 	Autoptr<NTFontRenderer> EquipType;
+	std::vector<Autoptr<NTFontRenderer>> Inventory;
+
+	std::list<Autoptr<InventoryData>> TypeInventory;
 
 	bool bUp;
 	bool bDown;
 	bool bShow;
 	int CurIndex;
 	int CurDetailIndex;
+	int InventoryScroll;
+	int* InventoryIndex;
 
 	CHARACTER CurChara;
 	PlayerStatus* CurPlayer;
@@ -47,9 +57,29 @@ public:
 	void SetItemType(int _Index)
 	{
 		CurDetailIndex = _Index;
-		CurChara = GameSystem::GetBattlememberCharacter(CurDetailIndex);
-		CurPlayer = GameSystem::GetBattlememberStatus(CurDetailIndex);
+		
 	}
+
+	void SetPlayer(int _Index)
+	{
+		CurChara = GameSystem::GetBattlememberCharacter(_Index);
+		CurPlayer = GameSystem::GetBattlememberStatus(_Index);
+	}
+
+	void SetInventoryIndex(int* _Index)
+	{
+		InventoryIndex = _Index;
+	}
+
+	int GetShowInventorySize()
+	{
+		return (int)TypeInventory.size();
+	}
+
+	void ChangeEquip();
+
+	void PauseRender();
+	void ResumeRender();
 
 private:
 	void MoveUp();

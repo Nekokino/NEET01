@@ -11,9 +11,11 @@ class PartyWindow : public NTLogic
 private:
 	int CurIndex;
 	int CurDetailIndex;
+	int CurInventoryIndex;
 	bool MoveUpUnderWindow;
 	bool MoveDownUnderWindow;
 	bool SelectDetail;
+	bool SelectInventory;
 	NTVEC2 WinSize;
 	Autoptr<NTObject> LeftWindow01;
 	Autoptr<NTObject> LeftWindow02;

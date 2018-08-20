@@ -125,14 +125,7 @@ void GameSystem::BaseSetting()
 	for (; StartIter != EndIter; ++StartIter)
 	{
 		const type_info* Type = StartIter->second->GetType();
-		if (strcmp(Type->name(), "class NTKeyItem") == 0)
-		{
-			GameInventory.InsertItem(StartIter->second);
-		}
-		else
-		{
-			GameInventory.InsertItem(StartIter->second, 99);
-		}
+		GameInventory.InsertItem(StartIter->second);
 	}
 }
 

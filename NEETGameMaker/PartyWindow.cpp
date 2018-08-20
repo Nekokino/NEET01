@@ -10,7 +10,8 @@
 
 PartyWindow::PartyWindow() : CurIndex(0), MoveUpUnderWindow(false), SelectDetail(false), WinSize(0.0f), LeftWindow01(nullptr)
 	,LeftWindow02(nullptr), LeftWindow03(nullptr), LeftWindow04(nullptr), RightWindow(nullptr),
-	Cursor(nullptr), CurDetailIndex(0), MoveDownUnderWindow(false), UnderWindow(nullptr)
+	Cursor(nullptr), CurDetailIndex(0), MoveDownUnderWindow(false), UnderWindow(nullptr), SelectInventory(false),
+	CurInventoryIndex(0)
 {
 
 }
@@ -65,7 +66,7 @@ void PartyWindow::MainUpdate()
 {
 	if (MoveUpUnderWindow == false && MoveDownUnderWindow == false)
 	{
-		if (SelectDetail == false)
+		if (SelectDetail == false && SelectInventory == false)
 		{
 			if (InputSystem::IsDown(L"ArrowDown") == true)
 			{
@@ -90,30 +91,61 @@ void PartyWindow::MainUpdate()
 		}
 		else
 		{
-			if (InputSystem::IsDown(L"ArrowDown") == true)
+			if (SelectInventory == false)
 			{
-				if (CurDetailIndex < 3)
+				if (InputSystem::IsDown(L"ArrowDown") == true)
 				{
-					++CurDetailIndex;
+					if (CurDetailIndex < 3)
+					{
+						++CurDetailIndex;
+					}
+				}
+
+				if (InputSystem::IsDown(L"ArrowUp") == true)
+				{
+					if (CurDetailIndex > 0)
+					{
+						--CurDetailIndex;
+					}
+				}
+
+				if (InputSystem::IsDown(L"Key1") == true)
+				{
+					SelectInventory = true;
+				}
+
+				if (InputSystem::IsDown(L"Key2") == true)
+				{
+					MoveDownUnderWindow = true;
 				}
 			}
-
-			if (InputSystem::IsDown(L"ArrowUp") == true)
+			else
 			{
-				if (CurDetailIndex > 0)
+				if (InputSystem::IsDown(L"ArrowDown") == true)
 				{
-					--CurDetailIndex;
+					if (CurInventoryIndex < 10) 
+					{
+						++CurInventoryIndex;
+					}
 				}
-			}
 
-			if (InputSystem::IsDown(L"Key1") == true)
-			{
+				if (InputSystem::IsDown(L"ArrowUp") == true)
+				{
+					if (CurInventoryIndex > -1)
+					{
+						--CurInventoryIndex;
+					}
+				}
 
-			}
+				if (InputSystem::IsDown(L"Key1") == true)
+				{
+					UnderWindow->GetComponent<PartyEquipWindow>()->ChangeEquip();
+				}
 
-			if (InputSystem::IsDown(L"Key2") == true)
-			{
-				MoveDownUnderWindow = true;
+				if (InputSystem::IsDown(L"Key2") == true)
+				{
+					SelectInventory = false;
+				}
 			}
 		}
 	}
@@ -138,22 +170,64 @@ void PartyWindow::MainUpdate()
 	}
 	else
 	{
-		Cursor->SetColor(1.0f);
-		if (CurDetailIndex == 0)
+		if (SelectInventory == true)
 		{
-			Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.13f });
+			if (CurInventoryIndex == 0)
+			{
+				Cursor->SetSubPivot({ WinSize.x * -0.425f, WinSize.y * 0.0f });
+			}
+			else if (CurInventoryIndex == 1)
+			{
+				Cursor->SetSubPivot({ WinSize.x * -0.425f, WinSize.y * -0.055f });
+			}
+			else if (CurInventoryIndex == 2)
+			{
+				Cursor->SetSubPivot({ WinSize.x * -0.425f, WinSize.y * -0.11f });
+			}
+			else if (CurInventoryIndex == 3)
+			{
+				Cursor->SetSubPivot({ WinSize.x * -0.425f, WinSize.y * -0.165f });
+			}
+			else if (CurInventoryIndex == 4)
+			{
+				Cursor->SetSubPivot({ WinSize.x * -0.425f, WinSize.y * -0.22f });
+			}
+			else if (CurInventoryIndex == 5)
+			{
+				Cursor->SetSubPivot({ WinSize.x * -0.425f, WinSize.y * -0.275f });
+			}
+			else if (CurInventoryIndex == 6)
+			{
+				Cursor->SetSubPivot({ WinSize.x * -0.425f, WinSize.y * -0.33f });
+			}
+			else if (CurInventoryIndex == 7)
+			{
+				Cursor->SetSubPivot({ WinSize.x * -0.425f, WinSize.y * -0.385f });
+			}
+			else if (CurInventoryIndex >= 8)
+			{
+				Cursor->SetSubPivot({ WinSize.x * -0.425f, WinSize.y * -0.44f });
+			}
 		}
-		else if (CurDetailIndex == 1)
+		else
 		{
-			Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.08f });
-		}
-		else if (CurDetailIndex == 2)
-		{
-			Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.03f });
-		}
-		else if (CurDetailIndex == 3)
-		{
-			Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * -0.02f });
+			Cursor->SetColor(1.0f);
+			if (CurDetailIndex == 0 || CurDetailIndex == -1)
+			{
+				Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.13f });
+			}
+			else if (CurDetailIndex == 1)
+			{
+				Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.08f });
+			}
+			else if (CurDetailIndex == 2)
+			{
+				Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.03f });
+			}
+			else if (CurDetailIndex == 3)
+			{
+				Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * -0.02f });
+			}
 		}
 	}
 
@@ -175,6 +249,12 @@ void PartyWindow::MainUpdate()
 	if (SelectDetail == true)
 	{
 		UnderWindow->GetComponent<PartyEquipWindow>()->SetItemType(CurDetailIndex);
+		UnderWindow->GetComponent<PartyEquipWindow>()->SetPlayer(CurIndex);
+	}
+
+	if (SelectInventory == true)
+	{
+		UnderWindow->GetComponent<PartyEquipWindow>()->SetInventoryIndex(&CurInventoryIndex);
 	}
 }
 

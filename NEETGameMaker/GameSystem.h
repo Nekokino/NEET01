@@ -201,6 +201,11 @@ public:
 		return Gold;
 	}
 
+	static NTInventory& GetInventory()
+	{
+		return GameInventory;
+	}
+
 public:
 	GameSystem();
 	virtual ~GameSystem() = 0;
