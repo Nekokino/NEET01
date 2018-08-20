@@ -180,6 +180,7 @@
     <ClInclude Include="NTFadeRect.h" />
     <ClInclude Include="NTField.h" />
     <ClInclude Include="NTHelmet.h" />
+    <ClInclude Include="NTInventory.h" />
     <ClInclude Include="NTItem.h" />
     <ClInclude Include="NTItemData.h" />
     <ClInclude Include="NTKeyItem.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="NTTileMap.h" />
     <ClInclude Include="NTWeapon.h" />
     <ClInclude Include="PartyDetailWindow.h" />
+    <ClInclude Include="PartyEquipWindow.h" />
     <ClInclude Include="PartyGameInfoWindow.h" />
     <ClInclude Include="PartyMemWindow.h" />
     <ClInclude Include="PartyWindow.h" />
@@ -220,6 +222,7 @@
     <ClCompile Include="NTFadeRect.cpp" />
     <ClCompile Include="NTField.cpp" />
     <ClCompile Include="NTHelmet.cpp" />
+    <ClCompile Include="NTInventory.cpp" />
     <ClCompile Include="NTItem.cpp" />
     <ClCompile Include="NTKeyItem.cpp" />
     <ClCompile Include="NTNPC.cpp" />
@@ -230,6 +233,7 @@
     <ClCompile Include="NTTileMap.cpp" />
     <ClCompile Include="NTWeapon.cpp" />
     <ClCompile Include="PartyDetailWindow.cpp" />
+    <ClCompile Include="PartyEquipWindow.cpp" />
     <ClCompile Include="PartyGameInfoWindow.cpp" />
     <ClCompile Include="PartyMemWindow.cpp" />
     <ClCompile Include="PartyWindow.cpp" />

@@ -9,7 +9,7 @@ class PartyDetailWindow : public NTLogic
 private:
 	int Index;
 	NTVEC2 WinSize;
-	PlayerStatus CurStatus;
+	PlayerStatus* CurStatus;
 	CHARACTER CurCharacter;
 
 	Autoptr<NTSpRenderer> CharacterFace;

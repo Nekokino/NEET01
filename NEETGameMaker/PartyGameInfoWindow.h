@@ -10,10 +10,15 @@ private:
 	NTVEC2 WinSize;
 	Autoptr<NTFontRenderer> PlayTime;
 	Autoptr<NTFontRenderer> Gold;
+	Autoptr<NTFontRenderer> PlanePlayTime;
+	Autoptr<NTFontRenderer> PlaneGold;
 public:
 	bool Init();
 	void MainUpdate() override;
 	void DbgUpdate() override;
+
+	void PauseRender();
+	void ResumeRender();
 public:
 	PartyGameInfoWindow();
 	~PartyGameInfoWindow();

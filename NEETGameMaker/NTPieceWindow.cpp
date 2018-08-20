@@ -12,6 +12,7 @@ NTPieceWindow::~NTPieceWindow()
 {
 }
 
+
 bool NTPieceWindow::Init(size_t _Row, size_t _Col, float _Size)
 {
 	NTVEC Pos = GetNTObject()->GetTransform()->GetLocalPosition();

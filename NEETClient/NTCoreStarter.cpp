@@ -40,7 +40,7 @@ void NTCoreStarter::Build()
 	TextLoader::Load();
 	ItemLoader::Load();
 
-	GameSystem::BasePlayerSetting();
+	GameSystem::BaseSetting();
 	
 	NTWinShortCut::GetMainSceneSystem().CreateScene<LoadingSceneBuilder, LoadingSceneUpdater>(L"LoadingScene");
 	NTWinShortCut::GetMainSceneSystem().CreateScene<WindowSceneBuilder, WindowSceneUpdater>(L"WindowScene");

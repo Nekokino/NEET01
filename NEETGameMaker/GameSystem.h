@@ -5,6 +5,7 @@
 #include "NTArmor.h"
 #include "NTHelmet.h"
 #include "NTAcc.h"
+#include "NTInventory.h"
 
 class NTNPC;
 class PlayerStatus // 각각 캐릭터마다 가지고 있을 내용들.
@@ -91,6 +92,7 @@ private:
 	static int WindowStyle;
 	static NTNPC* TextNPC;
 	static int Gold;
+	static NTInventory GameInventory;
 
 public:
 	static PlayerStatus* GetStatus(CHARACTER _Chara)
@@ -167,14 +169,14 @@ public:
 		return PS[_index];
 	}
 
-	static PlayerStatus GetBattlememberStatus(int _index)
+	static PlayerStatus* GetBattlememberStatus(int _index)
 	{
 		if (_index >= 3)
 		{
-			return PS[CHARA_MAX];
+			return &PS[CHARA_MAX];
 		}
 
-		return PS[BattleMember[_index]];
+		return &PS[BattleMember[_index]];
 	}
 
 	static CHARACTER GetBattlememberCharacter(int _index)
@@ -187,7 +189,7 @@ public:
 		return BattleMember[_index];
 	}
 
-	static void BasePlayerSetting();
+	static void BaseSetting();
 	static void TimeUpdate();
 	static float GetPlayTime()
 	{

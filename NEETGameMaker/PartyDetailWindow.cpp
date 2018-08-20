@@ -336,28 +336,28 @@ void PartyDetailWindow::MainUpdate()
 	std::wstring TmpStr;
 	wchar_t TmpBuf[32];
 
-	CharacterName->SetString(CurStatus.Name);
+	CharacterName->SetString(CurStatus->Name);
 	TmpStr.clear();
-	swprintf_s(TmpBuf, L"LEVEL %d", CurStatus.Level);
+	swprintf_s(TmpBuf, L"LEVEL %d", CurStatus->Level);
 	TmpStr += TmpBuf;
 	CharacterLevel->SetString(TmpStr.c_str());
-	EqiupWeapon->SetString(CurStatus.Weapon.Output.c_str());
-	EquipHelmet->SetString(CurStatus.Helmet.Output.c_str());
-	EquipArmor->SetString(CurStatus.Armor.Output.c_str());
-	EquipAcc->SetString(CurStatus.Acc.Output.c_str());
+	EqiupWeapon->SetString(CurStatus->Weapon.Output.c_str());
+	EquipHelmet->SetString(CurStatus->Helmet.Output.c_str());
+	EquipArmor->SetString(CurStatus->Armor.Output.c_str());
+	EquipAcc->SetString(CurStatus->Acc.Output.c_str());
 	
 
 	wchar_t Buf[32];
 
-	Power->SetString(IntToString(Buf, CurStatus.Power));
-	Hit->SetString(IntToString(Buf, CurStatus.Hit));
-	Speed->SetString(IntToString(Buf, CurStatus.Speed));
-	Magic->SetString(IntToString(Buf, CurStatus.Magic));
-	Evade->SetString(IntToString(Buf, CurStatus.Evade));
-	Stamina->SetString(IntToString(Buf, CurStatus.Stamina));
-	MagicDef->SetString(IntToString(Buf, CurStatus.MagicDef));
-	CurExp->SetString(IntToString(Buf, CurStatus.CurEXP));
-	NextExp->SetString(IntToString(Buf, CurStatus.NextEXP));
+	Power->SetString(IntToString(Buf, CurStatus->Power));
+	Hit->SetString(IntToString(Buf, CurStatus->Hit));
+	Speed->SetString(IntToString(Buf, CurStatus->Speed));
+	Magic->SetString(IntToString(Buf, CurStatus->Magic));
+	Evade->SetString(IntToString(Buf, CurStatus->Evade));
+	Stamina->SetString(IntToString(Buf, CurStatus->Stamina));
+	MagicDef->SetString(IntToString(Buf, CurStatus->MagicDef));
+	CurExp->SetString(IntToString(Buf, CurStatus->CurEXP));
+	NextExp->SetString(IntToString(Buf, CurStatus->NextEXP));
 }
 
 void PartyDetailWindow::DbgRender()

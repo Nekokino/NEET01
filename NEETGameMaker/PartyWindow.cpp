@@ -8,9 +8,9 @@
 #include <NTSpRenderer.h>
 #include <InputSystem.h>
 
-PartyWindow::PartyWindow() : CurIndex(0), MoveUnderWindow(false), SelectDetail(false), WinSize(0.0f), LeftWindow01(nullptr)
+PartyWindow::PartyWindow() : CurIndex(0), MoveUpUnderWindow(false), SelectDetail(false), WinSize(0.0f), LeftWindow01(nullptr)
 	,LeftWindow02(nullptr), LeftWindow03(nullptr), LeftWindow04(nullptr), RightWindow(nullptr),
-	UnderLowerWindow(nullptr), UnderUpperWindow(nullptr), Cursor(nullptr)
+	Cursor(nullptr), CurDetailIndex(0), MoveDownUnderWindow(false), UnderWindow(nullptr)
 {
 
 }
@@ -54,68 +54,175 @@ bool PartyWindow::Init()
 	Cursor->SetSubScale({ 192.0f, 192.0f, 1.0f });
 	Cursor->SetSubPivot({ WinSize.x * -0.45f, WinSize.y * 0.3375f });
 
-	UnderUpperWindow = GetScene()->CreateObject(L"UnderUpperWIndow", UILayer);
-	GetNTObject()->AddChild(UnderUpperWindow);
-	UnderUpperWindow->GetTransform()->SetLocalPosition({ WinSize.x * -0.27f, WinSize.y * -0.5625f });
-
-	Autoptr<NTPieceWindow> EquipWindow = UnderUpperWindow->AddComponent<NTPieceWindow>(5, 3, 0.45f);
+	UnderWindow = GetScene()->CreateObject(L"PartyUnderWindow", UILayer);
+	GetNTObject()->AddChild(UnderWindow);
+	UnderWindow->AddComponent<PartyEquipWindow>();
 	
 	return true;
 }
 
 void PartyWindow::MainUpdate()
 {
-	if (SelectDetail == false)
+	if (MoveUpUnderWindow == false && MoveDownUnderWindow == false)
 	{
-		if (InputSystem::IsDown(L"ArrowDown") == true)
+		if (SelectDetail == false)
 		{
-			if (CurIndex < 2)
+			if (InputSystem::IsDown(L"ArrowDown") == true)
 			{
-				++CurIndex;
+				if (CurIndex < 2)
+				{
+					++CurIndex;
+				}
+			}
+
+			if (InputSystem::IsDown(L"ArrowUp") == true)
+			{
+				if (CurIndex > 0)
+				{
+					--CurIndex;
+				}
+			}
+
+			if (InputSystem::IsDown(L"Key1") == true)
+			{
+				MoveUpUnderWindow = true;
 			}
 		}
-
-		if (InputSystem::IsDown(L"ArrowUp") == true)
+		else
 		{
-			if (CurIndex > 0)
+			if (InputSystem::IsDown(L"ArrowDown") == true)
 			{
-				--CurIndex;
+				if (CurDetailIndex < 3)
+				{
+					++CurDetailIndex;
+				}
 			}
-		}
 
-		if (InputSystem::IsDown(L"Key1") == true)
-		{
-			MoveUnderWindow = true;
+			if (InputSystem::IsDown(L"ArrowUp") == true)
+			{
+				if (CurDetailIndex > 0)
+				{
+					--CurDetailIndex;
+				}
+			}
+
+			if (InputSystem::IsDown(L"Key1") == true)
+			{
+
+			}
+
+			if (InputSystem::IsDown(L"Key2") == true)
+			{
+				MoveDownUnderWindow = true;
+			}
 		}
 	}
 	
-	switch (CurIndex)
+	if (SelectDetail == false)
 	{
-	case 0:
-		Cursor->SetSubPivot({ WinSize.x * -0.45f, WinSize.y * 0.3375f });
-		break;
-	case 1:
-		Cursor->SetSubPivot({ WinSize.x * -0.45f, WinSize.y * 0.1125f });
-		break;
-	case 2:
-		Cursor->SetSubPivot({ WinSize.x * -0.45f, WinSize.y * -0.1125f });
-		break;
-	default:
-		break;
-	}
-
-	if (MoveUnderWindow == true)
-	{
-		UnderUpperWindow->GetTransform()->SetLocalMove({ 0.0f, 250.0f * TimeSystem::DeltaTime() });
-		if (true)
+		Cursor->SetColor(1.0f);
+		switch (CurIndex)
 		{
-
+		case 0:
+			Cursor->SetSubPivot({ WinSize.x * -0.45f, WinSize.y * 0.3375f });
+			break;
+		case 1:
+			Cursor->SetSubPivot({ WinSize.x * -0.45f, WinSize.y * 0.1125f });
+			break;
+		case 2:
+			Cursor->SetSubPivot({ WinSize.x * -0.45f, WinSize.y * -0.1125f });
+			break;
+		default:
+			break;
+		}
+	}
+	else
+	{
+		Cursor->SetColor(1.0f);
+		if (CurDetailIndex == 0)
+		{
+			Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.13f });
+		}
+		else if (CurDetailIndex == 1)
+		{
+			Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.08f });
+		}
+		else if (CurDetailIndex == 2)
+		{
+			Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * 0.03f });
+		}
+		else if (CurDetailIndex == 3)
+		{
+			Cursor->SetSubPivot({ WinSize.x * 0.075f, WinSize.y * -0.02f });
 		}
 	}
 
+	if (MoveUpUnderWindow == true)
+	{
+		Cursor->SetColor({ 0.0f });
+		UnderWindow->GetComponent<PartyEquipWindow>()->SetMoveUp(CurIndex);
+		PauseRenderer();
+	}
+
+	if (MoveDownUnderWindow == true)
+	{
+		Cursor->SetColor({ 0.0f });
+		UnderWindow->GetComponent<PartyEquipWindow>()->SetMoveDown(CurIndex);
+	}
+
 	RightWindow->GetComponent<PartyDetailWindow>()->SetPlayerStatus(CurIndex);
+
+	if (SelectDetail == true)
+	{
+		UnderWindow->GetComponent<PartyEquipWindow>()->SetItemType(CurDetailIndex);
+	}
 }
 
 void PartyWindow::DbgRender()
 {
 }
+
+void PartyWindow::PauseRenderer()
+{
+	if (CurIndex == 0)
+	{
+		LeftWindow02->GetComponent<PartyMemWindow>()->PauseRender();
+		LeftWindow03->GetComponent<PartyMemWindow>()->PauseRender();
+		LeftWindow04->GetComponent<PartyGameInfoWindow>()->PauseRender();
+	}
+	else if (CurIndex == 1)
+	{
+		LeftWindow01->GetComponent<PartyMemWindow>()->PauseRender();
+		LeftWindow03->GetComponent<PartyMemWindow>()->PauseRender();
+		LeftWindow04->GetComponent<PartyGameInfoWindow>()->PauseRender();
+	}
+	else if (CurIndex == 2)
+	{
+		LeftWindow01->GetComponent<PartyMemWindow>()->PauseRender();
+		LeftWindow02->GetComponent<PartyMemWindow>()->PauseRender();
+		LeftWindow04->GetComponent<PartyGameInfoWindow>()->PauseRender();
+	}
+}
+
+void PartyWindow::ResumeRenderer()
+{
+	if (CurIndex == 0)
+	{
+		LeftWindow02->GetComponent<PartyMemWindow>()->ResumeRender();
+		LeftWindow03->GetComponent<PartyMemWindow>()->ResumeRender();
+		LeftWindow04->GetComponent<PartyGameInfoWindow>()->ResumeRender();
+	}
+	else if (CurIndex == 1)
+	{
+		LeftWindow01->GetComponent<PartyMemWindow>()->ResumeRender();
+		LeftWindow03->GetComponent<PartyMemWindow>()->ResumeRender();
+		LeftWindow04->GetComponent<PartyGameInfoWindow>()->ResumeRender();
+	}
+	else if (CurIndex == 2)
+	{
+		LeftWindow01->GetComponent<PartyMemWindow>()->ResumeRender();
+		LeftWindow02->GetComponent<PartyMemWindow>()->ResumeRender();
+		LeftWindow04->GetComponent<PartyGameInfoWindow>()->ResumeRender();
+	}
+}
+

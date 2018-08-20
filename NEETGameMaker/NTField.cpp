@@ -54,9 +54,10 @@ FieldData NTField::FindFieldData(const wchar_t * _Key)
 	return FindIter->second;
 }
 
-std::wstring TempKey;
 void NTField::DefaultDataSet()
 {
+	std::wstring TempKey;
+
 	FieldData* NewData = new FieldData();
 	NTVEC Vector;
 

@@ -25,7 +25,7 @@ bool PartyGameInfoWindow::Init()
 	Autoptr<NTPieceWindow> ActualWin04 = GetNTObject()->AddComponent<NTPieceWindow>(5, 3, 0.45f);
 	GetNTObject()->GetTransform()->SetLocalPosition({ WinSize.x * -0.27f, WinSize.y * -0.3375f });
 
-	Autoptr<NTFontRenderer> PlanePlayTime = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	PlanePlayTime = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlanePlayTime->SetColor(255, 255, 255, 255);
 	PlanePlayTime->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.775f });
 	PlanePlayTime->SetSubScale({ 1.0f, 1.0f, 1.0f });
@@ -42,7 +42,7 @@ bool PartyGameInfoWindow::Init()
 	PlayTime->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
 	PlayTime->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 
-	Autoptr<NTFontRenderer> PlaneGold = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
+	PlaneGold = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneGold->SetColor(255, 255, 255, 255);
 	PlaneGold->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.85f });
 	PlaneGold->SetSubScale({ 1.0f, 1.0f, 1.0f });
@@ -91,3 +91,20 @@ void PartyGameInfoWindow::MainUpdate()
 void PartyGameInfoWindow::DbgUpdate()
 {
 }
+
+void PartyGameInfoWindow::PauseRender()
+{
+	PlayTime->SetUpdate(false);
+	Gold->SetUpdate(false);
+	PlanePlayTime->SetUpdate(false);
+	PlaneGold->SetUpdate(false);
+}
+
+void PartyGameInfoWindow::ResumeRender()
+{
+	PlayTime->SetUpdate(true);
+	Gold->SetUpdate(true);
+	PlanePlayTime->SetUpdate(true);
+	PlaneGold->SetUpdate(true);
+}
+

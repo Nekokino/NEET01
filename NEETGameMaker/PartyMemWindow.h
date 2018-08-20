@@ -11,7 +11,7 @@ class PartyMemWindow : public NTLogic
 private:
 	int Index;
 	bool bFontRender;
-	PlayerStatus CurPlayer;
+	PlayerStatus* CurPlayer;
 	NTVEC2 WinSize;
 	Autoptr<NTPieceWindow> WindowRenderer;
 	Autoptr<NTFontRenderer> MemberName;
@@ -20,6 +20,8 @@ private:
 	Autoptr<NTFontRenderer> MemberMP;
 	Autoptr<NTFontRenderer> MemberAtk;
 	Autoptr<NTFontRenderer> MemberDef;
+	Autoptr<NTFontRenderer> PlainHP;
+	Autoptr<NTFontRenderer> PlainMP;
 
 	Autoptr<NTSpRenderer> PlaneAtk;
 	Autoptr<NTSpRenderer> PlaneDef;
@@ -30,8 +32,8 @@ private:
 		_gStr.clear();
 		_gStr = L"Lv    ";
 		wchar_t Tmp[32];
-		swprintf_s(Tmp, L"%d", CurPlayer.Level);
-		if (CurPlayer.Level < 10)
+		swprintf_s(Tmp, L"%d", CurPlayer->Level);
+		if (CurPlayer->Level < 10)
 		{
 			_gStr += L"  ";
 		}
@@ -43,18 +45,18 @@ private:
 		_gStr.clear();
 		if (_Use == 0)
 		{
-			swprintf_s(Tmp, L"%d", CurPlayer.CurHP);
+			swprintf_s(Tmp, L"%d", CurPlayer->CurHP);
 			_gStr += Tmp;
 			_gStr += L" / ";
-			swprintf_s(Tmp, L"%d", CurPlayer.MaxHP);
+			swprintf_s(Tmp, L"%d", CurPlayer->MaxHP);
 			_gStr += Tmp;
 		}
 		else
 		{
-			swprintf_s(Tmp, L"%d", CurPlayer.CurMP);
+			swprintf_s(Tmp, L"%d", CurPlayer->CurMP);
 			_gStr += Tmp;
 			_gStr += L" / ";
-			swprintf_s(Tmp, L"%d", CurPlayer.MaxMP);
+			swprintf_s(Tmp, L"%d", CurPlayer->MaxMP);
 			_gStr += Tmp;
 		}
 		
@@ -81,14 +83,14 @@ private:
 	{
 		wchar_t Tmp[32];
 		_gStr.clear();
-		swprintf_s(Tmp, L"%d", CurPlayer.Power + CurPlayer.Weapon.Atk);
+		swprintf_s(Tmp, L"%d", CurPlayer->Power + CurPlayer->Weapon.Atk);
 		_gStr += Tmp;
 	}
 	void MakeDefString(std::wstring& _gStr)
 	{
 		wchar_t Tmp[32];
 		_gStr.clear();
-		swprintf_s(Tmp, L"%d", CurPlayer.Stamina + CurPlayer.Armor.Def + CurPlayer.Helmet.Def);
+		swprintf_s(Tmp, L"%d", CurPlayer->Stamina + CurPlayer->Armor.Def + CurPlayer->Helmet.Def);
 		_gStr += Tmp;
 	}
 
@@ -100,6 +102,9 @@ public:
 	bool Init(int _Index);
 	void MainUpdate() override;
 	void DbgUpdate() override;
+
+	void PauseRender();
+	void ResumeRender();
 public:
 	PartyMemWindow();
 	~PartyMemWindow();

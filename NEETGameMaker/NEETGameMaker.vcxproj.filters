@@ -61,6 +61,9 @@
     <Filter Include="WindowClass\PartyWindow\SubWindow">
       <UniqueIdentifier>{db3ca4bd-31a3-4289-a9d8-8eef570c587b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inventory">
+      <UniqueIdentifier>{5855f3e2-5243-4c10-8cca-5d5fbb993d6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NTTileMap.cpp">
@@ -166,6 +169,12 @@
       <Filter>WindowClass\PartyWindow\SubWindow</Filter>
     </ClCompile>
     <ClCompile Include="PartyDetailWindow.cpp">
+      <Filter>WindowClass\PartyWindow\SubWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="NTInventory.cpp">
+      <Filter>Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="PartyEquipWindow.cpp">
       <Filter>WindowClass\PartyWindow\SubWindow</Filter>
     </ClCompile>
   </ItemGroup>
@@ -285,6 +294,12 @@
       <Filter>WindowClass\PartyWindow\SubWindow</Filter>
     </ClInclude>
     <ClInclude Include="PartyDetailWindow.h">
+      <Filter>WindowClass\PartyWindow\SubWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="NTInventory.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="PartyEquipWindow.h">
       <Filter>WindowClass\PartyWindow\SubWindow</Filter>
     </ClInclude>
   </ItemGroup>

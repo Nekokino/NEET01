@@ -1,5 +1,6 @@
 #include "GameSystem.h"
 #include "NTNPC.h"
+#include "NTItem.h"
 
 GameSystem::GAMEMODE GameSystem::GameMode = (GameSystem::GAMEMODE)0;
 PlayerStatus GameSystem::PS[CHARA_MAX] = {};
@@ -12,6 +13,7 @@ int GameSystem::WindowStyle = 0;
 NTNPC* GameSystem::TextNPC = nullptr;
 float GameSystem::PlayTime = 0.0f;
 int GameSystem::Gold = 0;
+NTInventory GameSystem::GameInventory;
 
 void GameSystem::SetNextText(NTNPC * _NPC, bool _Value)
 {
@@ -24,7 +26,7 @@ void GameSystem::ActiveText()
 	TextNPC->ActiveTextEvent();
 }
 
-void GameSystem::BasePlayerSetting()
+void GameSystem::BaseSetting()
 {
 
 #pragma region BasicData
@@ -116,6 +118,22 @@ void GameSystem::BasePlayerSetting()
 	BattleMember[2] = LUCCA;
 
 	PlayTime = 0;
+
+	std::unordered_map<std::wstring, Autoptr<NTItem>>::iterator StartIter = NTItem::ItemData.begin();
+	std::unordered_map<std::wstring, Autoptr<NTItem>>::iterator EndIter = NTItem::ItemData.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		const type_info* Type = StartIter->second->GetType();
+		if (strcmp(Type->name(), "class NTKeyItem") == 0)
+		{
+			GameInventory.InsertItem(StartIter->second);
+		}
+		else
+		{
+			GameInventory.InsertItem(StartIter->second, 99);
+		}
+	}
 }
 
 void GameSystem::TimeUpdate()
