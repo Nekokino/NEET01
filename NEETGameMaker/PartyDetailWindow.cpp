@@ -44,7 +44,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	CharacterName = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	CharacterName->SetColor(255, 255, 255, 255);
-	CharacterName->SetSubPivot({ WinSize.x * 0.67f, WinSize.y * 0.2f });
+	CharacterName->SetSubPivot({ WinSize.x * 0.0f, WinSize.y * 0.0f });
 	CharacterName->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	CharacterName->SetSize(25.0f);
 	CharacterName->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);

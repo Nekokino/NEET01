@@ -54,21 +54,27 @@ void NTFontRenderer::Render(const NTMAT & _VP)
 	{
 		return;
 	}
+	
+	SubTranformUpdate();
 
 	wchar_t* Tmp = const_cast<wchar_t*>(String.c_str());
 
 	NTRECT Rect;
-	Rect.Pos = GetSubPivot().Pos;
-	Rect.Size = GetSubScale().Pos;
+	NTMAT SubWorldMat = GetSubWorldMat();
+	Rect.Pos = NTVEC2(SubWorldMat.Matrix._41, SubWorldMat.Matrix._42);
+	Rect.Size = NTVEC2(SubWorldMat.Matrix._11, SubWorldMat.Matrix._22);
 
 	if (Mode == RM_NORMAL)
 	{
-		Font->DrawFont(Tmp, GetSubPivot().Pos, Size, Color);
+		Rect.Pos.x += NTWinShortCut::GetMainWindow().GetWidthf() * 0.5f;
+		Rect.Pos.y *= -1.0f;
+		Rect.Pos.y += NTWinShortCut::GetMainWindow().GetHeightf() * 0.5f;
+		Font->DrawFont(Tmp, Rect, Size, Color);
 	}
 	
 	if (Mode == RM_RECT)
 	{
-		Font->DrawFontRect(Tmp, { GetSubPivot().Pos, GetSubScale().Pos }, Size, Color);
+		Font->DrawFontRect(Tmp, Rect, Size, Color);
 	}
 
 	NTWinShortCut::GetMainDevice().ResetContext();

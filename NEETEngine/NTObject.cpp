@@ -289,6 +289,24 @@ void NTObject::AddChild(Autoptr<NTObject> _Obj, bool _World)
 	}
 }
 
+Autoptr<NTObject> NTObject::FindChild(const wchar_t * _Name)
+{
+	std::list<Autoptr<NTObject>>::iterator StartIter;
+	std::list<Autoptr<NTObject>>::iterator EndIter;
+	StartIter = ChildList.begin();
+	EndIter = ChildList.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (lstrcmpW((*StartIter)->GetName(), _Name) == 0)
+		{
+			return (*StartIter);
+		}
+	}
+
+	return nullptr;
+}
+
 void NTObject::Detach()
 {
 	std::list<Autoptr<NTObject>>::iterator StartIter = ChildList.begin();

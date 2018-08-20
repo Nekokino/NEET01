@@ -127,7 +127,7 @@ private:
 
 public:
 	Autoptr<NTObject> CreateObject(const wchar_t* _Name, int _Order);
-	Autoptr<NTObject> FindObject(const wchar_t* _Name, int _Order);
+	Autoptr<NTObject> FindObject(const wchar_t* _Name, int _Order = 0);
 
 private:
 	NTCamera* MainCamera;

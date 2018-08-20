@@ -418,9 +418,12 @@ void PartyEquipWindow::MoveUp()
 
 	if (CurIndex == 1)
 	{
+		Autoptr<NTObject> FindObj = GetNTObject()->GetParent()->FindChild(L"PartyLeftWindow02");
+
 		if (GetNTObject()->GetTransform()->GetLocalPosition().y >= WinSize.y * -0.21f)
 		{
 			GetNTObject()->GetTransform()->SetLocalPosition({ WinSize.x * -0.27f, WinSize.y * -0.205f });
+			FindObj->GetTransform()->SetLocalPosition(PartyWindowFirstPos);
 			bUp = false;
 			Autoptr<PartyWindow> tmp = GetNTObject()->GetParent()->GetComponent<PartyWindow>();
 			tmp->EnterDetail();
@@ -430,6 +433,10 @@ void PartyEquipWindow::MoveUp()
 		else
 		{
 			GetNTObject()->GetTransform()->SetLocalMove({ 0.0f, 750.0f * TimeSystem::DeltaTime() });
+			if (GetNTObject()->GetTransform()->GetLocalPosition().y >= WinSize.y * -0.43f)
+			{
+				FindObj->GetTransform()->SetLocalMove({ 0.0f, 750.0f * TimeSystem::DeltaTime() });
+			}
 		}
 	}
 	

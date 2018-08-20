@@ -85,6 +85,7 @@ private:
 
 public:
 	void AddChild(Autoptr<NTObject> _Obj, bool _World = true);
+	Autoptr<NTObject> FindChild(const wchar_t* _Name);
 
 public:
 	friend NTTransform;
