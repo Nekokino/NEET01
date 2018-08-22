@@ -27,7 +27,14 @@ class FieldObjData
 
 class FieldNPCData
 {
-
+public:
+	int RenderType;
+	int EventType;
+	int TextListSize;
+	int TextStart[5];
+	int TextSize[5];
+	int TextNumArr[5][10];
+	wchar_t Name[16];
 };
 
 class FieldData

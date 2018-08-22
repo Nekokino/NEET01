@@ -27,7 +27,7 @@ bool PartyGameInfoWindow::Init()
 
 	PlanePlayTime = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlanePlayTime->SetColor(255, 255, 255, 255);
-	PlanePlayTime->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.775f });
+	PlanePlayTime->SetSubPivot({ WinSize.x * -0.125f, WinSize.y * 0.06f });
 	PlanePlayTime->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlanePlayTime->SetSize(25.0f);
 	PlanePlayTime->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -36,7 +36,7 @@ bool PartyGameInfoWindow::Init()
 
 	PlayTime = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlayTime->SetColor(255, 255, 255, 255);
-	PlayTime->SetSubPivot({ WinSize.x * 0.235f, WinSize.y * 0.775f });
+	PlayTime->SetSubPivot({ WinSize.x * 0.05f, WinSize.y * 0.06f });
 	PlayTime->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlayTime->SetSize(25.0f);
 	PlayTime->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -44,7 +44,7 @@ bool PartyGameInfoWindow::Init()
 
 	PlaneGold = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneGold->SetColor(255, 255, 255, 255);
-	PlaneGold->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.85f });
+	PlaneGold->SetSubPivot({ WinSize.x * -0.125f, WinSize.y * -0.02f });
 	PlaneGold->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlaneGold->SetSize(25.0f);
 	PlaneGold->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -53,7 +53,7 @@ bool PartyGameInfoWindow::Init()
 
 	Gold = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	Gold->SetColor(255, 255, 255, 255);
-	Gold->SetSubPivot({ WinSize.x * 0.235f, WinSize.y * 0.85f });
+	Gold->SetSubPivot({ WinSize.x * 0.05f, WinSize.y * -0.02f });
 	Gold->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	Gold->SetSize(25.0f);
 	Gold->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);

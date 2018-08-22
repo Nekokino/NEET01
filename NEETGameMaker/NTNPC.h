@@ -25,6 +25,7 @@ public:
 		NRT_AD_BROWNGUY,
 		NRT_AD_REDGUY,
 		NRT_AD_BLUEGUY,
+		NRT_AD_GONZALEZ,
 		NRT_MAX
 	};
 
@@ -42,23 +43,43 @@ private:
 		
 	NPCRENDERTYPE RType;
 	NPCEVENTTYPE EType;
+	size_t CurListIndex;
 	size_t CurTextCount;
-	std::vector<int> TextIndex;
+	std::vector<int> StartText;
+	std::vector<std::vector<int>> TextIndex;
 
 public:
-	void AddText(int _Index)
+	void AddText(size_t _ListIndex, int _TextIndex)
 	{
-		TextIndex.push_back(_Index);
+		TextIndex[_ListIndex].push_back(_TextIndex);
 	}
 
-	void SetTextCount(int _Count)
+	size_t AddTextList()
 	{
-		CurTextCount = _Count;
+		TextIndex.push_back(std::vector<int>());
+		StartText.push_back(0);
+
+		return TextIndex.size();
+	}
+
+	void SetTextCount(int _StartCount)
+	{
+		CurTextCount = _StartCount;
 	}
 
 	size_t GetTextCount()
 	{
 		return CurTextCount;
+	}
+
+	void SetStartCount(size_t _ListIndex, int _Value)
+	{
+		StartText[_ListIndex] = _Value;
+	}
+
+	void SetListIndex(size_t _ListIndex)
+	{
+		CurListIndex = _ListIndex;
 	}
 
 	bool Init(NPCRENDERTYPE _RType, NPCEVENTTYPE _EType);

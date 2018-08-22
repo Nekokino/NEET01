@@ -173,41 +173,14 @@ bool PartyMemWindow::Init(int _Index)
 		PlaneDef->SetColor({ 0.0f, 0.0f, 0.0f, 0.0f });
 	}
 
-	switch (Index)
-	{
-	case 0:
-		MemberName->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.065f });
-		MemberLevel->SetSubPivot({ WinSize.x * 0.275f, WinSize.y * 0.065f});
-		PlainHP->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.065f + 30.0f});
-		PlainMP->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.065f + 60.0f });
-		MemberHP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.065f + 30.0f });
-		MemberMP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.065f + 60.0f });
-		MemberAtk->SetSubPivot({ WinSize.x * 0.175f, WinSize.y * 0.21f });
-		MemberDef->SetSubPivot({ WinSize.x * 0.325f, WinSize.y * 0.21f });
-		break;
-	case 1:
-		MemberName->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.29f });
-		MemberLevel->SetSubPivot({ WinSize.x * 0.275f, WinSize.y * 0.29f });
-		PlainHP->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.29f + 30.0f });
-		PlainMP->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.29f + 60.0f });
-		MemberHP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.29f + 30.0f });
-		MemberMP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.29f + 60.0f });
-		MemberAtk->SetSubPivot({ WinSize.x * 0.175f, WinSize.y * 0.435f });
-		MemberDef->SetSubPivot({ WinSize.x * 0.325f, WinSize.y * 0.435f });
-		break;
-	case 2:
-		MemberName->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.515f });
-		MemberLevel->SetSubPivot({ WinSize.x * 0.275f, WinSize.y * 0.515f });
-		PlainHP->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.515f + 30.0f });
-		PlainMP->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * 0.515f + 60.0f });
-		MemberHP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.515f + 30.0f });
-		MemberMP->SetSubPivot({ WinSize.x * 0.2625f, WinSize.y * 0.515f + 60.0f });
-		MemberAtk->SetSubPivot({ WinSize.x * 0.175f, WinSize.y * 0.66f });
-		MemberDef->SetSubPivot({ WinSize.x * 0.325f, WinSize.y * 0.66f });
-		break;
-	default:
-		break;
-	}
+	MemberName->SetSubPivot({ WinSize.x * -0.13f, WinSize.y * 0.09f });
+	MemberLevel->SetSubPivot({ WinSize.x * 0.02f, WinSize.y * 0.09f });
+	PlainHP->SetSubPivot({ WinSize.x * -0.13f, WinSize.y * 0.05f });
+	PlainMP->SetSubPivot({ WinSize.x * -0.13f, WinSize.y * 0.01f });
+	MemberHP->SetSubPivot({ WinSize.x * 0.02f, WinSize.y * 0.05f });
+	MemberMP->SetSubPivot({ WinSize.x * 0.02f, WinSize.y * 0.01f });
+	MemberAtk->SetSubPivot({ WinSize.x * -0.04f, WinSize.y * -0.05f });
+	MemberDef->SetSubPivot({ WinSize.x * 0.1f, WinSize.y * -0.05f });
 
 	return true;
 }

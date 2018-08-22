@@ -44,7 +44,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	CharacterName = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	CharacterName->SetColor(255, 255, 255, 255);
-	CharacterName->SetSubPivot({ WinSize.x * 0.0f, WinSize.y * 0.0f });
+	CharacterName->SetSubPivot({ WinSize.x * 0.015f, WinSize.y * 0.3f });
 	CharacterName->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	CharacterName->SetSize(25.0f);
 	CharacterName->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -52,7 +52,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	CharacterLevel = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	CharacterLevel->SetColor(255, 255, 255, 255);
-	CharacterLevel->SetSubPivot({ WinSize.x * 0.67f, WinSize.y * 0.275f });
+	CharacterLevel->SetSubPivot({ WinSize.x * 0.015f, WinSize.y * 0.225f });
 	CharacterLevel->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	CharacterLevel->SetSize(25.0f);
 	CharacterLevel->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -65,7 +65,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Autoptr<NTFontRenderer> PlaneEquipText = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneEquipText->SetColor(255, 255, 255, 255);
-	PlaneEquipText->SetSubPivot({ WinSize.x * 0.43f, WinSize.y * 0.34f });
+	PlaneEquipText->SetSubPivot({ WinSize.x * -0.22f, WinSize.y * 0.155f });
 	PlaneEquipText->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlaneEquipText->SetSize(25.0f);
 	PlaneEquipText->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -74,7 +74,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	EqiupWeapon = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	EqiupWeapon->SetColor(255, 255, 255, 255);
-	EqiupWeapon->SetSubPivot({ WinSize.x * 0.65f, WinSize.y * 0.34f });
+	EqiupWeapon->SetSubPivot({ WinSize.x * 0.015f, WinSize.y * 0.155f });
 	EqiupWeapon->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	EqiupWeapon->SetSize(25.0f);
 	EqiupWeapon->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -88,7 +88,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	EquipHelmet = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	EquipHelmet->SetColor(255, 255, 255, 255);
-	EquipHelmet->SetSubPivot({ WinSize.x * 0.65f, WinSize.y * 0.39f });
+	EquipHelmet->SetSubPivot({ WinSize.x * 0.015f, WinSize.y * 0.105f });
 	EquipHelmet->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	EquipHelmet->SetSize(25.0f);
 	EquipHelmet->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -103,7 +103,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	EquipArmor = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	EquipArmor->SetColor(255, 255, 255, 255);
-	EquipArmor->SetSubPivot({ WinSize.x * 0.65f, WinSize.y * 0.44f });
+	EquipArmor->SetSubPivot({ WinSize.x * 0.015f, WinSize.y * 0.055f });
 	EquipArmor->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	EquipArmor->SetSize(25.0f);
 	EquipArmor->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -117,7 +117,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	EquipAcc = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	EquipAcc->SetColor(255, 255, 255, 255);
-	EquipAcc->SetSubPivot({ WinSize.x * 0.65f, WinSize.y * 0.49f });
+	EquipAcc->SetSubPivot({ WinSize.x * 0.015f, WinSize.y * 0.005f });
 	EquipAcc->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	EquipAcc->SetSize(25.0f);
 	EquipAcc->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -131,7 +131,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Autoptr<NTFontRenderer> PlanePower = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlanePower->SetColor(255, 255, 255, 255);
-	PlanePower->SetSubPivot({ WinSize.x * 0.43f, WinSize.y * 0.575f });
+	PlanePower->SetSubPivot({ WinSize.x * -0.22f, WinSize.y * -0.05f });
 	PlanePower->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlanePower->SetSize(25.0f);
 	PlanePower->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -140,7 +140,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Power = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	Power->SetColor(255, 255, 255, 255);
-	Power->SetSubPivot({ WinSize.x * 0.575f, WinSize.y * 0.575f });
+	Power->SetSubPivot({ WinSize.x * -0.1f, WinSize.y * -0.05f });
 	Power->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	Power->SetSize(25.0f);
 	Power->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -148,7 +148,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Autoptr<NTFontRenderer> PlaneHit = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneHit->SetColor(255, 255, 255, 255);
-	PlaneHit->SetSubPivot({ WinSize.x * 0.65f, WinSize.y * 0.575f });
+	PlaneHit->SetSubPivot({ WinSize.x * 0.0f, WinSize.y * -0.05f });
 	PlaneHit->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlaneHit->SetSize(25.0f);
 	PlaneHit->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -157,7 +157,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Hit = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	Hit->SetColor(255, 255, 255, 255);
-	Hit->SetSubPivot({ WinSize.x * 0.8f, WinSize.y * 0.575f });
+	Hit->SetSubPivot({ WinSize.x * 0.12f, WinSize.y * -0.05f });
 	Hit->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	Hit->SetSize(25.0f);
 	Hit->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -165,7 +165,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Autoptr<NTFontRenderer> PlaneSpeed = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneSpeed->SetColor(255, 255, 255, 255);
-	PlaneSpeed->SetSubPivot({ WinSize.x * 0.43f, WinSize.y * 0.625f });
+	PlaneSpeed->SetSubPivot({ WinSize.x * -0.22f, WinSize.y * -0.1f });
 	PlaneSpeed->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlaneSpeed->SetSize(25.0f);
 	PlaneSpeed->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -174,7 +174,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Speed = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	Speed->SetColor(255, 255, 255, 255);
-	Speed->SetSubPivot({ WinSize.x * 0.575f, WinSize.y * 0.625f });
+	Speed->SetSubPivot({ WinSize.x * -0.1f, WinSize.y * -0.1f });
 	Speed->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	Speed->SetSize(25.0f);
 	Speed->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -182,7 +182,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Autoptr<NTFontRenderer> PlaneMagic = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneMagic->SetColor(255, 255, 255, 255);
-	PlaneMagic->SetSubPivot({ WinSize.x * 0.65f, WinSize.y * 0.625f });
+	PlaneMagic->SetSubPivot({ WinSize.x * 0.0f, WinSize.y * -0.1f });
 	PlaneMagic->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlaneMagic->SetSize(25.0f);
 	PlaneMagic->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -191,7 +191,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Magic = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	Magic->SetColor(255, 255, 255, 255);
-	Magic->SetSubPivot({ WinSize.x * 0.8f, WinSize.y * 0.625f });
+	Magic->SetSubPivot({ WinSize.x * 0.12f, WinSize.y * -0.1f });
 	Magic->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	Magic->SetSize(25.0f);
 	Magic->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -199,7 +199,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Autoptr<NTFontRenderer> PlaneEvade = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneEvade->SetColor(255, 255, 255, 255);
-	PlaneEvade->SetSubPivot({ WinSize.x * 0.43f, WinSize.y * 0.675f });
+	PlaneEvade->SetSubPivot({ WinSize.x * -0.22f, WinSize.y * -0.15f });
 	PlaneEvade->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlaneEvade->SetSize(25.0f);
 	PlaneEvade->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -208,7 +208,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Evade = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	Evade->SetColor(255, 255, 255, 255);
-	Evade->SetSubPivot({ WinSize.x * 0.575f, WinSize.y * 0.675f });
+	Evade->SetSubPivot({ WinSize.x * -0.1f, WinSize.y * -0.15f });
 	Evade->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	Evade->SetSize(25.0f);
 	Evade->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -216,7 +216,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Autoptr<NTFontRenderer> PlaneStamina = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneStamina->SetColor(255, 255, 255, 255);
-	PlaneStamina->SetSubPivot({ WinSize.x * 0.65f, WinSize.y * 0.675f });
+	PlaneStamina->SetSubPivot({ WinSize.x * 0.0f, WinSize.y * -0.15f });
 	PlaneStamina->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlaneStamina->SetSize(25.0f);
 	PlaneStamina->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -225,7 +225,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Stamina = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	Stamina->SetColor(255, 255, 255, 255);
-	Stamina->SetSubPivot({ WinSize.x * 0.8f, WinSize.y * 0.675f });
+	Stamina->SetSubPivot({ WinSize.x * 0.12f, WinSize.y * -0.15f });
 	Stamina->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	Stamina->SetSize(25.0f);
 	Stamina->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -233,7 +233,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Autoptr<NTFontRenderer> PlaneMagicDef = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneMagicDef->SetColor(255, 255, 255, 255);
-	PlaneMagicDef->SetSubPivot({ WinSize.x * 0.43f, WinSize.y * 0.725f });
+	PlaneMagicDef->SetSubPivot({ WinSize.x * -0.22f, WinSize.y * -0.2f });
 	PlaneMagicDef->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlaneMagicDef->SetSize(25.0f);
 	PlaneMagicDef->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -242,24 +242,24 @@ bool PartyDetailWindow::Init(int _Index)
 
 	MagicDef = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	MagicDef->SetColor(255, 255, 255, 255);
-	MagicDef->SetSubPivot({ WinSize.x * 0.8f, WinSize.y * 0.725f });
+	MagicDef->SetSubPivot({ WinSize.x * 0.12f, WinSize.y * -0.2f });
 	MagicDef->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	MagicDef->SetSize(25.0f);
 	MagicDef->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
 	MagicDef->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 
 	Autoptr<NTFontRenderer> PlaneCurExp = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
-	PlaneMagicDef->SetColor(255, 255, 255, 255);
-	PlaneMagicDef->SetSubPivot({ WinSize.x * 0.43f, WinSize.y * 0.8f });
-	PlaneMagicDef->SetSubScale({ 1.0f, 1.0f, 1.0f });
-	PlaneMagicDef->SetSize(25.0f);
-	PlaneMagicDef->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
-	PlaneMagicDef->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
-	PlaneMagicDef->SetString(L"ÇöÀç °æÇèÄ¡");
+	PlaneCurExp->SetColor(255, 255, 255, 255);
+	PlaneCurExp->SetSubPivot({ WinSize.x * -0.22f, WinSize.y * -0.32f });
+	PlaneCurExp->SetSubScale({ 1.0f, 1.0f, 1.0f });
+	PlaneCurExp->SetSize(25.0f);
+	PlaneCurExp->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
+	PlaneCurExp->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
+	PlaneCurExp->SetString(L"ÇöÀç °æÇèÄ¡");
 
 	CurExp = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	CurExp->SetColor(255, 255, 255, 255);
-	CurExp->SetSubPivot({ WinSize.x * 0.8f, WinSize.y * 0.8f });
+	CurExp->SetSubPivot({ WinSize.x * 0.12f, WinSize.y * -0.32f});
 	CurExp->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	CurExp->SetSize(25.0f);
 	CurExp->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -267,7 +267,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	Autoptr<NTFontRenderer> PlaneNextExp = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	PlaneNextExp->SetColor(255, 255, 255, 255);
-	PlaneNextExp->SetSubPivot({ WinSize.x * 0.43f, WinSize.y * 0.85f });
+	PlaneNextExp->SetSubPivot({ WinSize.x * -0.22f, WinSize.y * -0.37f });
 	PlaneNextExp->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	PlaneNextExp->SetSize(25.0f);
 	PlaneNextExp->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
@@ -276,7 +276,7 @@ bool PartyDetailWindow::Init(int _Index)
 
 	NextExp = GetNTObject()->AddComponent<NTFontRenderer>(L"±Ã¼­", UILayer);
 	NextExp->SetColor(255, 255, 255, 255);
-	NextExp->SetSubPivot({ WinSize.x * 0.8f, WinSize.y * 0.85f });
+	NextExp->SetSubPivot({ WinSize.x * 0.12f, WinSize.y * -0.37f });
 	NextExp->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	NextExp->SetSize(25.0f);
 	NextExp->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);

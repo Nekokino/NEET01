@@ -61,8 +61,9 @@ NTItem * NTInventory::TakeoutItem(NTItem * _Item, int _Count)
 		if ((*StartIter)->Item == _Item)
 		{
 			(*StartIter)->Count -= _Count;
+			Autoptr<NTItem> ReturnItem = (*StartIter);
 			UpdateInventory();
-			return (*StartIter)->Item;
+			return ReturnItem;
 		}
 	}
 	UpdateInventory();

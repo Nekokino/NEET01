@@ -177,6 +177,9 @@
     <ClCompile Include="PartyEquipWindow.cpp">
       <Filter>WindowClass\PartyWindow\SubWindow</Filter>
     </ClCompile>
+    <ClCompile Include="NTEnemy.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NTTileMap.h">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="PartyEquipWindow.h">
       <Filter>WindowClass\PartyWindow\SubWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="NTEnemy.h">
+      <Filter>Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

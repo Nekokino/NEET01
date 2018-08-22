@@ -47,7 +47,7 @@ void NTCoreStarter::Build()
 	NTWinShortCut::GetMainSceneSystem().CreateScene<DebugSceneBuilder, DebugSceneUpdater>(L"DebugScene");
 	NTWinShortCut::GetMainSceneSystem().CreateScene<TitleSceneBuilder, TitleSceneUpdater>(L"TitleScene");	
 	
-	NTWinShortCut::GetMainSceneSystem().ChangeScene(L"WindowScene");
+	NTWinShortCut::GetMainSceneSystem().ChangeScene(L"DebugScene");
 
 	InputSystem::CreateKey(L"ArrowUp", VK_UP);
 	InputSystem::CreateKey(L"ArrowDown", VK_DOWN);

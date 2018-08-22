@@ -5,6 +5,7 @@
 #include <NTWinShortCut.h>
 #include "NTEvent.h"
 #include "GameSystem.h"
+#include "NTNPC.h"
 
 std::unordered_map<std::wstring, FieldData> NTField::FieldMap = std::unordered_map<std::wstring, FieldData>();
 
@@ -58,12 +59,13 @@ void NTField::DefaultDataSet()
 {
 	std::wstring TempKey;
 
-	FieldData* NewData = new FieldData();
+	
 	NTVEC Vector;
 
 	TempKey.clear();
 	TempKey = L"";
 #pragma region Leene_Center Init
+	FieldData* NewData = new FieldData();
 	lstrcpyW(NewData->FieldImgName, L"Leene_Center.png");
 
 	lstrcpyW(NewData->ColImgName, L"Leene_Center_Col.png");
@@ -99,22 +101,63 @@ void NTField::DefaultDataSet()
 
 	lstrcpyW(NewData->Key, L"Leene_Center");
 
+	NewData->FieldNPCSize = 1;
+	NewData->FieldNPC[0].RenderType = (int)NTNPC::NPCRENDERTYPE::NRT_AD_GREENGUY; 
+	NewData->FieldNPC[0].EventType = (int)NTNPC::NPCEVENTTYPE::NET_CONVERSATION;
+	NewData->FieldNPC[0].TextListSize = 1;
+	NewData->FieldNPC[0].TextStart[0] = 0;
+	NewData->FieldNPC[0].TextSize[0] = 2;
+	NewData->FieldNPC[0].TextNumArr[0][0] = 0;
+	NewData->FieldNPC[0].TextNumArr[0][1] = 1;
+	lstrcpyW(NewData->FieldNPC[0].Name, L"잉여");
+
 	TempKey = NewData->Key;
 	FieldMap.insert(std::unordered_map<std::wstring, FieldData>::value_type(TempKey, *NewData));
+
 	delete NewData;
 	NewData = nullptr;
 #pragma endregion
-	NewData = new FieldData();
+	
 #pragma region Leene_Right Init
+	NewData = new FieldData();
 	lstrcpyW(NewData->FieldImgName, L"Leene_Right.png");
 	lstrcpyW(NewData->ColImgName, L"Leene_Right_Col.png");
 
 	NewData->FieldAnimationSize = 0;
 
-	Vector = NTVEC{ 256.0f * 4.0f, 243.0f *4.0f };
+	Vector = NTVEC{ 256.0f * 4.0f, 243.0f * 4.0f };
 	memcpy_s(NewData->MapSize, sizeof(NTVEC), &Vector, sizeof(NTVEC));
 
 	lstrcpyW(NewData->Key, L"Leene_Right");
+	TempKey = NewData->Key;
+	FieldMap.insert(std::unordered_map<std::wstring, FieldData>::value_type(TempKey, *NewData));
+	delete NewData;
+	NewData = nullptr;
+#pragma endregion
+
+#pragma region Leene_Left Init
+	NewData = new FieldData();
+	lstrcpyW(NewData->FieldImgName, L"Leene_Left.png");
+	lstrcpyW(NewData->ColImgName, L"Leene_Left_Col.png");
+
+	NewData->FieldAnimationSize = 0;
+
+	Vector = NTVEC{ 256.0f * 4.0f, 243.0f * 4.0f };
+	memcpy_s(NewData->MapSize, sizeof(NTVEC), &Vector, sizeof(NTVEC));
+
+	NewData->FieldNPCSize = 1;
+	NewData->FieldNPC[0].RenderType = (int)NTNPC::NPCRENDERTYPE::NRT_AD_GONZALEZ;
+	NewData->FieldNPC[0].EventType = (int)NTNPC::NPCEVENTTYPE::NET_CONVERSATION;
+	NewData->FieldNPC[0].TextListSize = 2;
+	NewData->FieldNPC[0].TextStart[0] = 2;
+	NewData->FieldNPC[0].TextSize[0] = 1;
+	NewData->FieldNPC[0].TextNumArr[0][0] = 2;
+	NewData->FieldNPC[0].TextStart[1] = 3;
+	NewData->FieldNPC[0].TextSize[1] = 1;
+	NewData->FieldNPC[0].TextNumArr[1][0] = 3;
+	lstrcpyW(NewData->FieldNPC[0].Name, L"곤잘레스");
+
+	lstrcpyW(NewData->Key, L"Leene_Left");
 	TempKey = NewData->Key;
 	FieldMap.insert(std::unordered_map<std::wstring, FieldData>::value_type(TempKey, *NewData));
 	delete NewData;
@@ -244,12 +287,29 @@ void NTField::ChangeField(const wchar_t * _FieldKey)
 		TmpP->GetSpRenderer()->SetSubScale(NTVEC{ TmpData.FieldAnimation[i].Scale[0], TmpData.FieldAnimation[i].Scale[1],TmpData.FieldAnimation[i].Scale[2],TmpData.FieldAnimation[i].Scale[3] });
 		TmpP->GetSpRenderer()->SetMode(NTSubTransform::SUBMODE::SM_SELF);
 	}
+
+	for (int i = 0; i < TmpData.FieldNPCSize; i++)
+	{
+		Autoptr<NTObject> NewNPCObj = GetScene()->CreateObject(TmpData.FieldNPC[i].Name, NPCLayer);
+		Autoptr<NTNPC> NewNPC = NewNPCObj->AddComponent<NTNPC>((NTNPC::NPCRENDERTYPE)TmpData.FieldNPC[i].RenderType, (NTNPC::NPCEVENTTYPE)TmpData.FieldNPC[i].EventType);
+		for (int j = 0; j < TmpData.FieldNPC[i].TextListSize; j++)
+		{
+			NewNPC->AddTextList();
+			NewNPC->SetStartCount(j, TmpData.FieldNPC[i].TextStart[j]);
+			for (int k = 0; k < TmpData.FieldNPC[i].TextSize[j]; k++)
+			{
+				NewNPC->AddText(j, TmpData.FieldNPC[i].TextNumArr[j][k]);
+			}
+		}
+
+		AddNPC(NewNPCObj);
+	}
 	
 	SetImageSize(FieldImage->GetImage()->GetTex()->GetImageSize() * 4.0f);
 
 	if (NTWinShortCut::GetMainSceneSystem().GetCurScene() != nullptr)
 	{
-		NTWinShortCut::GetMainSceneSystem().GetCurScene()->GetMainCamera()->GetNTObject()->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+		NTWinShortCut::GetMainSceneSystem().GetCurScene()->GetMainCamera()->GetNTObject()->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f }); // 아 이거 이동위치에 따른 카메라 강제이동
 		NTWinShortCut::GetMainSceneSystem().GetCurScene()->GetMainCamera()->GetNTObject()->GetTransform()->ForceMove();
 	}
 

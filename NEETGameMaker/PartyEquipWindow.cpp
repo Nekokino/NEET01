@@ -45,7 +45,7 @@ bool PartyEquipWindow::Init()
 	EquipType->SetColor(255, 255, 255, 255);
 	EquipType->SetSubScale({ 1.0f, 1.0f, 1.0f });
 	EquipType->SetSize(25.0f);
-	EquipType->SetSubPivot({ WinSize.x * 0.18f, WinSize.y * 0.335f });
+	EquipType->SetSubPivot({ WinSize.x * -0.05f, WinSize.y * 0.365f });
 	EquipType->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
 	EquipType->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 	EquipType->SetString(L"");
@@ -60,7 +60,7 @@ bool PartyEquipWindow::Init()
 		Tmp->SetFontMode(NTFontRenderer::RENDERMODE::RM_NORMAL);
 		Tmp->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 		Tmp->SetString(L"");
-		Inventory[i]->SetSubPivot({ WinSize.x * 0.0f + WinSize.x * 0.12f, WinSize.y * (0.055f * (i + 1)) + WinSize.y * 0.41f });
+		Inventory[i]->SetSubPivot({ WinSize.x * -0.12f, WinSize.y * (-0.055f * (i + 1)) + WinSize.y * 0.3f });
 	}
 
 	PauseRender();
@@ -101,6 +101,7 @@ void PartyEquipWindow::MainUpdate()
 					else
 						++StartIter;
 				}
+
 				StartIter = TypeInventory.begin();
 				EndIter = TypeInventory.end();
 

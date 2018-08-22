@@ -47,11 +47,11 @@ void DebugSceneUpdater::SceneUpdate()
 	//	FontRender->SetString(TextString);
 	//}
 
-	swprintf_s(TextString, 256, L"%f, %f", Player->GetTransform()->GetLocalPosition().x, Player->GetTransform()->GetLocalPosition().y);
+	/*swprintf_s(TextString, 256, L"%f, %f", Player->GetTransform()->GetLocalPosition().x, Player->GetTransform()->GetLocalPosition().y);
 	if (TextString != nullptr)
 	{
 		FontRender->SetString(TextString);
-	}
+	}*/
 
 	
 	//swprintf_s(TextString, 256, L"%f", TimeSystem::FPS());
