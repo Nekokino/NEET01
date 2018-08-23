@@ -2,6 +2,7 @@
 #include <NTScene.h>
 #include <Windows.h>
 #include <string>
+#include <list>
 
 class NTFadeRect;
 class NTFontRenderer;
@@ -16,7 +17,20 @@ private:
 	Autoptr<NTFadeRect> FadeRect;
 	Autoptr<NTPixelChecker> PixelChecker;
 
+	std::list<Autoptr<NTObject>> SceneEnemyList;
+
 	POINT MousePos;
+
+public:
+	std::list<Autoptr<NTObject>>* GetEnemyList()
+	{
+		return &SceneEnemyList;
+	}
+
+	void AddEnemyList(Autoptr<NTObject> _Obj)
+	{
+		SceneEnemyList.push_back(_Obj);
+	}
 public:
 	DebugSceneUpdater();
 	~DebugSceneUpdater();

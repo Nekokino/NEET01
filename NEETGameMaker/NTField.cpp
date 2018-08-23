@@ -6,6 +6,7 @@
 #include "NTEvent.h"
 #include "GameSystem.h"
 #include "NTNPC.h"
+#include "NTBattle.h"
 
 std::unordered_map<std::wstring, FieldData> NTField::FieldMap = std::unordered_map<std::wstring, FieldData>();
 
@@ -109,6 +110,7 @@ void NTField::DefaultDataSet()
 	NewData->FieldNPC[0].TextSize[0] = 2;
 	NewData->FieldNPC[0].TextNumArr[0][0] = 0;
 	NewData->FieldNPC[0].TextNumArr[0][1] = 1;
+	NewData->FieldNPC[0].bBattle = false;
 	lstrcpyW(NewData->FieldNPC[0].Name, L"À×¿©");
 
 	TempKey = NewData->Key;
@@ -147,7 +149,7 @@ void NTField::DefaultDataSet()
 
 	NewData->FieldNPCSize = 1;
 	NewData->FieldNPC[0].RenderType = (int)NTNPC::NPCRENDERTYPE::NRT_AD_GONZALEZ;
-	NewData->FieldNPC[0].EventType = (int)NTNPC::NPCEVENTTYPE::NET_CONVERSATION;
+	NewData->FieldNPC[0].EventType = (int)NTNPC::NPCEVENTTYPE::NET_CONVBATLLE;
 	NewData->FieldNPC[0].TextListSize = 2;
 	NewData->FieldNPC[0].TextStart[0] = 2;
 	NewData->FieldNPC[0].TextSize[0] = 1;
@@ -155,6 +157,7 @@ void NTField::DefaultDataSet()
 	NewData->FieldNPC[0].TextStart[1] = 3;
 	NewData->FieldNPC[0].TextSize[1] = 1;
 	NewData->FieldNPC[0].TextNumArr[1][0] = 3;
+	NewData->FieldNPC[0].bBattle = true;
 	lstrcpyW(NewData->FieldNPC[0].Name, L"°ïÀß·¹½º");
 
 	lstrcpyW(NewData->Key, L"Leene_Left");
@@ -300,6 +303,11 @@ void NTField::ChangeField(const wchar_t * _FieldKey)
 			{
 				NewNPC->AddText(j, TmpData.FieldNPC[i].TextNumArr[j][k]);
 			}
+		}
+
+		if (TmpData.FieldNPC[i].bBattle == true)
+		{
+			NewNPCObj->AddComponent<NTBattle>();
 		}
 
 		AddNPC(NewNPCObj);

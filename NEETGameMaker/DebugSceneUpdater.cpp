@@ -73,7 +73,7 @@ void DebugSceneUpdater::SceneStart()
 	Autoptr<NTObject> UI = GetScene()->FindObject(L"UIObj", UILayer);
 	FontRender = UI->GetComponent<NTFontRenderer>(1);
 	FadeRect = UI->GetComponent<NTFadeRect>();
-	Player = GetScene()->FindObject(L"TPlane", PlayerLayer);
+	Player = GetScene()->FindObject(L"Player01", PlayerLayer);
 	PixelChecker = Player->GetComponent<NTPixelChecker>();
 	
 }

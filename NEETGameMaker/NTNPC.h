@@ -32,6 +32,7 @@ public:
 	enum NPCEVENTTYPE
 	{
 		NET_CONVERSATION,
+		NET_CONVBATLLE,
 		NET_SHOP,
 		NET_MAX,
 	};
@@ -39,12 +40,14 @@ private:
 	Autoptr<NTSpRenderer> Renderer;
 	Autoptr<NT2DCollision> Collider;
 	Autoptr<NTSpFrameAnimator> Animator;
-	Autoptr<NTEvent> Event;
+	std::list<Autoptr<NTEvent>> EventList;
 		
 	NPCRENDERTYPE RType;
 	NPCEVENTTYPE EType;
 	size_t CurListIndex;
 	size_t CurTextCount;
+	bool NextEvent;
+	int EventCount;
 	std::vector<int> StartText;
 	std::vector<std::vector<int>> TextIndex;
 

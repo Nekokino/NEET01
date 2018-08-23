@@ -15,6 +15,8 @@
 #include "NTTextWindow.h"
 #include "NTPixelChecker.h"
 #include "NTPixelCollider.h"
+#include "BattleSystem.h"
+#include "NTBattle.h"
 
 
 DebugSceneBuilder::DebugSceneBuilder()
@@ -37,10 +39,14 @@ void DebugSceneBuilder::SceneBuild()
 	Autoptr<NTObject> Camera = GetScene()->CreateObject(L"MainCamera", 0);
 	Autoptr<NTCamera> CameraComponent = Camera->AddComponent<NTCamera>();
 
+	Autoptr<NTObject> BattleSystemObj = GetScene()->CreateObject(L"BattleSystem", 0);
+	Autoptr<BattleSystem> BattleSystemCom = BattleSystemObj->AddComponent<BattleSystem>();
+
 	CameraComponent->PushRenderLayer(0, 1, 2, 3, 4, 10);
 
-	Autoptr<NTObject> TestPlane = GetScene()->CreateObject(L"TPlane", 0);
+	Autoptr<NTObject> TestPlane = GetScene()->CreateObject(L"Player01", 0);
 	Autoptr<NTPlayer> P_Kaeru = TestPlane->AddComponent<NTPlayer>(CHARACTER::KAERU);
+	Autoptr<NTBattle> BattleCom = TestPlane->AddComponent<NTBattle>();
 
 	Autoptr<NTObject> Field = GetScene()->CreateObject(L"MainField", 0);
 	Autoptr<NTField> Test11 = Field->AddComponent<NTField>();
@@ -81,14 +87,6 @@ void DebugSceneBuilder::SceneBuild()
 	Autoptr<NTEvent> MainMoveEvent2 = Field->AddComponent<NTEvent>();
 	MainMoveEvent2->SetEvent(NTEventSystem::FindEvent(L"MoveMapEvent"));
 	MainMoveEvent2->SetParameter(L"Leene_Left", (void*)&NTVEC::FORWARD, FadeInEvent);
-
-	//Autoptr<NTObject> TestNPC = GetScene()->CreateObject(L"TestNPC", NPCLayer);
-	//Autoptr<NTNPC> NPCLogic = TestNPC->AddComponent<NTNPC>(NTNPC::NPCRENDERTYPE::NRT_AD_GREENGUY, NTNPC::NPCEVENTTYPE::NET_CONVERSATION);
-	//NPCLogic->SetStartCount(0);
-	//NPCLogic->AddText(0);
-	//NPCLogic->AddText(1);
-	//NPCLogic->SetName(L"À×¾î");
-	//Test11->AddNPC(TestNPC);
 
 	Autoptr<NTObject> UICamera = GetScene()->CreateObject(L"UICam", 0);
 	Autoptr<NTCamera> CameraCom = UICamera->AddComponent<NTCamera>();

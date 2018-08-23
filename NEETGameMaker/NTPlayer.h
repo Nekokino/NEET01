@@ -30,6 +30,11 @@ private:
 	PLAYERDIRECTION Direction;
 
 	float FieldSpeed;
+	NTVEC MoveToVec;
+	float MoveSpeed;
+	bool bMove;
+private:
+	void MoveTo(NTVEC _Value, float _Speed);
 public:
 	bool Init(CHARACTER _Chara);
 	void PreUpdate() override;
@@ -37,6 +42,12 @@ public:
 	void DbgRender() override;
 
 	void SetFieldRenderer(Autoptr<NTSpRenderer> _Renderer);
+	void SetMove(NTVEC _Value, float _Speed)
+	{
+		bMove = true;
+		MoveToVec = _Value;
+		MoveSpeed = _Speed;
+	}
 public:
 	void ColEnter(NTCollisionComponent* _Left, NTCollisionComponent* _Right);
 	void ColExit(NTCollisionComponent* _Left, NTCollisionComponent* _Right);

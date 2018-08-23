@@ -35,6 +35,7 @@ public:
 	int TextSize[5];
 	int TextNumArr[5][10];
 	wchar_t Name[16];
+	bool bBattle;
 };
 
 class FieldData

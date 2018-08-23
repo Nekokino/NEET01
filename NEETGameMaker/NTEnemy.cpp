@@ -1,6 +1,14 @@
 #include "NTEnemy.h"
 
+NTEnemy::NTEnemy()
+{
 
+}
+
+
+NTEnemy::~NTEnemy()
+{
+}
 
 bool NTEnemy::Init()
 {
@@ -12,14 +20,5 @@ void NTEnemy::MainUpdate()
 }
 
 void NTEnemy::DbgRender()
-{
-}
-
-NTEnemy::NTEnemy()
-{
-}
-
-
-NTEnemy::~NTEnemy()
 {
 }

@@ -11,7 +11,7 @@
 #include "NTTextWindow.h"
 
 
-NTPlayer::NTPlayer() : Renderer(nullptr), Collider(nullptr), Status(nullptr), FieldSpeed(200.0f), Direction(PD_DOWN), EventCollider(nullptr), Animator(nullptr), PixelCollider(nullptr)
+NTPlayer::NTPlayer() : Renderer(nullptr), Collider(nullptr), Status(nullptr), FieldSpeed(200.0f), Direction(PD_DOWN), EventCollider(nullptr), Animator(nullptr), PixelCollider(nullptr), MoveToVec(0.0f), MoveSpeed(0.0f)
 {
 	
 }
@@ -95,6 +95,12 @@ bool Temp = false;
 
 void NTPlayer::MainUpdate()
 {
+	if (bMove == true)
+	{
+		MoveTo(MoveToVec, MoveSpeed);
+	}
+
+
 	if (Status->IsFront == true && GameSystem::GetInputable() == true)
 	{
 		if (true == InputSystem::IsPressed(L"Key2"))
@@ -289,6 +295,22 @@ void NTPlayer::DbgRender()
 void NTPlayer::SetFieldRenderer(Autoptr<NTSpRenderer> _Renderer)
 {
 	PixelCollider->SetSourceRenderer(_Renderer);
+}
+
+void NTPlayer::MoveTo(NTVEC _Value, float _Speed)
+{
+	NTVEC CurPos = GetNTObject()->GetTransform()->GetLocalPosition();
+	NTVEC DirVec = _Value - CurPos;
+	float Dist = MathSystem::GetDistance2D(_Value, CurPos);
+	if (Dist > 10.0f)
+	{
+		DirVec.Normalize();
+		GetNTObject()->GetTransform()->SetLocalMove(NTVEC2{ DirVec * TimeSystem::DeltaTime() * _Speed });
+		
+	}
+	else
+		bMove = false;
+		return;
 }
 
 void NTPlayer::ColEnter(NTCollisionComponent * _Left, NTCollisionComponent * _Right)

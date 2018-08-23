@@ -93,6 +93,7 @@ private:
 	static NTNPC* TextNPC;
 	static int Gold;
 	static NTInventory GameInventory;
+	static bool BattlePhase;
 
 public:
 	static PlayerStatus* GetStatus(CHARACTER _Chara)
@@ -204,6 +205,11 @@ public:
 	static NTInventory& GetInventory()
 	{
 		return GameInventory;
+	}
+
+	static void SetBattlePhase(bool _Value)
+	{
+		BattlePhase = _Value;
 	}
 
 public:

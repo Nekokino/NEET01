@@ -6,12 +6,12 @@
 #include "GameSystem.h"
 #include "NTFadeRect.h"
 #include "NTEvent.h"
+#include "BattleSystem.h"
 
 std::unordered_map<std::wstring, bool(*)(void*, void*, void*)> NTEventSystem::EventMap;
 
 void NTEventSystem::Init()
 {
-	EventMap.insert(std::unordered_map<std::wstring, bool(*)(void*, void*, void*)>::value_type(L"TestEvent", &NTEventSystem::TestEvent));
 	EventMap.insert(std::unordered_map<std::wstring, bool(*)(void*, void*, void*)>::value_type(L"ConvEvent", &NTEventSystem::ConversationEvent));
 	EventMap.insert(std::unordered_map<std::wstring, bool(*)(void*, void*, void*)>::value_type(L"MoveMapEvent", &NTEventSystem::MoveMapEvent));
 	EventMap.insert(std::unordered_map<std::wstring, bool(*)(void*, void*, void*)>::value_type(L"FadeOutEvent", &NTEventSystem::FadeOutEvent));
@@ -22,6 +22,7 @@ void NTEventSystem::Init()
 	EventMap.insert(std::unordered_map<std::wstring, bool(*)(void*, void*, void*)>::value_type(L"IsSmallerIntEvent", &NTEventSystem::IsSmallerIntEvent));
 	EventMap.insert(std::unordered_map<std::wstring, bool(*)(void*, void*, void*)>::value_type(L"IsBiggerFloatEvent", &NTEventSystem::IsBiggerFloatEvent));
 	EventMap.insert(std::unordered_map<std::wstring, bool(*)(void*, void*, void*)>::value_type(L"IsSmallerFloatEvent", &NTEventSystem::IsSmallerFloatEvent));
+	EventMap.insert(std::unordered_map<std::wstring, bool(*)(void*, void*, void*)>::value_type(L"BattleEnterEvent", &NTEventSystem::BattleEnterEvent));
 }
 
 bool NTEventSystem::ConversationEvent(void * _String, void* _Color, void* _Unuse)
@@ -60,7 +61,7 @@ bool NTEventSystem::MoveMapEvent(void * _MapName, void * _Position, void* _NextE
 
 	Autoptr<NTField> Field = NTWinShortCut::GetMainSceneSystem().GetCurScene()->FindObject(L"MainField", 0)->GetComponent<NTField>();
 	Field->ChangeField((const wchar_t*)_MapName);
-	Autoptr<NTObject> Player = NTWinShortCut::GetMainSceneSystem().GetCurScene()->FindObject(L"TPlane", 0);
+	Autoptr<NTObject> Player = NTWinShortCut::GetMainSceneSystem().GetCurScene()->FindObject(L"Player01", 0);
 	NTVEC Pos = *(NTVEC*)_Position;
 	Player->GetTransform()->SetLocalPosition(Pos);
 	Event->ActivateEvent();
@@ -259,5 +260,14 @@ bool NTEventSystem::IsSmallerFloatEvent(void * _A, void * _B, void * _UseEqual)
 		return false;
 	}
 
+	return false;
+}
+
+bool NTEventSystem::BattleEnterEvent(void * _A, void * _B, void * _C)
+{
+	Autoptr<NTObject> BattleSys = (NTObject*)_A;
+	std::list<Autoptr<NTObject>>* EnemyList = (std::list<Autoptr<NTObject>>*)_B;
+
+	BattleSys->GetComponent<BattleSystem>()->EnterBattle(EnemyList);
 	return false;
 }

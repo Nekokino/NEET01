@@ -25,12 +25,6 @@ public:
 		return FindIter->second;
 	}
 
-	static bool TestEvent(void* _Pointer1 = nullptr, void* _Pointer2 = nullptr, void* _Pointer3 = nullptr)
-	{
-		int a = 0;
-		return true;
-	}
-
 	static bool ConversationEvent(void* _String, void* _Color = nullptr, void* _Unuse = nullptr);
 	static bool MoveMapEvent(void* _MapName, void* _Position, void* _NextEvent);
 	static bool FadeOutEvent(void* _Speed, void* _Unuse1 = nullptr, void* _Unuse2 = nullptr);
@@ -41,6 +35,7 @@ public:
 	static bool IsSmallerIntEvent(void* _A, void* _B, void* _UseEqual);
 	static bool IsBiggerFloatEvent(void* _A, void* _B, void* _UseEqual);
 	static bool IsSmallerFloatEvent(void* _A, void* _B, void* _UseEqual);
+	static bool BattleEnterEvent(void* _A, void* _B, void* _C);
 private:
 	NTEventSystem() {};
 	virtual ~NTEventSystem() = 0;

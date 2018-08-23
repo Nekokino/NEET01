@@ -14,6 +14,7 @@ NTNPC* GameSystem::TextNPC = nullptr;
 float GameSystem::PlayTime = 0.0f;
 int GameSystem::Gold = 0;
 NTInventory GameSystem::GameInventory;
+bool GameSystem::BattlePhase = false;
 
 void GameSystem::SetNextText(NTNPC * _NPC, bool _Value)
 {

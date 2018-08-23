@@ -162,6 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="DebugSceneBuilder.h" />
     <ClInclude Include="DebugSceneUpdater.h" />
     <ClInclude Include="EnableRange.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="LoadingSceneUpdater.h" />
     <ClInclude Include="NTAcc.h" />
     <ClInclude Include="NTArmor.h" />
+    <ClInclude Include="NTBattle.h" />
     <ClInclude Include="NTConsume.h" />
     <ClInclude Include="NTEnemy.h" />
     <ClInclude Include="NTEquip.h" />
@@ -206,6 +208,7 @@
     <ClInclude Include="WindowSceneUpdater.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BattleSystem.cpp" />
     <ClCompile Include="DebugSceneBuilder.cpp" />
     <ClCompile Include="DebugSceneUpdater.cpp" />
     <ClCompile Include="EnableRange.cpp" />
@@ -216,6 +219,7 @@
     <ClCompile Include="LoadingSceneUpdater.cpp" />
     <ClCompile Include="NTAcc.cpp" />
     <ClCompile Include="NTArmor.cpp" />
+    <ClCompile Include="NTBattle.cpp" />
     <ClCompile Include="NTConsume.cpp" />
     <ClCompile Include="NTEnemy.cpp" />
     <ClCompile Include="NTEquip.cpp" />

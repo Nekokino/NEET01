@@ -10,7 +10,13 @@
 #include "NTEventSystem.h"
 #include "NTTextWindow.h"
 
-NTNPC::NTNPC() : Renderer(nullptr), Collider(nullptr), Animator(nullptr), Event(nullptr), RType(NRT_MAX), EType(NET_MAX), CurListIndex(0)
+
+
+
+
+#include "DebugSceneUpdater.h"
+
+NTNPC::NTNPC() : Renderer(nullptr), Collider(nullptr), Animator(nullptr), RType(NRT_MAX), EType(NET_MAX), CurListIndex(0), NextEvent(false), EventCount(0)
 {
 	
 }
@@ -23,8 +29,6 @@ NTNPC::~NTNPC()
 
 bool NTNPC::Init(NPCRENDERTYPE _RType, NPCEVENTTYPE _EType)
 {
-	Event = AddComponent<NTEvent>();
-
 	RType = _RType;
 	EType = _EType;
 	switch (RType)
@@ -94,10 +98,23 @@ bool NTNPC::Init(NPCRENDERTYPE _RType, NPCEVENTTYPE _EType)
 		return false;
 		break;
 	}
+
+	Autoptr<NTEvent> EventPointer = nullptr;
+
 	switch (EType)
 	{
 	case NET_CONVERSATION:
-		Event->SetEvent(NTEventSystem::FindEvent(L"ConvEvent"));
+		EventPointer = GetNTObject()->AddComponent<NTEvent>();
+		EventList.push_back(EventPointer);
+		EventPointer->SetEvent(NTEventSystem::FindEvent(L"ConvEvent"));
+		break;
+	case NET_CONVBATLLE:
+		EventPointer = GetNTObject()->AddComponent<NTEvent>();
+		EventPointer->SetEvent(NTEventSystem::FindEvent(L"ConvEvent"));
+		EventList.push_back(EventPointer);
+		EventPointer = GetNTObject()->AddComponent<NTEvent>();
+		EventPointer->SetEvent(NTEventSystem::FindEvent(L"BattleEnterEvent"));
+		EventList.push_back(EventPointer);
 		break;
 	case NET_SHOP:
 		break;
@@ -121,7 +138,25 @@ bool NTNPC::Init(NPCRENDERTYPE _RType, NPCEVENTTYPE _EType)
 
 void NTNPC::MainUpdate()
 {
-	
+	if (NextEvent == true)
+	{
+		if (GameSystem::GetTextWindowStatus() == false)
+		{
+			std::list<Autoptr<NTEvent>>::iterator EventIter = EventList.begin();
+			for (int i = 0; i < EventCount; ++i)
+			{
+				++EventIter;
+			}
+			Autoptr<NTObject> Tmp = GetScene()->FindObject(L"BattleSystem", 0);
+			(*EventIter)->ActivateEvent(Tmp, GetScene()->GetUpdater<DebugSceneUpdater>()->GetEnemyList(), nullptr);
+			
+			if (EventList.size() - 1 == EventCount)
+			{
+				NextEvent = false;
+				EventCount = 0;
+			}
+		}
+	}
 }
 
 void NTNPC::DbgRender()
@@ -190,7 +225,10 @@ void NTNPC::ColStay(NTCollisionComponent * _Left, NTCollisionComponent * _Right)
 
 	if (0 == lstrcmpW(ColliderName, L"EventCollider"))
 	{
-		ActiveTextEvent();
+		if (EType == NET_CONVBATLLE || EType == NET_CONVERSATION)
+		{
+			ActiveTextEvent();
+		}
 	}
 }
 
@@ -202,7 +240,8 @@ void NTNPC::ActiveTextEvent()
 		wchar_t tmp[TextMaxBuf] = {};
 		lstrcpyW(tmp, GameSystem::GetText(TextIndex[CurListIndex][CurTextCount]));
 		swprintf_s(tmp, TextMaxBuf, tmp, GetName());
-		Event->ActivateEvent(tmp, &Color, nullptr);
+		std::list<Autoptr<NTEvent>>::iterator EventIter = EventList.begin();
+		(*EventIter)->ActivateEvent(tmp, &Color, nullptr);
 		++CurTextCount;
 		if (TextIndex[CurListIndex].size() > (size_t)CurTextCount)
 		{
@@ -212,6 +251,15 @@ void NTNPC::ActiveTextEvent()
 		{
 			CurTextCount = 0;
 			GameSystem::ClearNPC();
+			if (EType == NET_CONVBATLLE)
+			{
+				GetScene()->GetUpdater<DebugSceneUpdater>()->AddEnemyList(GetNTObject());
+			}
+			if (EventList.size() > (size_t)EventCount + 1)
+			{
+				NextEvent = true;
+				++EventCount;
+			}
 		}
 	}
 }

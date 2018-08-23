@@ -129,6 +129,45 @@ public:
 	Autoptr<NTObject> CreateObject(const wchar_t* _Name, int _Order);
 	Autoptr<NTObject> FindObject(const wchar_t* _Name, int _Order = 0);
 
+	template<typename T>
+	std::list<Autoptr<NTObject>> GetCompObjList()
+	{
+		std::list<Autoptr<NTObject>> ReturnList;
+
+		std::unordered_map<int, std::list<Autoptr<NTObject>>>::iterator FuncMapStartIter = ObjectMap.begin();
+		std::unordered_map<int, std::list<Autoptr<NTObject>>>::iterator FuncMapEndIter = ObjectMap.end();
+
+		for (; FuncMapStartIter != FuncMapEndIter; ++FuncMapStartIter)
+		{
+			std::list<Autoptr<NTObject>>::iterator FuncListStartIter = FuncMapStartIter->second.begin();
+			std::list<Autoptr<NTObject>>::iterator FuncListEndIter = FuncMapStartIter->second.end();
+
+			for (; FuncListStartIter != FuncListEndIter; FuncListStartIter++)
+			{
+				if ((*FuncListStartIter)->GetComponent<T>() != nullptr)
+				{
+					ReturnList.push_back(*FuncListStartIter);
+				}
+
+				if ((*FuncListStartIter)->ChildList.size() > 0)
+				{
+					std::list<Autoptr<NTObject>>::iterator FuncChildListStartIter = (*FuncListStartIter)->ChildList.begin();
+					std::list<Autoptr<NTObject>>::iterator FuncChildListEndIter = (*FuncListStartIter)->ChildList.end();
+
+					for (; FuncChildListStartIter != FuncChildListEndIter; ++FuncChildListStartIter)
+					{
+						if ((*FuncChildListStartIter)->GetComponent<T>() != nullptr)
+						{
+							ReturnList.push_back(*FuncChildListStartIter);
+						}
+					}
+				}
+			}
+		}
+
+		return ReturnList;
+	}
+
 private:
 	NTCamera* MainCamera;
 
