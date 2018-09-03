@@ -2,7 +2,7 @@
 #include "NTColorMeshRenderer.h"
 #include "NTWindow.h"
 
-NTColorMeshRenderer::NTColorMeshRenderer() : Alpha({ 1.0f, 1.0f, 1.0f, 0.0f })
+NTColorMeshRenderer::NTColorMeshRenderer() : Color({ 1.0f, 1.0f, 1.0f, 0.0f })
 {
 }
 
@@ -34,7 +34,7 @@ void NTColorMeshRenderer::Render(const NTMAT & _VP)
 
 	NTMAT aa = GetSubWorldMat();
 	GetNTWindow()->GetDevice().SetData<NTMAT>(L"TRANS", (GetSubWorldMat() * _VP).RTranspose(), NTShader::STYPE::ST_VS);
-	GetNTWindow()->GetDevice().SetData<NTVEC>(L"MULCOLOR", Alpha, NTShader::STYPE::ST_PX);
+	GetNTWindow()->GetDevice().SetData<NTVEC>(L"MULCOLOR", Color, NTShader::STYPE::ST_PX);
 
 	Material->Update();
 	Mesh->Update();

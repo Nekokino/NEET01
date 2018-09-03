@@ -435,6 +435,11 @@ public:
 		*this = DirectX::XMVector4Normalize(*this);
 	}
 
+	NTVEC ReturnNormalize()
+	{
+		return DirectX::XMVector4Normalize(*this);
+	}
+
 	float GetLength()
 	{
 		return sqrtf(x*x + y*y + z*z);

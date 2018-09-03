@@ -7,36 +7,9 @@
 #include "NTAcc.h"
 #include "NTInventory.h"
 
-class NTNPC;
 class PlayerStatus // 각각 캐릭터마다 가지고 있을 내용들.
 {
 public:
-	enum EFFECT
-	{
-		EF_BERSERK, // 물리공격 데미지 1.5배, 받는 물리데미지 2/3
-		EF_HASTE, // 스피드 수치 두배
-		EF_LIFELINE, // 죽으면 자동부활
-		EF_SAFE, // 마법대미지 2/3
-		EF_SHIELD, // 물리데미지 2/3
-		EF_SERAPH, // 주기적으로 5MP 회복
-		EF_CHAOS, // 무작위로 아군 공격
-		EF_DARKNESS, // 공격 명중률 감소
-		EF_LOCK, // 기술 사용 불가능
-		EF_POISON, // 주기적으로 HP감소
-		EF_SLEEP, // 일어날때까지 아무것도 못함
-		EF_SLOW, // 스피드 수치 반감
-		EF_STOP, // 전투 끝날때까지 멈춤
-		EF_MAX
-	};
-
-	enum ELEMENT
-	{
-		EM_FIRE,
-		EM_WATER,
-		EM_LIGHT,
-		EM_SHADOW,
-		EM_MAX
-	};
 	wchar_t Name[32];
 
 	int MaxHP;
@@ -68,8 +41,25 @@ public:
 	bool IsFront; // 선두인가?
 	bool IsBattle; // 전투 멤버인가?
 	size_t BattleOrder; // 그렇다면 몇번째인가? (선두라면 무조건 첫번째일것)
+						// 스킬목록
 };
 
+class EnemyStatus
+{
+public:
+	int MaxHP;
+	int CurHP;
+	int Exp;
+	int TP;
+	int Speed;
+	int Def;
+	int MDef;
+
+	NTItem* CharmItem;
+	// 스킬 목록
+};
+
+class NTNPC;
 class GameSystem
 {
 private:
@@ -94,6 +84,7 @@ private:
 	static int Gold;
 	static NTInventory GameInventory;
 	static bool BattlePhase;
+	static bool BattleReadyPhase;
 
 public:
 	static PlayerStatus* GetStatus(CHARACTER _Chara)
@@ -210,6 +201,27 @@ public:
 	static void SetBattlePhase(bool _Value)
 	{
 		BattlePhase = _Value;
+		if (BattlePhase == true)
+		{
+			Inputable = false;
+		}
+		else
+			Inputable = true;
+	}
+
+	static void SetBattleReadyPhase(bool _Value)
+	{
+		BattleReadyPhase = _Value;
+	}
+
+	static bool GetBattlePhase()
+	{
+		return BattlePhase;
+	}
+
+	static bool GetBattleReadyPhase()
+	{
+		return BattleReadyPhase;
 	}
 
 public:

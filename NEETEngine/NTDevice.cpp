@@ -311,10 +311,10 @@ bool NTDevice::DefaultInit()
 	ArrColVtx[2].Pos = NTVEC(-0.5f, -0.5f, 0.0f, 1.0f);
 	ArrColVtx[3].Pos = NTVEC(0.5f, -0.5f, 0.0f, 1.0f);
 
-	ArrColVtx[0].Color = NTVEC(0.0f, 0.0f, 0.0f, 1.0f);
-	ArrColVtx[1].Color = NTVEC(0.0f, 0.0f, 0.0f, 1.0f);
-	ArrColVtx[2].Color = NTVEC(0.0f, 0.0f, 0.0f, 1.0f);
-	ArrColVtx[3].Color = NTVEC(0.0f, 0.0f, 0.0f, 1.0f);
+	ArrColVtx[0].Color = NTVEC(1.0f, 1.0f, 1.0f, 1.0f);
+	ArrColVtx[1].Color = NTVEC(1.0f, 1.0f, 1.0f, 1.0f);
+	ArrColVtx[2].Color = NTVEC(1.0f, 1.0f, 1.0f, 1.0f);
+	ArrColVtx[3].Color = NTVEC(1.0f, 1.0f, 1.0f, 1.0f);
 
 	ArrColIDX[0] = IDX16(0, 3, 2);
 	ArrColIDX[1] = IDX16(0, 1, 3);

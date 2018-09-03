@@ -28,6 +28,9 @@ private:
 	size_t CurFrame;
 	float CurFrameTime;
 	bool IsPause;
+	bool IsEnd;
+	bool IsXReverse;
+	bool IsYReverse;
 	std::unordered_map<std::wstring, Autoptr<SpriteAnimation>> AnimationMap;
 
 public:
@@ -37,9 +40,15 @@ public:
 	Autoptr<NTSpRenderer> GetSpRenderer();
 	bool CreateAnimation(const wchar_t* _AnimationName, size_t _Start, size_t _End, float FrameSpeed, bool _Loop);
 	bool ChangeAnimation(const wchar_t* _AnimationName, size_t _StartIndex = 0);
+	bool ChangeAnimationReverse(const wchar_t* _AnimationName, bool _XReverse, bool _YReverse);
 	void ChangeFrame(size_t _Frame);
 	void PauseAnimation();
 	void ResumeAnimation();
+	void SideReverse();
+	bool IsAniEnd()
+	{
+		return IsEnd;
+	}
 public:
 	NTSpFrameAnimator();
 	~NTSpFrameAnimator();

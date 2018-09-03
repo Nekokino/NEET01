@@ -71,29 +71,29 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\NEETEngine\</IncludePath>
+    <LibraryPath>$(LibraryPath);..\FMOD\lib\</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\NEETEngine\;..\FMOD\inc\</IncludePath>
     <OutDir>..\output\</OutDir>
     <TargetName>$(ProjectName)D32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\NEETEngine\</IncludePath>
+    <LibraryPath>$(LibraryPath);..\FMOD\lib\</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\NEETEngine\;..\FMOD\inc\</IncludePath>
     <OutDir>..\output\</OutDir>
     <TargetName>$(ProjectName)D64</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\NEETEngine\</IncludePath>
+    <LibraryPath>$(LibraryPath);..\FMOD\lib\</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\NEETEngine\;..\FMOD\inc\</IncludePath>
     <OutDir>..\output\</OutDir>
     <TargetName>$(ProjectName)R32</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\NEETEngine\</IncludePath>
+    <LibraryPath>$(LibraryPath);..\FMOD\lib\</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\NEETEngine\;..\FMOD\inc\</IncludePath>
     <OutDir>..\output\</OutDir>
     <TargetName>$(ProjectName)R64</TargetName>
   </PropertyGroup>
@@ -195,6 +195,7 @@
     <ClInclude Include="NTSpriteData.h" />
     <ClInclude Include="NTTextData.h" />
     <ClInclude Include="NTTileMap.h" />
+    <ClInclude Include="NTTurnBar.h" />
     <ClInclude Include="NTWeapon.h" />
     <ClInclude Include="PartyDetailWindow.h" />
     <ClInclude Include="PartyEquipWindow.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="NTPixelCollider.cpp" />
     <ClCompile Include="NTPlayer.cpp" />
     <ClCompile Include="NTTileMap.cpp" />
+    <ClCompile Include="NTTurnBar.cpp" />
     <ClCompile Include="NTWeapon.cpp" />
     <ClCompile Include="PartyDetailWindow.cpp" />
     <ClCompile Include="PartyEquipWindow.cpp" />

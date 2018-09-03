@@ -8,6 +8,7 @@
 #include <SpriteLoader.h>
 #include <TextLoader.h>
 #include <ItemLoader.h>
+#include "NTSound.h"
 
 #include "TitleSceneBuilder.h"
 #include "TitleSceneUpdater.h"
@@ -40,6 +41,12 @@ void NTCoreStarter::Build()
 	TextLoader::Load();
 	ItemLoader::Load();
 
+	ResourceSystem<NTSound>::Load(L"Sound", L"BattleTheme.wav");
+	ResourceSystem<NTSound>::Load(L"Sound", L"GonzalezTheme.wav");
+	ResourceSystem<NTSound>::Load(L"Sound", L"Leene.wav");
+	ResourceSystem<NTSound>::Load(L"Sound", L"Title.wav");
+
+
 	GameSystem::BaseSetting();
 	
 	NTWinShortCut::GetMainSceneSystem().CreateScene<LoadingSceneBuilder, LoadingSceneUpdater>(L"LoadingScene");
@@ -47,7 +54,7 @@ void NTCoreStarter::Build()
 	NTWinShortCut::GetMainSceneSystem().CreateScene<DebugSceneBuilder, DebugSceneUpdater>(L"DebugScene");
 	NTWinShortCut::GetMainSceneSystem().CreateScene<TitleSceneBuilder, TitleSceneUpdater>(L"TitleScene");	
 	
-	NTWinShortCut::GetMainSceneSystem().ChangeScene(L"DebugScene");
+	NTWinShortCut::GetMainSceneSystem().ChangeScene(L"TitleScene");
 
 	InputSystem::CreateKey(L"ArrowUp", VK_UP);
 	InputSystem::CreateKey(L"ArrowDown", VK_DOWN);
@@ -56,6 +63,7 @@ void NTCoreStarter::Build()
 
 	InputSystem::CreateKey(L"Key1", 'A');
 	InputSystem::CreateKey(L"Key2", 'S');
+	InputSystem::CreateKey(L"Key3", 'D');
 
 	InputSystem::CreateKey(L"TestKey", VK_LBUTTON);
 	InputSystem::CreateKey(L"MouseL", VK_LBUTTON);

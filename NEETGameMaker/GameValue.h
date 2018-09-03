@@ -37,3 +37,30 @@ enum CHARACTER
 	MAOU,
 	CHARA_MAX
 };
+
+enum EFFECT
+{
+	EF_BERSERK, // 물리공격 데미지 1.5배, 받는 물리데미지 2/3
+	EF_HASTE, // 스피드 수치 두배
+	EF_LIFELINE, // 죽으면 자동부활
+	EF_SAFE, // 마법대미지 2/3
+	EF_SHIELD, // 물리데미지 2/3
+	EF_SERAPH, // 주기적으로 5MP 회복
+	EF_CHAOS, // 무작위로 아군 공격
+	EF_DARKNESS, // 공격 명중률 감소
+	EF_LOCK, // 기술 사용 불가능
+	EF_POISON, // 주기적으로 HP감소
+	EF_SLEEP, // 일어날때까지 아무것도 못함
+	EF_SLOW, // 스피드 수치 반감
+	EF_STOP, // 전투 끝날때까지 멈춤
+	EF_MAX
+};
+
+enum ELEMENT
+{
+	EM_FIRE,
+	EM_WATER,
+	EM_LIGHT,
+	EM_SHADOW,
+	EM_MAX
+};

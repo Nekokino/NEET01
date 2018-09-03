@@ -59,6 +59,7 @@ void NTTextWindow::MainUpdate()
 {
 	if (Open == true)
 	{
+		GameSystem::SetTextWindowStatus(true);
 		if (CurUv < MaxUv)
 		{
 			CurUv += TimeSystem::DeltaTime() * Speed;
@@ -69,10 +70,8 @@ void NTTextWindow::MainUpdate()
 			CurUv = MaxUv;
 			Open = false;
 			TextSwitch = true;
-			GameSystem::SetTextWindowStatus(true);
+			
 		}
-
-		
 	}
 
 	if (Close == true)

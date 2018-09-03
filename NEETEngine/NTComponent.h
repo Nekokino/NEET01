@@ -37,6 +37,12 @@ public:
 	{
 		return GetNTObject()->AddComponent<T>(_1, _2);
 	}
+	
+	template<typename T, typename V1, typename V2, typename V3>
+	Autoptr<T> AddComponent(V1 _1, V2 _2, V3 _3)
+	{
+		return GetNTObject()->AddComponent<T>(_1, _2, _3);
+	}
 public:
 	virtual void InitComponent();
 

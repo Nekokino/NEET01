@@ -7,6 +7,7 @@
 class NTFadeRect;
 class NTFontRenderer;
 class NTPixelChecker;
+class NTSoundPlayer;
 class DebugSceneUpdater : public NTScene::NTSceneUpdater
 {
 private:
@@ -16,6 +17,7 @@ private:
 	Autoptr<NTFontRenderer> FontRender;
 	Autoptr<NTFadeRect> FadeRect;
 	Autoptr<NTPixelChecker> PixelChecker;
+	Autoptr<NTSoundPlayer> SoundPlayer;
 
 	std::list<Autoptr<NTObject>> SceneEnemyList;
 

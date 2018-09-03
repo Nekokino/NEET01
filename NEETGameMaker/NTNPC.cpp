@@ -9,6 +9,8 @@
 #include "NTEvent.h"
 #include "NTEventSystem.h"
 #include "NTTextWindow.h"
+#include "NTEnemy.h"
+#include <NTSoundPlayer.h>
 
 
 
@@ -16,7 +18,7 @@
 
 #include "DebugSceneUpdater.h"
 
-NTNPC::NTNPC() : Renderer(nullptr), Collider(nullptr), Animator(nullptr), RType(NRT_MAX), EType(NET_MAX), CurListIndex(0), NextEvent(false), EventCount(0)
+NTNPC::NTNPC() : Renderer(nullptr), Collider(nullptr), Animator(nullptr), RType(NRT_MAX), EType(NET_MAX), CurListIndex(0), NextEvent(false), EventCount(0), InBattle(false)
 {
 	
 }
@@ -91,6 +93,20 @@ bool NTNPC::Init(NPCRENDERTYPE _RType, NPCEVENTTYPE _EType)
 		Collider->SetRect({ 0.0f, -25.0f, 50.0f, 50.0f });
 		Collider->EnterFunc<NTNPC>(this, &NTNPC::ColEnter);
 		Collider->StayFunc<NTNPC>(this, &NTNPC::ColStay);
+#pragma region Gonzalez Animation
+		Animator->CreateAnimation(L"IdleDown", 1, 1, DFS, true);
+		Animator->CreateAnimation(L"WalkDown", 0, 2, DFS, true);
+		Animator->CreateAnimation(L"WalkUp", 3, 5, DFS, true);
+		Animator->CreateAnimation(L"WalkLeft", 6, 8, DFS, true);
+		Animator->CreateAnimation(L"WalkRight", 9, 11, DFS, true);
+		Animator->CreateAnimation(L"SingRight", 12, 14, DFS, true);
+		Animator->CreateAnimation(L"SingLeft", 15, 17, DFS, true);
+		Animator->CreateAnimation(L"AttackUp", 18, 21, DFS, true);
+		Animator->CreateAnimation(L"AttackDown", 22, 25, DFS, true);
+		Animator->CreateAnimation(L"AttackLeft", 26, 29, DFS, true);
+		Animator->CreateAnimation(L"Damage", 30, 30, DFS, true);
+#pragma endregion
+		Animator->ChangeAnimation(L"IdleDown");
 		break;
 	case NRT_MAX:
 	default:
@@ -149,7 +165,12 @@ void NTNPC::MainUpdate()
 			}
 			Autoptr<NTObject> Tmp = GetScene()->FindObject(L"BattleSystem", 0);
 			(*EventIter)->ActivateEvent(Tmp, GetScene()->GetUpdater<DebugSceneUpdater>()->GetEnemyList(), nullptr);
-			
+			InBattle = true;
+			if (RType == NRT_AD_GONZALEZ)
+			{
+				Animator->ChangeAnimation(L"IdleDown");
+				GetNTObject()->GetComponent<NTEnemy>()->SetEnemyType(NTEnemy::ENEMYTYPE::ET_GONZALEZ);
+			}
 			if (EventList.size() - 1 == EventCount)
 			{
 				NextEvent = false;
@@ -166,7 +187,15 @@ void NTNPC::DbgRender()
 
 void NTNPC::ColEnter(NTCollisionComponent * _Left, NTCollisionComponent * _Right)
 {
-	
+	const wchar_t* ColliderName = _Right->GetName();
+
+	if (0 == lstrcmpW(ColliderName, L"EventCollider"))
+	{
+		if (EType == NET_CONVBATLLE || EType == NET_CONVERSATION)
+		{
+			ActiveTextEvent();
+		}
+	}
 }
 
 
@@ -222,14 +251,6 @@ void NTNPC::ColStay(NTCollisionComponent * _Left, NTCollisionComponent * _Right)
 		}
 #pragma endregion
 	}
-
-	if (0 == lstrcmpW(ColliderName, L"EventCollider"))
-	{
-		if (EType == NET_CONVBATLLE || EType == NET_CONVERSATION)
-		{
-			ActiveTextEvent();
-		}
-	}
 }
 
 void NTNPC::ActiveTextEvent()
@@ -243,6 +264,7 @@ void NTNPC::ActiveTextEvent()
 		std::list<Autoptr<NTEvent>>::iterator EventIter = EventList.begin();
 		(*EventIter)->ActivateEvent(tmp, &Color, nullptr);
 		++CurTextCount;
+
 		if (TextIndex[CurListIndex].size() > (size_t)CurTextCount)
 		{
 			GameSystem::SetNextText(this, true);
@@ -255,6 +277,15 @@ void NTNPC::ActiveTextEvent()
 			{
 				GetScene()->GetUpdater<DebugSceneUpdater>()->AddEnemyList(GetNTObject());
 			}
+
+			if (RType == NRT_AD_GONZALEZ)
+			{
+				Autoptr<NTObject> Tmp = GetScene()->FindObject(L"UIObj", UILayer);
+				Tmp->GetComponent<NTSoundPlayer>()->StopSound();
+				Tmp->GetComponent<NTSoundPlayer>()->SoundPlay(L"GonzalezTheme.wav");
+				Animator->ChangeAnimation(L"SingRight");
+			}
+
 			if (EventList.size() > (size_t)EventCount + 1)
 			{
 				NextEvent = true;

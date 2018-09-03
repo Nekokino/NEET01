@@ -34,6 +34,8 @@ bool NTEventSystem::ConversationEvent(void * _String, void* _Color, void* _Unuse
 
 	Autoptr<NTTextWindow> TW = NTWinShortCut::GetMainSceneSystem().GetCurScene()->RenderSystem.GetRenderer(L"TextWindow.png", 100)->GetNTObject()->GetComponent<NTTextWindow>();
 
+	GameSystem::SetTextWindowStatus(true);
+
 	TW->OpenText();
 	TW->SetString((const wchar_t*)_String);
 	if (_Color == nullptr)

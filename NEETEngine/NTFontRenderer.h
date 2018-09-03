@@ -29,6 +29,27 @@ public:
 		String = _String;
 	}
 
+	void SetString(const std::wstring& _String)
+	{
+		String = _String.c_str();
+	}
+
+	void SetString(float _Float)
+	{
+		wchar_t Tmp[32] = {};
+		swprintf_s(Tmp, L"%f", _Float);
+		String.clear();
+		String += Tmp;
+	}
+
+	void SetString(int _int)
+	{
+		wchar_t Tmp[32] = {};
+		swprintf_s(Tmp, L"%d", _int);
+		String.clear();
+		String += Tmp;
+	}
+
 	const std::wstring& GetString()
 	{
 		return String;
@@ -51,6 +72,11 @@ public:
 	void SetColor(int _Color)
 	{
 		Color = _Color;
+	}
+
+	void HideFont()
+	{
+		Color = 0x00000000;
 	}
 
 	void SetSize(float _Size)

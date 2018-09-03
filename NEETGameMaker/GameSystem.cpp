@@ -15,6 +15,7 @@ float GameSystem::PlayTime = 0.0f;
 int GameSystem::Gold = 0;
 NTInventory GameSystem::GameInventory;
 bool GameSystem::BattlePhase = false;
+bool GameSystem::BattleReadyPhase = false;
 
 void GameSystem::SetNextText(NTNPC * _NPC, bool _Value)
 {
@@ -32,7 +33,7 @@ void GameSystem::BaseSetting()
 
 #pragma region BasicData
 	PS[CHRONO].CurEXP = 0;
-	PS[CHRONO].Element = PlayerStatus::EM_LIGHT;
+	PS[CHRONO].Element = EM_LIGHT;
 	PS[CHRONO].Evade = 8;
 	PS[CHRONO].Hit = 8;
 	PS[CHRONO].IsBattle = true;
@@ -59,7 +60,7 @@ void GameSystem::BaseSetting()
 	PS[CHRONO].Acc = *(Autoptr<NTAcc>)(NTItem::FindItem(L"Bandana"));
 
 	PS[MARU].CurEXP = 0;
-	PS[MARU].Element = PlayerStatus::EM_WATER;
+	PS[MARU].Element = EM_WATER;
 	PS[MARU].Evade = 8;
 	PS[MARU].Hit = 9;
 	PS[MARU].IsBattle = true;
@@ -85,8 +86,8 @@ void GameSystem::BaseSetting()
 	PS[MARU].Helmet = *(Autoptr<NTHelmet>)(NTItem::FindItem(L"LeatherHat"));
 	PS[MARU].Acc = *(Autoptr<NTAcc>)(NTItem::FindItem(L"Ribbon"));
 
-	PS[LUCCA].CurEXP = 0;
-	PS[LUCCA].Element = PlayerStatus::EM_FIRE;
+	PS[LUCCA].CurEXP = 20;
+	PS[LUCCA].Element = EM_FIRE;
 	PS[LUCCA].Evade = 8;
 	PS[LUCCA].Hit = 8;
 	PS[LUCCA].IsBattle = true;
@@ -100,7 +101,7 @@ void GameSystem::BaseSetting()
 	PS[LUCCA].CurMP = PS[LUCCA].MaxMP;
 	PS[LUCCA].Member = true;
 	lstrcpyW(PS[LUCCA].Name, L"루카");
-	PS[LUCCA].NextEXP = 20;
+	PS[LUCCA].NextEXP = 80;
 	PS[LUCCA].Power = 2;
 	PS[LUCCA].Speed = 6;
 	PS[LUCCA].Stamina = 6;
@@ -111,6 +112,33 @@ void GameSystem::BaseSetting()
 	PS[LUCCA].Armor = *(Autoptr<NTArmor>)(NTItem::FindItem(L"KarateSuit"));
 	PS[LUCCA].Helmet = *(Autoptr<NTHelmet>)(NTItem::FindItem(L"LeatherHat"));
 	PS[LUCCA].Acc = *(Autoptr<NTAcc>)(NTItem::FindItem(L"SightScope"));
+
+	PS[KAERU].CurEXP = 0;
+	PS[KAERU].Element = EM_WATER;
+	PS[KAERU].Evade = 9;
+	PS[KAERU].Hit = 9;
+	PS[KAERU].IsBattle = false;
+	PS[KAERU].IsFront = false;
+	PS[KAERU].Level = 5;
+	PS[KAERU].Magic = 8;
+	PS[KAERU].MagicDef = 9;
+	PS[KAERU].MaxHP = 128;
+	PS[KAERU].CurHP = PS[LUCCA].MaxHP;
+	PS[KAERU].MaxMP = 17;
+	PS[KAERU].CurMP = PS[LUCCA].MaxMP;
+	PS[KAERU].Member = true;
+	lstrcpyW(PS[KAERU].Name, L"카에루");
+	PS[KAERU].NextEXP = 20;
+	PS[KAERU].Power = 9;
+	PS[KAERU].Speed = 11;
+	PS[KAERU].Stamina = 14;
+	PS[KAERU].Usable = false;
+	PS[KAERU].BattleOrder = 0;
+
+	PS[KAERU].Weapon = *(Autoptr<NTWeapon>)(NTItem::FindItem(L"BronzeSword"));
+	PS[KAERU].Armor = *(Autoptr<NTArmor>)(NTItem::FindItem(L"BronzeArmor"));
+	PS[KAERU].Helmet = *(Autoptr<NTHelmet>)(NTItem::FindItem(L"BronzeHelmet"));
+	PS[KAERU].Acc = *(Autoptr<NTAcc>)(NTItem::FindItem(L"PowerGlove"));
 
 #pragma endregion
 

@@ -36,6 +36,7 @@ public:
 	int TextNumArr[5][10];
 	wchar_t Name[16];
 	bool bBattle;
+	float Pos[4];
 };
 
 class FieldData

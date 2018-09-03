@@ -43,7 +43,7 @@ void NTFadeRect::FadeIn()
 		FadeInSwitch = false;
 	}
 
-	Renderer->SetAlpha(CurAlpha);
+	Renderer->SetColor({0.0f, 0.0f, 0.0f, CurAlpha});
 	
 }
 
@@ -72,7 +72,7 @@ void NTFadeRect::FadeOut()
 		FadeOutSwitch = false;
 	}
 
-	Renderer->SetAlpha(CurAlpha);
+	Renderer->SetColor({0.0f, 0.0f, 0.0f, CurAlpha});
 }
 
 bool NTFadeRect::Init(float _Alpha, float _Speed)
@@ -80,7 +80,7 @@ bool NTFadeRect::Init(float _Alpha, float _Speed)
 	Renderer = AddComponent<NTColorMeshRenderer>(UILayer);
 
 	Speed = _Speed;
-	Renderer->SetAlpha(_Alpha);
+	Renderer->SetColor(_Alpha);
 	Renderer->SetSubPivot({ 0.0f, 0.0f, 1.0f });
 	Renderer->SetMode(NTSubTransform::SUBMODE::SM_INDEPENDENT);
 	Renderer->SetSubScale({ GetNTWindow()->GetWidthf(), GetNTWindow()->GetHeightf(), 1.0f });

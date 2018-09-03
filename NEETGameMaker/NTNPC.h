@@ -48,6 +48,7 @@ private:
 	size_t CurTextCount;
 	bool NextEvent;
 	int EventCount;
+	bool InBattle;
 	std::vector<int> StartText;
 	std::vector<std::vector<int>> TextIndex;
 

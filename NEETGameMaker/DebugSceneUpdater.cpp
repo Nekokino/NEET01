@@ -4,6 +4,7 @@
 #include <InputSystem.h>
 #include <NTFontRenderer.h>
 #include <NTColorMeshRenderer.h>
+#include <NTSoundPlayer.h>
 
 #include "NTFadeRect.h"
 #include "GameSystem.h"
@@ -47,11 +48,13 @@ void DebugSceneUpdater::SceneUpdate()
 	//	FontRender->SetString(TextString);
 	//}
 
-	/*swprintf_s(TextString, 256, L"%f, %f", Player->GetTransform()->GetLocalPosition().x, Player->GetTransform()->GetLocalPosition().y);
-	if (TextString != nullptr)
-	{
-		FontRender->SetString(TextString);
-	}*/
+	//swprintf_s(TextString, 256, L"%f, %f", Player->GetTransform()->GetLocalPosition().x, Player->GetTransform()->GetLocalPosition().y);
+	//if (TextString != nullptr)
+	//{
+	//	FontRender->SetString(TextString);
+	//}
+	//
+	//FontRender->SetSubPivot({ NTWinShortCut::GetMainWindow().GetWidthf() * -0.5f , NTWinShortCut::GetMainWindow().GetHeightf() * 0.5f });
 
 	
 	//swprintf_s(TextString, 256, L"%f", TimeSystem::FPS());
@@ -59,13 +62,25 @@ void DebugSceneUpdater::SceneUpdate()
 	//{
 	//	FontRender->SetString(TextString);
 	//}
-
+	//
 	//NTCOLOR Color = PixelChecker->GetPixelColor(MPos.x, MPos.y);
 	//swprintf_s(TextString, 256, L"%f, %f, %f, %f", Color.r, Color.g, Color.b, Color.a);
 	//if (TextString != nullptr)
 	//{
 	//	FontRender->SetString(TextString);
 	//}
+
+	
+	if (SoundPlayer->IsPlay() == false)
+	{
+		SoundPlayer->SoundPlay(L"Leene.wav");
+	}
+	
+
+	if (InputSystem::IsDown(L"Key3") == true)
+	{
+		NTWinShortCut::GetMainSceneSystem().ChangeScene(L"WindowScene");
+	}
 }
 
 void DebugSceneUpdater::SceneStart()
@@ -75,5 +90,6 @@ void DebugSceneUpdater::SceneStart()
 	FadeRect = UI->GetComponent<NTFadeRect>();
 	Player = GetScene()->FindObject(L"Player01", PlayerLayer);
 	PixelChecker = Player->GetComponent<NTPixelChecker>();
+	SoundPlayer = UI->AddComponent<NTSoundPlayer>();
 	
 }

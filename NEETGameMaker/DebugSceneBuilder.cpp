@@ -46,15 +46,21 @@ void DebugSceneBuilder::SceneBuild()
 
 	Autoptr<NTObject> TestPlane = GetScene()->CreateObject(L"Player01", 0);
 	Autoptr<NTPlayer> P_Kaeru = TestPlane->AddComponent<NTPlayer>(CHARACTER::KAERU);
-	Autoptr<NTBattle> BattleCom = TestPlane->AddComponent<NTBattle>();
+	P_Kaeru->SetFront();
+
+	Autoptr<NTObject> TestPlane2 = GetScene()->CreateObject(L"Player02", 0);
+	Autoptr<NTPlayer> P_TEST = TestPlane2->AddComponent<NTPlayer>(CHARACTER::CHRONO);
+
+	Autoptr<NTObject> TestPlane3 = GetScene()->CreateObject(L"Player03", 0);
+	Autoptr<NTPlayer> P_TEST2  = TestPlane3->AddComponent<NTPlayer>(CHARACTER::MARU);
 
 	Autoptr<NTObject> Field = GetScene()->CreateObject(L"MainField", 0);
 	Autoptr<NTField> Test11 = Field->AddComponent<NTField>();
 	Test11->ChangeField(L"Leene_Center");
 	P_Kaeru->SetFieldRenderer(Test11->GetColImage());
+	P_TEST->SetFieldRenderer(Test11->GetColImage());
+	P_TEST2->SetFieldRenderer(Test11->GetColImage());
 	Autoptr<FieldCamera> CamLogic = Camera->AddComponent<FieldCamera>(CameraComponent, TestPlane->GetTransform(), Test11);
-	Autoptr<NTPixelCollider> PCol = TestPlane->AddComponent<NTPixelCollider>();
-	PCol->SetSourceRenderer(Test11->GetColImage());
 
 	Autoptr<NTEvent> FadeInEvent = Field->AddComponent<NTEvent>();
 	FadeInEvent->SetEvent(NTEventSystem::FindEvent(L"FadeInEvent"));

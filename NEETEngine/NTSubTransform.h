@@ -52,6 +52,16 @@ public:
 		Pivot += _Pivot;
 	}
 
+	void SetXReverse()
+	{
+		Scale.x *= -1.0f;
+	}
+
+	void SetYReverse()
+	{
+		Scale.y *= -1.0f;
+	}
+
 	NTVEC GetSubPivot()
 	{
 		return Pivot;
@@ -76,6 +86,11 @@ public:
 	{
 		NTVEC Return = { SubWorldMatrix.Matrix._11, SubWorldMatrix.Matrix._22, SubWorldMatrix.Matrix._33 };
 		return Return;
+	}
+
+	void SideReverse()
+	{
+		Scale.x *= -1.0f;
 	}
 
 	

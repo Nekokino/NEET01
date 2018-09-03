@@ -6,6 +6,7 @@
 #include "NTWinShortCut.h"
 #include "ResourceSystem.h"
 #include "NTCollisionComponent.h"
+#include "NTSoundDevice.h"
 
 /////// ºô´õ ////////
 
@@ -63,6 +64,7 @@ void WinCore::Progress()
 {
 	TimeSystem::Update();
 	InputSystem::Update();
+	NTSoundDevice::Update();
 	NTWindow::Progress();
 }
 
@@ -85,10 +87,12 @@ void WinCore::InitCore(HINSTANCE _hInst, const wchar_t* _MainWindowName, HWND _h
 
 	NTWinShortCut::SetMainWindow(_MainWindowName);
 
+	NTSoundDevice::Init();
 	PathSystem::Init();
 	PathSystem::CreatePath(L"Shader");
 	PathSystem::CreatePath(L"Texture");
 	PathSystem::CreatePath(L"Data");
+	PathSystem::CreatePath(L"Sound");
 	TimeSystem::Init();
 	NTCollisionComponent::CollsionInit();
 }

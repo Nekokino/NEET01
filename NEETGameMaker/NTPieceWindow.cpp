@@ -15,6 +15,7 @@ NTPieceWindow::~NTPieceWindow()
 
 bool NTPieceWindow::Init(size_t _Row, size_t _Col, float _Size)
 {
+	RendererVector.reserve(4 + _Row * 2 + _Col * 2 + _Row * _Col);
 	NTVEC Pos = GetNTObject()->GetTransform()->GetLocalPosition();
 	int Style = GameSystem::GetWindowStyle();
 	Autoptr<NTSpRenderer> LT = AddComponent<NTSpRenderer>(L"WindowPiece.png", UILayer);
@@ -39,6 +40,11 @@ bool NTPieceWindow::Init(size_t _Row, size_t _Col, float _Size)
 	LB->SetSubPivot({ -64.0f * _Row * _Size - 16.0f * _Size, -64.0f * _Col * _Size - 16.0f * _Size });
 	RB->SetSubPivot({ 64.0f * _Row * _Size + 16.0f * _Size, -64.0f * _Col * _Size - 16.0f * _Size });
 
+	RendererVector.push_back(LT);
+	RendererVector.push_back(RT);
+	RendererVector.push_back(LB);
+	RendererVector.push_back(RB);
+
 	NTVEC Tmp1 = LT->GetSubPivot() - RT->GetSubPivot();
 	float Tmp2 = ( MathSystem::GetLength(Tmp1) - 32.0f * _Size) / (64.0f * _Size);
 
@@ -54,6 +60,9 @@ bool NTPieceWindow::Init(size_t _Row, size_t _Col, float _Size)
 		Bottom->SetSubScale({ 128.0f * _Size, 128.0f * _Size, 1.0f });
 		Top->SetSubPivot({ LT->GetSubPivot().x - 16.0f * _Size + (i + 1) * 64.0f * _Size, LT->GetSubPivot().y });
 		Bottom->SetSubPivot({ LT->GetSubPivot().x - 16.0f * _Size + (i + 1) * 64.0f * _Size, LB->GetSubPivot().y });
+
+		RendererVector.push_back(Top);
+		RendererVector.push_back(Bottom);
 	}
 
 	Tmp1 = LT->GetSubPivot() - LB->GetSubPivot();
@@ -71,6 +80,9 @@ bool NTPieceWindow::Init(size_t _Row, size_t _Col, float _Size)
 		Right->SetSubScale({ 128.0f * _Size, 128.0f * _Size, 1.0f });
 		Left->SetSubPivot({ LT->GetSubPivot().x, LB->GetSubPivot().y - 16.0f * _Size + (i + 1) * 64.0f  * _Size });
 		Right->SetSubPivot({ RT->GetSubPivot().x, LB->GetSubPivot().y - 16.0f * _Size + (i + 1) * 64.0f  * _Size });
+
+		RendererVector.push_back(Left);
+		RendererVector.push_back(Right);
 	}
 
 	for (size_t y = 0; y < _Col; y++)
@@ -82,6 +94,7 @@ bool NTPieceWindow::Init(size_t _Row, size_t _Col, float _Size)
 			In->SetMode(NTSubTransform::SUBMODE::SM_PARENT);
 			In->SetSubScale({ 128.0f * _Size, 128.0f * _Size, 1.0f });
 			In->SetSubPivot({ LT->GetSubPivot().x - 48.0f * _Size + (x + 1) * 128.0f * _Size, LB->GetSubPivot().y - 48.0f * _Size + (y + 1) * 128.0f  * _Size });
+			RendererVector.push_back(In);
 		}
 	}
 	return true;
@@ -93,4 +106,20 @@ void NTPieceWindow::MainUpdate()
 
 void NTPieceWindow::DbgRender()
 {
+}
+
+void NTPieceWindow::HideWindow()
+{
+	for (size_t i = 0; i < RendererVector.size(); i++)
+	{
+		RendererVector[i]->SetColor(0.0f);
+	}
+}
+
+void NTPieceWindow::ShowWindow()
+{
+	for (size_t i = 0; i < RendererVector.size(); i++)
+	{
+		RendererVector[i]->SetColor(1.0f);
+	}
 }

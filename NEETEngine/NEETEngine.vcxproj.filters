@@ -94,6 +94,12 @@
     <Filter Include="File">
       <UniqueIdentifier>{e4121996-9e0b-4668-a735-eee987d432de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Res\Sound">
+      <UniqueIdentifier>{d0462e63-0e3b-4b25-9147-8874addbfb36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\EngineComponent\Sound">
+      <UniqueIdentifier>{2d4aed28-6ccc-4641-9fea-57620db1e240}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinCore.cpp">
@@ -236,6 +242,15 @@
     </ClCompile>
     <ClCompile Include="NTColorMeshRenderer.cpp">
       <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSound.cpp">
+      <Filter>Resource\Res\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSoundDevice.cpp">
+      <Filter>Window\SubSystem\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="NTSoundPlayer.cpp">
+      <Filter>Object\Component\EngineComponent\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -412,6 +427,15 @@
     </ClInclude>
     <ClInclude Include="NTColorMeshRenderer.h">
       <Filter>Object\Component\EngineComponent\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSound.h">
+      <Filter>Resource\Res\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSoundDevice.h">
+      <Filter>Window\SubSystem\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="NTSoundPlayer.h">
+      <Filter>Object\Component\EngineComponent\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

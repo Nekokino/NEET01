@@ -76,26 +76,34 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\output\</OutDir>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;..\output\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;..\output\..\FMOD\lib\;..\FMOD\lib</LibraryPath>
     <TargetName>$(ProjectName)D32</TargetName>
+    <ReferencePath>$(VC_ReferencesPath_x86);;..\FMOD\inc\..\FMOD\lib\</ReferencePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\FMOD\inc\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\output\</OutDir>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;..\output\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;..\output\..\FMOD\lib\;..\FMOD\lib</LibraryPath>
     <TargetName>$(ProjectName)D64</TargetName>
+    <ReferencePath>$(VC_ReferencesPath_x64);;..\FMOD\inc\..\FMOD\lib\</ReferencePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\FMOD\inc\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\output\</OutDir>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;..\output\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;..\output\..\FMOD\lib\;..\FMOD\lib</LibraryPath>
     <TargetName>$(ProjectName)R32</TargetName>
+    <ReferencePath>$(VC_ReferencesPath_x86);;..\FMOD\inc\..\FMOD\lib\</ReferencePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\FMOD\inc\</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\output\</OutDir>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;..\output\</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;..\output\..\FMOD\lib\;..\FMOD\lib</LibraryPath>
     <TargetName>$(ProjectName)R64</TargetName>
+    <ReferencePath>$(VC_ReferencesPath_x64);;..\FMOD\inc\..\FMOD\lib\</ReferencePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\FMOD\inc\</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -196,6 +204,9 @@
     <ClCompile Include="NTSceneSystem.cpp" />
     <ClCompile Include="NTSecondUVRenderer.cpp" />
     <ClCompile Include="NTShader.cpp" />
+    <ClCompile Include="NTSound.cpp" />
+    <ClCompile Include="NTSoundDevice.cpp" />
+    <ClCompile Include="NTSoundPlayer.cpp" />
     <ClCompile Include="NTSpFrameAnimator.cpp" />
     <ClCompile Include="NTSpRenderer.cpp" />
     <ClCompile Include="NTStCom.cpp" />
@@ -256,6 +267,9 @@
     <ClInclude Include="NTSceneSystem.h" />
     <ClInclude Include="NTSecondUVRenderer.h" />
     <ClInclude Include="NTShader.h" />
+    <ClInclude Include="NTSound.h" />
+    <ClInclude Include="NTSoundDevice.h" />
+    <ClInclude Include="NTSoundPlayer.h" />
     <ClInclude Include="NTSpFrameAnimator.h" />
     <ClInclude Include="NTSpRenderer.h" />
     <ClInclude Include="NTStCom.h" />

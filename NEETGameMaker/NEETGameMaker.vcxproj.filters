@@ -70,6 +70,9 @@
     <Filter Include="Battle">
       <UniqueIdentifier>{29974720-2054-4dc1-a44e-5aa55e6cb266}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{f86c435e-70ff-4399-859d-35f19179e9e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NTTileMap.cpp">
@@ -191,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="NTBattle.cpp">
       <Filter>Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="NTTurnBar.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="NTBattle.h">
       <Filter>Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="NTTurnBar.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

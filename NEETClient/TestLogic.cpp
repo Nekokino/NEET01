@@ -120,7 +120,7 @@ void TestLogic::MainUpdate()
 		Transform->SetLocalScale({ PenScale, PenScale, 0.0f, 0.0f });
 	}
 
-	if (PenTime <= 1.8f)
+	/*if (PenTime <= 1.8f)
 	{
 		NTVEC PenPos = MathSystem::Pendulum(OriginPos, TmpVec[0], 4000.0f, 0.0f, PenTime);
 		PenRad = MathSystem::GetRadian2D(PenPos, NTVEC::DOWN);
@@ -155,7 +155,7 @@ void TestLogic::MainUpdate()
 		NTVEC PenPos = MathSystem::Pendulum(OriginPos, TmpVec[6], 4000.0f, 0.0f, PenTime);
 		PenRad = MathSystem::GetRadian2D(PenPos, NTVEC::DOWN);
 	}
-	else if (PenTime > 9.0f)
+	else */if (PenTime > 9.0f)
 	{
 		BigC->SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
 		NTVEC Dir = { -350.0f, 200.0f, 10.0f };

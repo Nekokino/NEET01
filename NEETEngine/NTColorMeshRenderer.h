@@ -3,22 +3,22 @@
 class NTColorMeshRenderer : public NTRenderer
 {
 private:
-	NTCOLOR Alpha;
+	NTCOLOR Color;
 
 public:
-	void SetAlpha(float _Alpha)
+	void SetColor(NTCOLOR _Color)
 	{
-		Alpha.a = _Alpha;
+		Color = _Color;
 	}
 
 	float GetAlpha()
 	{
-		return Alpha.a;
+		return Color.a;
 	}
 
 	NTCOLOR GetColor()
 	{
-		return Alpha;
+		return Color;
 	}
 public:
 	bool Init(int _Order = 0) override;

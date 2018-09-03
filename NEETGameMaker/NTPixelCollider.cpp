@@ -37,7 +37,6 @@ void NTPixelCollider::SetSourceRenderer(Autoptr<NTSpRenderer> _Renderer)
 	PixelChecker->SetRenderer(_Renderer);
 }
 
-NTVEC aaaa = {};
 void NTPixelCollider::MainUpdate()
 {
 	NTRECT ColliderRect = Collider->GetColliderVec();
@@ -61,9 +60,6 @@ void NTPixelCollider::MainUpdate()
 
 void NTPixelCollider::DbgRender()
 {
-	wchar_t ASD[256];
-	swprintf_s(ASD, 256, L"%f, %f", aaaa.x, aaaa.y);
-	DebugFunc::DrawFont(ASD, { 0.0f, 50.0f }, 50.0f, 0xffffffff);
 }
 bool NTPixelCollider::MoveColCheck(NTVEC _DirVec, float _Dis)
 {
@@ -76,8 +72,6 @@ bool NTPixelCollider::MoveColCheck(NTVEC _DirVec, float _Dis)
 	float Right = ColliderRect.Pos.x + ColliderRect.Size.x * 0.5f;
 	float Top = ColliderRect.Pos.y + ColliderRect.Size.x * 0.5f;
 	float Bottom = ColliderRect.Pos.y - ColliderRect.Size.x * 0.5f;
-
-	aaaa = NTVEC{ Left, Top };
 
 	if (_DirVec == NTVEC::UP)
 	{

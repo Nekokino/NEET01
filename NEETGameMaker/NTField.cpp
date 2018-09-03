@@ -7,6 +7,7 @@
 #include "GameSystem.h"
 #include "NTNPC.h"
 #include "NTBattle.h"
+#include "NTEnemy.h"
 
 std::unordered_map<std::wstring, FieldData> NTField::FieldMap = std::unordered_map<std::wstring, FieldData>();
 
@@ -71,7 +72,7 @@ void NTField::DefaultDataSet()
 
 	lstrcpyW(NewData->ColImgName, L"Leene_Center_Col.png");
 
-	NewData->FieldAnimationSize = 2;
+	NewData->FieldAnimationSize = 3;
 
 	Vector = NTVEC{ 767.0f * 4.0f, 755.0f * 4.0f };
 	memcpy_s(NewData->MapSize, sizeof(float) * 4, &Vector, sizeof(float) * 4);
@@ -100,8 +101,21 @@ void NTField::DefaultDataSet()
 	Vector = NTVEC{ 400.0f, 400.0f, 1.0f };
 	memcpy_s(NewData->FieldAnimation[1].Scale, sizeof(float) * 4, &Vector, sizeof(float) * 4);
 
-	lstrcpyW(NewData->Key, L"Leene_Center");
+	lstrcpyW(NewData->FieldAnimation[2].Key, L"Fountain");
+	lstrcpyW(NewData->FieldAnimation[2].SourceImgName, L"Leene_Obj.png");
+	lstrcpyW(NewData->FieldAnimation[2].AnimationName, L"Fountain");
+	NewData->FieldAnimation[2].StartFrame = 3;
+	NewData->FieldAnimation[2].Endframe = 5;
+	NewData->FieldAnimation[2].FrameSpeed = 0.1f;
+	NewData->FieldAnimation[2].Loop = true;
+	Vector = NTVEC{ 0.0f, -590.0f, -1.0f };
+	memcpy_s(NewData->FieldAnimation[2].Pivot, sizeof(float) * 4, &Vector, sizeof(float) * 4);
+	Vector = NTVEC{ 400.0f, 400.0f, 1.0f };
+	memcpy_s(NewData->FieldAnimation[2].Scale, sizeof(float) * 4, &Vector, sizeof(float) * 4);
 
+
+	lstrcpyW(NewData->Key, L"Leene_Center");
+	Vector = NTVEC{ 510.0f, -440.0f, 5.0f, 0.0f };
 	NewData->FieldNPCSize = 1;
 	NewData->FieldNPC[0].RenderType = (int)NTNPC::NPCRENDERTYPE::NRT_AD_GREENGUY; 
 	NewData->FieldNPC[0].EventType = (int)NTNPC::NPCEVENTTYPE::NET_CONVERSATION;
@@ -111,6 +125,7 @@ void NTField::DefaultDataSet()
 	NewData->FieldNPC[0].TextNumArr[0][0] = 0;
 	NewData->FieldNPC[0].TextNumArr[0][1] = 1;
 	NewData->FieldNPC[0].bBattle = false;
+	memcpy_s(NewData->FieldNPC[0].Pos, sizeof(float) * 4, &Vector, sizeof(float) * 4);
 	lstrcpyW(NewData->FieldNPC[0].Name, L"À×¿©");
 
 	TempKey = NewData->Key;
@@ -147,6 +162,10 @@ void NTField::DefaultDataSet()
 	Vector = NTVEC{ 256.0f * 4.0f, 243.0f * 4.0f };
 	memcpy_s(NewData->MapSize, sizeof(NTVEC), &Vector, sizeof(NTVEC));
 
+
+	
+	Vector = NTVEC{ 0.0f, 0.0f, 5.0f, 0.0f };
+	memcpy_s(NewData->FieldNPC[0].Pos, sizeof(float) * 4, &Vector, sizeof(float) * 4);
 	NewData->FieldNPCSize = 1;
 	NewData->FieldNPC[0].RenderType = (int)NTNPC::NPCRENDERTYPE::NRT_AD_GONZALEZ;
 	NewData->FieldNPC[0].EventType = (int)NTNPC::NPCEVENTTYPE::NET_CONVBATLLE;
@@ -293,6 +312,8 @@ void NTField::ChangeField(const wchar_t * _FieldKey)
 
 	for (int i = 0; i < TmpData.FieldNPCSize; i++)
 	{
+		NTVEC Pos = 0.0f;
+		memcpy_s(&Pos, sizeof(NTVEC), TmpData.FieldNPC[i].Pos, sizeof(NTVEC));
 		Autoptr<NTObject> NewNPCObj = GetScene()->CreateObject(TmpData.FieldNPC[i].Name, NPCLayer);
 		Autoptr<NTNPC> NewNPC = NewNPCObj->AddComponent<NTNPC>((NTNPC::NPCRENDERTYPE)TmpData.FieldNPC[i].RenderType, (NTNPC::NPCEVENTTYPE)TmpData.FieldNPC[i].EventType);
 		for (int j = 0; j < TmpData.FieldNPC[i].TextListSize; j++)
@@ -307,9 +328,10 @@ void NTField::ChangeField(const wchar_t * _FieldKey)
 
 		if (TmpData.FieldNPC[i].bBattle == true)
 		{
-			NewNPCObj->AddComponent<NTBattle>();
+			NTEnemy* Tmp = NewNPCObj->AddComponent<NTEnemy>();
+			Tmp->SetAnimator(NewNPCObj->GetComponent<NTSpFrameAnimator>());
 		}
-
+		NewNPCObj->GetTransform()->SetLocalPosition(Pos);
 		AddNPC(NewNPCObj);
 	}
 	
